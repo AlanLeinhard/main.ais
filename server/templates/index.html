@@ -1,0 +1,110 @@
+{%% extends 'base.html' }
+
+{% block title %}
+  <title>...</title>
+{% endblock %}
+
+{% block body%}
+<!-- Контент страницы -->
+<div class="fon">
+<div class="container-md con mx-auto">
+  <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" >
+
+ 
+  <div class="col img ">
+      <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
+
+  </div>  
+        
+        
+         <div class="inne col-2">
+         <div class="in row justify-content-between">
+         
+      <a href="admin" class="shest col-2">
+
+  </a>
+          <a href="#" class="dom col-2">
+
+  </a>
+  </div>
+  </div>
+  </div>
+  
+<div class="poisk row google"  id="google"> 
+  <div class="dropdown  col-1">
+    <img id="logot" src="images/google_logo.png" alt="" width="50px" height="50px">
+    <div class="dropdown-content">
+      <a href="javascript: var ava = document.getElementById('logot');
+      ava.setAttribute('src','images/google_logo.png')" onclick="replaceContentInContainer('poiskbaar', 'googlespan')">Google</a>
+      <a href="javascript: var ava = document.getElementById('logot');
+      ava.setAttribute('src','images/yandex_logo.png'); "onclick="replaceContentInContainer('poiskbaar', 'yandex')">Яндекс</a>
+ </div>
+ </div>
+ <div class="poiskbar col-11 my-auto"  id="poiskbaar">
+  <form id="poisk" action="http://google.com/search" target="_blank">
+<input type="search" name="q">
+<input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
+<input type="submit" value="Поиск">
+</form></div> 
+</div>
+
+<div class="poisk row " style="display: none;" >
+<span id="yandex">
+  <form id="poisk" action="https://yandex.ru/" target="_blank">
+    <input type="search" name="q">
+    <input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
+    <input type="submit" value="Поиск">
+  </form>
+</span>
+<span id="googlespan"><form id="poisk" action="http://google.com/search" target="_blank">
+<input type="search" name="q">
+<input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
+<input type="submit" value="Поиск">
+</form></span>
+</div>
+
+
+<div class="setka">
+<div class="row">
+  <div class="containerr col cola holder">
+    <div class="linke"> <div class="text"> <h1 class="zgl"   >GitLab AIS</h1></div> </div>
+    <div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+<div class="containerr col cola holder">
+  <div class="linke"> <div class="text"> <h1 class="zgl"   >Сервис</h1></div> </div>
+  <div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+<div class="containerr col cola holder">
+<div class="linke"> <div class="text"> <h1 class="zgl"   >Сервис</h1></div> </div>
+<div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+</div>
+
+<div class="row">
+<div class="containerr col cola holder">
+  <div class="linke"> <div class="text"> <h1 class="zgl"   >Сервис</h1></div> </div>
+  <div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+
+<div class="containerr col cola holder">
+<div class="linke"> <div class="text"> <h1 class="zgl"   >Сервис</h1></div> </div>
+<div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+
+<div class="containerr col cola holder">
+<div class="linke"> <div class="text"> <h1 class="zgl"   >Сервис</h1></div> </div>
+<div class="content"><h1 class="zgl"   >Описание</h1></div>
+</div>
+
+</div>
+
+
+</div>
+
+
+<a href="http://www.quakejs.com/" class="game">
+  .
+</a> 
+</div>
+</div>
+{% endblock %}
