@@ -1,148 +1,45 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <!-- Кодировка веб-страницы -->
-  <meta charset="utf-8">
-  <!-- Настройка viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>...</title>
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="row-fluid">
 
-  <!-- Bootstrap CSS (Cloudflare CDN) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!-- <script src="index.js"></script> -->
-  <script src="{{ url_for('static',index.js') }}"> </script>
-  <!-- jQuery (Cloudflare CDN) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <!-- Bootstrap Bundle JS (Cloudflare CDN) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
-</head>
-<body>
-  <!-- Контент страницы -->
-<div class="fon">
-<div class="container-md con mx-auto">
-                                                   <!-- Навигация Header -->
-    <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" >
+    <div>
+        {% if current_user.is_authenticated %}
+        <div>
+            <h2>Logged in User details</h2>
+            <ul>
+                <li>Username: {{ current_user.username }}</li>
+                <li>Email: {{ current_user.email }}</li>
+                <li>Created on: {{ current_user.created_on }}</li>
+                <li>Updated on: {{ current_user.updated_on }}</li>
+            </ul>
 
-   <!-- Логотип -->
-    <div class="col img">
-        <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
-    </div>  
-          
+            <h2>Основные ваши настройки</h2>
+            <p class="lead">Вы можете:</p>
+            <p><a href="/admin/change/">Изменить пароль</a></p>
+        </div>
 
-                    <!-- Кнопки навигации -->
-           <div class="inne col-2">
-           <div class="in row justify-content-between">
-           <a href="#" class="gear col-2"></a>
-         <a href="#" class="dom col-2"></a> </div> </div>
-
-
-
-
+        {% else %}
+        <form method="POST" action="">
+            {{ form.hidden_tag() if form.hidden_tag }}
+            {% for f in form if f.type != 'CSRFTokenField' %}
+            <div>
+                {{ f.label }}
+                {{ f }}
+                {% if f.errors %}
+                <ul>
+                    {% for e in f.errors %}
+                    <li>{{ e }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+        {{ link | safe }}
+        {% endif %}
     </div>
-    
-                                                        <!-- Смена поисковиков -->
-             <!-- Кнопки поисковиков -->                                                     
-  <div class="poisk row google"  id="default"> 
-    <div class="dropdown  col-1">
-      <img id="logot" src="images/google_logo.png" alt="" width="50px" height="50px">
-      <div class="dropdown-content">
-        <a href="javascript: var ava = document.getElementById('logot');
-        ava.setAttribute('src','images/google_logo.png')" onclick="replaceContentInContainer('poiskbaar', 'p_google')">Google</a>
-        <a href="javascript: var ava = document.getElementById('logot');
-        ava.setAttribute('src','images/yandex_logo.png'); "onclick="replaceContentInContainer('poiskbaar', 'p_yandex')">Яндекс</a>
-   </div>
-   </div>
 
-           <!-- Defalut строка поиска Google -->
-   <div class="poiskbar col-11 my-auto "  id="poiskbaar">
-    <span id="google">
-      <form id="poisk" action="http://google.com/search" target="_blank">
-        <input type="text" class="poisk_row" name="q">
-
-        <button class="search_button" type="submit" value="Поиск">
-      </form>
-      </span> 
-</div> 
 </div>
-
-    <!-- Строка поиска Яндекс для замены -->
-<div class="poisk row " style="display: none" id="p_yandex" >
-  <span id="yandex">
-    <form id="poisk" action="https://yandex.ru/" target="_blank">
-      <input type="search" name="q">
-      <input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
-      <button class="search_button" type="submit" value="Поиск">
-    </form>
-</span> 
-</div>
-
-
-       <!-- Строка поиска Google для замены -->
-<div class="poisk row " style="display: none" id="p_google">
-<span id="google">
-<form id="poisk" action="http://google.com/search" target="_blank">
-  <input type="search" name="q">
-  <input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
-  <button class="search_button" type="submit" value="Поиск">
-</form>
-</span> 
-</div>
-                                                         <!-- Сетка с плитками -->
-                                                         <div class="setka">
- 
-                                                          <!-- Первый ряд -->
-                                                          <div class="row">
-                                                          
-                                                          <div class="containerr col cola holder">
-                                                            <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                            <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                        
-                                                          <div class="containerr col cola holder">
-                                                            <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                            <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                        
-                                                          <div class="containerr col cola holder">
-                                                            <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                            <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                        
-                                                          </div>
-                                                          
-                                                            <!-- Второй ряд ряд -->
-                                                          <div class="row">
-                                                            <div class="containerr col cola holder">
-                                                              <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                              <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                          
-                                                          <div class="containerr col cola holder">
-                                                            <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                            <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                          
-                                                          <div class="containerr col cola holder">
-                                                            <div class="linke"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
-                                                            <div class="content">  <h1 class="zgl">Описание</h1>  </div>
-                                                          </div>
-                                                          
-                                                          </div>
-                                                          
-                                                        </div>
-                                                        
-                                                        
-                                                        
-                                                                                                           <!-- Конец сетки с плитками -->
-                                                                                                          
-                                                        
-                                                        </div>
-                                                        
-                                                        </div>
-                                                        
-                                                        </div>
-                                                        </div>
-                                                        </body>
-                                                        </html>
+{% endblock body %}
