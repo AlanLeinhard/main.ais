@@ -1,21 +1,29 @@
-from flask import Flask, render_template
+from flask import Flask,render_template
+from flask_bootstrap import Bootstrap
+from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from config import Config
-
-def create_app():
+from flask_moment import Moment
+from config import config
+ 
+bootstrap = Bootstrap()
+mail = Mail()
+moment = Moment()
+db = SQLAlchemy()
+ 
+def create_app(config_name):
     app = Flask(__name__)
-
-    app.config.from_object(Config)
-    app.config.from_pyfile('../config-extended.py')
-
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
+ 
+    bootstrap.init_app(app)
+    mail.init_app(app)
+    moment.init_app(app)
+    db.init_app(app)
+ 
+    # Дополнительная маршрутизация и настраиваемая страница ошибок
+ 
     return app
-
-
-app = create_app()
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-login_manager = LoginManager(app)
-login_manager.login_view = 'admin_blueprint.login'
+        #...
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    return app
