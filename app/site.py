@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from app.auth import login_required
 from app.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('site', __name__)
 @bp.route('/')
 def index():
     db = get_db()
