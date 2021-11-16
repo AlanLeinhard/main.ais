@@ -1,36 +1,59 @@
 <!doctype html>
-<head>
 <title>{% block title %}{% endblock %} - app</title>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static', filename='AIS.css') }}">
 
 <script src="{{ url_for('static', filename='AIS.js') }}"></script>
-<!-- jQuery (Cloudflare CDN) -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<!-- Bootstrap Bundle JS (Cloudflare CDN) -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
-</head>
-<nav>
-  <h1>app</h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
-</nav>
+<!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script> -->
+
 <section class="content">
   <header>
-    {% block header %}
-    
-  {% block content %}{% endblock %}
-    {% endblock %}
+    {% block header %}{% endblock %}
   </header>
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
-  {%block body%}{%endblock%}
+<div class="fon">
+    <div class="container-md ">
+  <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" >
+  
+   
+    <div class="col img ">
+        <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}"  alt="logo">
+  
+    </div>  
+          
+          
+           <div class="inne col-2">
+           <div class="in row justify-content-between">
+  
+              <nav>
+                <ul>
+                  {% if g.user %}
+                    <li><span>{{ g.user['username'] }}</span>
+                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+                  {% else %}
+                    <li><a href="{{ url_for('auth.register') }}">Register</a>
+                    <li><a href="{{ url_for('auth.login') }}">Log In</a>
+                  {% endif %}
+                </ul>
+              </nav>
+           
+        <a href="admin" class="shest col-2">
+  
+    </a>
+            <a href="#" class="dom col-2">
+  
+    </a>
+    </div>
+
+  </div>
+</div>
+</div>
+  {% block content %}
+  
+  {% endblock %}
+</div>
 </section>

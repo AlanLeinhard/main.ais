@@ -4,33 +4,24 @@ import click
 from flask import Flask
 from flask.cli import with_appcontext
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from app import config
 
 __version__ = (1, 0, 0, "dev")
 
 db = SQLAlchemy()
 
 
+
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
 
+    migrate = Migrate(app, db)
+
     # some deploy systems set the database url in the environ
-    db_url = os.environ.get("DATABASE_URL")
 
-    if db_url is None:
-        # default to a sqlite database in the instance folder
-        db_path = os.path.join(app.instance_path, "app.sqlite")
-        db_url = f"sqlite:///{db_path}"
-        # ensure the instance folder exists
-        os.makedirs(app.instance_path, exist_ok=True)
-
-    app.config.from_mapping(
-        # default secret that should be overridden in environ or config
-        SECRET_KEY=os.environ.get("SECRET_KEY", "dev"),
-        SQLALCHEMY_DATABASE_URI=db_url,
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-    )
-
+    app.config.from_object(config.Config)
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile("config.py", silent=True)
