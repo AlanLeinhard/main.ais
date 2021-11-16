@@ -10,7 +10,7 @@ from flask import session
 from flask import url_for
 
 from app import db
-from app.auth.models import User
+from app.auth.models import Users
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -33,7 +33,7 @@ def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
     the database into ``g.user``."""
     user_id = session.get("user_id")
-    g.user = User.query.get(user_id) if user_id is not None else None
+    g.user = Users.query.get(user_id) if user_id is not None else None
 
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -44,21 +44,24 @@ def register():
     """
     if request.method == "POST":
         username = request.form["username"]
+        platoon = request.form["platoon"]
         password = request.form["password"]
         error = None
 
         if not username:
             error = "Username is required."
+        if not platoon:
+            error = "Platoon is required."
         elif not password:
             error = "Password is required."
         elif db.session.query(
-            User.query.filter_by(username=username).exists()
+            Users.query.filter_by(username=username).exists()
         ).scalar():
             error = f"User {username} is already registered."
 
         if error is None:
             # the name is available, create the user and go to the login page
-            db.session.add(User(username=username, password=password))
+            db.session.add(Users(username=username, platoon=platoon, password=password))
             db.session.commit()
             return redirect(url_for("auth.login"))
 
@@ -74,7 +77,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         error = None
-        user = User.query.filter_by(username=username).first()
+        user = Users.query.filter_by(username=username).first()
 
         if user is None:
             error = "Incorrect username."

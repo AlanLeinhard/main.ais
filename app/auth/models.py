@@ -5,11 +5,14 @@ from werkzeug.security import generate_password_hash
 from app import db
 
 
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
+    platoon = db.Column(db.String, unique=True, nullable=False)
     _password = db.Column("password", db.String, nullable=False)
 
+    def __repr__(self):
+        return f"<users {self.id}>"
     @hybrid_property
     def password(self):
         return self._password
