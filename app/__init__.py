@@ -34,12 +34,12 @@ def create_app(test_config=None):
     app.cli.add_command(init_db_command)
 
     # apply the blueprints to the app
-    from app import auth, blog
+    from app import auth, site
 
     app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
+    app.register_blueprint(site.bp)
 
-    # make "index" point at "/", which is handled by "blog.index"
+    # make "index" point at "/", which is handled by "site.index"
     app.add_url_rule("/", endpoint="index")
 
     return app
