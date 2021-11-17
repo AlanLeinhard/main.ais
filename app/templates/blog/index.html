@@ -1,28 +1,174 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('blog.create') }}">New</a>
-  {% endif %}
+{% block title %}
+  <title>...</title>
 {% endblock %}
 
-{% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
-        {% endif %}
-      </header>
-      <p class="body">{{ post['body'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+
+{% block content%}
+    
+                    <!-- Новости news -->
+
+                    <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" id="news">
+                      <div class="poloska">Новости</div>
+                      <div class="scrolling-wrapper-flexbox prokrutka">
+                        <div class="card" style="width: 18rem;">
+                          <img src="images/ais.jpg" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                          <img src="..." class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                                                                        <!-- Смена поисковиков -->
+                  <div class="search shadow p-3 mb-5 bg-body rounded">                                        
+                             <!-- Кнопки поисковиков -->  
+                             <div class="col-1"></div>
+                             <div class="col-1"></div>                
+                  <div class="poisk row google"  id="default"> 
+                   
+                    <select class="form-select col-2" aria-label="Default select example">
+                      <option selected>Open this select menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                
+                
+                           <!-- Defalut строка поиска Google -->
+                   <div class="poiskbar col-9 my-auto "  id="poiskbaar">
+                    <span id="google">
+                
+                      <form id="poisk" class="row" action="http://google.com/search" target="_blank">
+                        <div class="col-1"></div>
+                        <input class="form-control poisk_row col-8"  type="text" placeholder="Default input" aria-label="default input example">
+                        <div class="col-1"></div>
+                        <input class="btn btn-primary search_button col-2" type="submit" value="Поиск">
+                      </form>
+                      </span> 
+                </div> 
+                </div>
+                
+                
+                    <!-- Строка поиска Яндекс для замены -->
+                <div class="poisk row " style="display: none" id="p_yandex" >
+                  <span id="yandex">
+                    <form id="poisk" action="https://yandex.ru/" target="_blank">
+                      <input type="search" name="q">
+                      <input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
+                      <button class="search_button" type="submit" value="Поиск">
+                    </form>
+                </span> 
+                </div>
+                
+                
+                       <!-- Строка поиска Google для замены -->
+                <div class="poisk row " style="display: none" id="p_google">
+                <span id="google">
+                <form id="poisk" action="http://google.com/search" target="_blank">
+                  <input type="search" name="q">
+                  <input type="hidden" name="as_sitesearch" value="AISOVD.ru"> 
+                  <button class="search_button" type="submit" value="Поиск">
+                </form>
+                </span> 
+                </div>
+                
+                </div> 
+                
+                
+                                                                         <!-- Сетка с плитками -->
+                
+                <div class="setka">
+                 
+                  <!-- Первый ряд -->
+                  <div class="row">
+                  
+                  <div class="containerr col cola holder ">
+                    <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                    <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                
+                  <div class="containerr col cola holder ">
+                    <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                    <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                
+                  <div class="containerr col cola holder ">
+                    <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                    <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                
+                  </div>
+                  
+                    <!-- Второй ряд ряд -->
+                  <div class="row">
+                    <div class="containerr col cola holder ">
+                      <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                      <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                  
+                  <div class="containerr col cola holder ">
+                    <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                    <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                  
+                  <div class="containerr col cola holder ">
+                    <div class="linke elementsetki"> <div class="text"> <h1 class="zgl"> GitLab AIS </h1> </div> </div>
+                    <div class="content elementsetki">  <h1 class="zgl">Описание</h1>  </div>
+                  </div>
+                  
+                  </div>
+                  
+                </div>
+                
+                
+                
 {% endblock %}
