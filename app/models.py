@@ -1,0 +1,99 @@
+from flask import url_for
+
+from datetime import datetime
+from flask_login import UserMixin
+from flask_security import RoleMixin
+from app import db, login_manager
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+from app import db
+
+
+roles_users = db.Table(
+    'roles_user',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
+)
+
+
+class Role(db.Model, RoleMixin):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+    def __str__(self):
+        return self.name
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    name = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+    created_on = db.Column(db.DateTime(), default=datetime.utcnow)
+    updated_on = db.Column(db.DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
+    # Нужен для security!
+    active = db.Column(db.Boolean())
+    # Для получения доступа к связанным объектам
+    roles = db.relationship('Role', secondary=roles_users, backref=db.backref('user', lazy='dynamic'))
+
+    # Flask - Login
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    # Flask-Security
+    def has_role(self, *args):
+        return set(args).issubset({role.name for role in self.roles})
+
+    def get_id(self):
+        return self.id
+
+    # Required for administrative interface
+    def __unicode__(self):
+        return self.username
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+
+# Отвечает за сессию пользователей. Запрещает доступ к роутам, перед которыми указано @login_required
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.query(User).get(user_id)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.ForeignKey(User.id), nullable=False)
+    created = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.current_timestamp()
+    )
+    title = db.Column(db.String, nullable=False)
+    body = db.Column(db.String, nullable=False)
+
+    # User object backed by author_id
+    # lazy="joined" means the user is returned with the post in one query
+    author = db.relationship(User, lazy="joined", backref="posts")
+
+    @property
+    def update_url(self):
+        return url_for("site.update", id=self.id)
+
+    @property
+    def delete_url(self):
+        return url_for("site.delete", id=self.id)

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ru">
+
 <head>
   <!-- Кодировка веб-страницы -->
   <meta charset="utf-8">
@@ -8,21 +9,27 @@
   <title>...</title>
 
   <!-- Bootstrap CSS (Cloudflare CDN) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+    crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='AIS.css') }}">
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="{{ url_for('static', filename='AIS.js') }}"></script>
   <!-- jQuery (Cloudflare CDN) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+    crossorigin="anonymous"></script>
   <!-- Bootstrap Bundle JS (Cloudflare CDN) -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"
+    integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
+    crossorigin="anonymous"></script>
 </head>
 <section class="content">
   <header>
   </header>
   {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
+  <div class="flash">{{ message }}</div>
   {% endfor %}
 
 
@@ -30,66 +37,66 @@
 
 
 
-<div class="fon">
-  <div class="container-md con mx-auto">
-    <!-- Навигация Header -->
-    <div class="navig header align-items-middle shadow p-3 mb-3 bg-body rounded row justify-content-between" >
+  <div class="fon">
+    <div class="container-md con mx-auto">
+      <!-- Навигация Header -->
+      <div class="navig header align-items-middle shadow p-3 mb-3 bg-body rounded row justify-content-between">
 
-      <!-- Логотип -->
-       <div class="col img">
-           <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
-       </div>  
-             
-   
-                       <!-- Кнопки навигации -->
-              <div class="inne col-2">
-              <div class="in row justify-content-between">
-              <a href="#" class="gear col-2"></a>
-            <a href="#" class="dom col-2"></a> </div> </div>
-   
-   
-   
-   
-       </div>
-    <div class="container-md ">
-  <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" >
-  
-   
-    <div class="col img ">
-        <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}"  alt="logo">
-  
-    </div>  
-          
-          
-           <div class="inne col-2">
-           <div class="in row justify-content-between">
-  
-              <nav>
-                <ul>
-                  {% if g.user %}
-                    <li><span>{{ g.user['username'] }}</span>
-                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-                  {% else %}
-                    <li><a href="{{ url_for('auth.register') }}">Register</a>
-                    <li><a href="{{ url_for('auth.login') }}">Log In</a>
-                  {% endif %}
-                </ul>
-              </nav>
-           
-        <a href="admin" class="shest col-2">
-  
-    </a>
-            <a href="/" class="dom col-2">
-  
-    </a>
+        <!-- Логотип -->
+        <div class="col img">
+          <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
+        </div>
+
+        <!-- Кнопки навигации -->
+        <div class="inne col-2">
+          <div class="in row justify-content-between">
+            <a href="#" class="gear col-2"></a>
+            <a href="#" class="dom col-2"></a>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="container-md ">
+        <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between">
+
+
+          <div class="col img ">
+            <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}" alt="logo">
+
+          </div>
+
+
+
+          {% block access_control %}
+
+          {% if current_user.is_authenticated %}
+          {% endif %}
+          {%endblock%}
+
+          <div class="inne col-2">
+            <div class="in row justify-content-between">
+
+              <a href="admin" class="shest col-2">
+
+              </a>
+              <a href="/" class="dom col-2">
+
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {% block body %}
+
+      {%endblock%}
+      {% block content %}
+
+      {% endblock %}
     </div>
-
   </div>
-</div>
-</div>
-  {% block content %}
-  
-  {% endblock %}
-</div>
-</div>
 </section>

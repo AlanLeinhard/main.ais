@@ -8,8 +8,7 @@ from flask import url_for
 from werkzeug.exceptions import abort
 
 from app import db
-from app.auth.views import login_required
-from app.site.models import Post
+from app.models import Post
 
 bp = Blueprint("site", __name__)
 
@@ -40,7 +39,7 @@ def get_post(id, check_author=True):
 
 
 @bp.route("/create", methods=("GET", "POST"))
-@login_required
+# @login_required
 def create():
     """Create a new post for the current user."""
     if request.method == "POST":
@@ -62,7 +61,7 @@ def create():
 
 
 @bp.route("/<int:id>/update", methods=("GET", "POST"))
-@login_required
+# @login_required
 def update(id):
     """Update a post if the current user is the author."""
     post = get_post(id)
@@ -87,7 +86,7 @@ def update(id):
 
 
 @bp.route("/<int:id>/delete", methods=("POST",))
-@login_required
+# @login_required
 def delete(id):
     """Delete a post.
     Ensures that the post exists and that the logged in user is the
