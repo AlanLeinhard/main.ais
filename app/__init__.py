@@ -27,3 +27,10 @@ login_manager.login_view = 'admin_blueprint.login'
 # Регистрация путей Blueprint
 from app.admin.routes import admin_bp
 app.register_blueprint(admin_bp, url_prefix="/admin")
+
+
+
+# apply the blueprints to the app
+from app import site
+
+app.register_blueprint(site.bp)
