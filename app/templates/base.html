@@ -13,7 +13,7 @@
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='AIS.css') }}">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='adminka.css') }}">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="{{ url_for('static', filename='AIS.js') }}"></script>
   <!-- jQuery (Cloudflare CDN) -->
@@ -38,7 +38,7 @@
    
                        <!-- Кнопки навигации -->
         <div class="col header_inner col-4">
-       <button type="button" class="btn btn-primary b_nav">Авторизация</button>
+       <a href="http://127.0.0.1:5000/admin/login/"><button type="button"  class="btn btn-primary b_nav">Авторизация</button></a>
        <button type="button" class="btn btn-primary b_nav">Главная</button>
        <button type="button" class="btn btn-primary b_nav">Админка</button>
       </div>
@@ -68,13 +68,10 @@
 
           {% if current_user.is_authenticated %}
           {% endif %}
+
           {%endblock%}
 
          
-
-          </div>
-        </div>
-      </div>
 
       {% block body %}
 

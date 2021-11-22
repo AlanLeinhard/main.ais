@@ -42,4 +42,56 @@
     </div>
 
 </div>
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавление сервиса</button>
+    <button class="tablinks" onclick="openCity(event, 'Новость')">Добавление новости</button>
+    <button class="tablinks" onclick="openCity(event, 'Проект')">Добавление проекта</button>
+  </div>
+  
+  <div id="Сервис" class="tabcontent">
+    <h3>Сервис</h3>
+   
+    <div class="window_form">
+      Название сервиса
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Описание сервиса
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Ссылка на сервис
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Загрузка изображения
+      <div id="upload_img">
+      <form enctype="multipart/form-data" method="post">
+        <p><input type="file" name="f">
+        <input type="submit" value="Загрузить"></p>
+       </form> 
+      </div>   
+
+    </div>
+  </div>
+  
+  <div id="Новость" class="tabcontent">
+    <h3>Новость</h3>
+    <div class="window_form">
+      Заголовок новости
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Описание новости
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Ссылка на полную страницу
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    </div>
+  </div>
+  
+  <div id="Проект" class="tabcontent">
+    <h3>Проект</h3>
+    <div class="window_form">
+      Название проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Описание проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Ссылка на проект
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Авторы проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    </div>
+  </div>
 {% endblock body %}
