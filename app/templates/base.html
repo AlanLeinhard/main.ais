@@ -26,7 +26,26 @@
     crossorigin="anonymous"></script>
 </head>
 <section class="content">
+        <!-- Навигация Header -->
   <header>
+    <div class="navig header align-items-middle shadow p-3 mb-3 bg-body rounded row justify-content-between" >
+
+      <!-- Логотип -->
+       <div class="col-2 img">
+           <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
+       </div>  
+             
+   
+                       <!-- Кнопки навигации -->
+        <div class="col header_inner col-4">
+       <button type="button" class="btn btn-primary b_nav">Авторизация</button>
+       <button type="button" class="btn btn-primary b_nav">Главная</button>
+       <button type="button" class="btn btn-primary b_nav">Админка</button>
+      </div>
+   
+   
+       </div>
+
   </header>
   {% for message in get_flashed_messages() %}
   <div class="flash">{{ message }}</div>
@@ -39,26 +58,8 @@
 
   <div class="fon">
     <div class="container-md con mx-auto">
-      <!-- Навигация Header -->
-      <div class="navig header align-items-middle shadow p-3 mb-3 bg-body rounded row justify-content-between">
-
-        <!-- Логотип -->
-        <div class="col img">
-          <img id="logo" src="images/4nepbggowropb8so1meje.png" alt="logo">
-        </div>
-
-        <!-- Кнопки навигации -->
-        <div class="inne col-2">
-          <div class="in row justify-content-between">
-            <a href="#" class="gear col-2"></a>
-            <a href="#" class="dom col-2"></a>
-          </div>
-        </div>
 
 
-
-
-      </div>
       <div class="container-md ">
         <div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between">
 
