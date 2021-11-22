@@ -5,7 +5,8 @@
 .fon {
     background-image: url(images/backbody.jpg);
     width: 100%;
-    height: 1500px;
+    height: 1440px;
+    padding-top: 30px;
 }
 
 .con {
@@ -14,6 +15,7 @@
         border: 2px solid;
     border-color: #c8d3e3;
     background-color: #f0f7ff;
+
 }
 
 .navig {
@@ -46,24 +48,6 @@
         transition: background 0.3s;
 }
 
-.inne {
-margin-right: 30px;
-}
-
-.dom {
-    background-image: url(images/dom%201.png); background-size: 100% 100%; width: 30px;     height: 30px;
-    transition: background 0.3s;
-}
-
-.dom:hover {
-    background-image: url(images/dom%202.png);
-    
-}
-
-.gear:hover {
-    background-image: url(images/free-icon-settings-1264722.png);
-    
-}
 
 input[type="search"] { 
     margin: 0 auto;
@@ -243,7 +227,6 @@ border-radius: 7px;
 
 #news {
     height: 200px;
-    
 }
 
 
@@ -295,12 +278,19 @@ border-radius: 7px;
 
   .footer {
       width: 100%;
-      height: 100px;
-
+      height: 150px;
+      margin-top: 10px;
+      background-color: #ffff;
+      border: 3px solid #c8d3e3;
+      border-radius: 5px;
   }
 
   .header_inner {
       display: flex;
       justify-content: space-between;
       
+  }
+
+  .b_admin {
+      margin-top: 30px;
   }
