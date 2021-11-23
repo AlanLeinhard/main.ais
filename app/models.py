@@ -1,3 +1,4 @@
+from re import S
 from flask import url_for, g
 
 from datetime import datetime
@@ -115,6 +116,9 @@ class Item(db.Model):
     desc = db.Column(db.String, nullable=False)
     url_serv = db.Column(db.String, nullable=False)
     image = db.Column(db.LargeBinary, nullable=False)
+
+    def __repr__(self):
+        return self.title
 
 
 

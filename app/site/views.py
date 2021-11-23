@@ -16,7 +16,7 @@ bp = Blueprint("site", __name__)
 @bp.route("/")
 def index():
     """Show all the posts, most recent first."""
-    items = Item.query.order_by(Item.created.desc()).all()
+    items = Item.query.order_by(Item.created).all()
     return render_template("site/index.html", item=items)
 
 
