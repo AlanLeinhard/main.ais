@@ -25,65 +25,73 @@
     integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
     crossorigin="anonymous"></script>
 </head>
-        <!-- Навигация Header -->
-  <header>
-    <div class="navig header align-items-middle shadow p-3 bg-body rounded row justify-content-between" >
+<!-- Навигация Header -->
+<header>
+  <div class="navig header align-items-middle shadow p-3 bg-body rounded row justify-content-between">
 
-      <!-- Логотип -->
-       <div class="col-2 img">
-        <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}" alt="logo">
-       </div>  
-             
-   
-                       <!-- Кнопки навигации -->
-        <div class="col header_inner col-4">
-       <a href="/admin/login/"><button type="button"  class="btn btn-primary b_nav">Авторизация</button></a>
-       <a href="/"><button type="button" class="btn btn-primary b_nav">Главная</button></a>
-       <a href="/admin/"><button type="button" class="btn btn-primary b_nav">Админка</button></a>
-      </div>
-   
-   
-       </div>
-
-  </header>
-  {% for message in get_flashed_messages() %}
-  <div class="flash">{{ message }}</div>
-  {% endfor %}
-
-
-
-
-
-
-  <div class="fon">
-    <div class="container-md con mx-auto">
-
-
-
-
-
-
-          {% block access_control %}
-
-          {% if current_user.is_authenticated %}
-          {% endif %}
-
-          {%endblock%}
-
-         
-
-      {% block body %}
-
-      {%endblock%}
-      {% block content %}
-
-      {% endblock %}
+    <!-- Логотип -->
+    <div class="col-2 img">
+      <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}" alt="logo">
     </div>
 
-    <div class="footer align-items-center row shadow p-3 ">
-      <div class="col"></div>
-      <div class="col "></div>
-      <div class="col"></div>
+
+    <!-- Кнопки навигации -->
+    <div class="col header_inner col-4">
+      <a href="/admin/login/"><button type="button" class="btn btn-primary b_nav">Авторизация</button></a>
+      <a href="/"><button type="button" class="btn btn-primary b_nav">Главная</button></a>
+      <a href="/admin/"><button type="button" class="btn btn-primary b_nav">Админка</button></a>
     </div>
+
 
   </div>
+
+</header>
+{% for message in get_flashed_messages() %}
+<div class="flash">{{ message }}</div>
+{% endfor %}
+
+
+
+
+
+
+<div class="fon">
+  <div class="container-md con mx-auto">
+
+
+
+
+
+
+    {% block access_control %}
+
+    {% if current_user.is_authenticated %}
+    {% endif %}
+
+    {%endblock%}
+
+
+    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+
+    {% block body %}
+
+    {%endblock%}
+    {% block header %}
+
+    {% if g.user %}
+    {% endif %}
+
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+  </div>
+
+  <div class="footer align-items-center row shadow p-3 ">
+    <div class="col"></div>
+    <div class="col "></div>
+    <div class="col"></div>
+  </div>
+
+</div>

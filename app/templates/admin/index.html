@@ -3,100 +3,100 @@
 {{ super() }}
 <div class="row-fluid">
 
+  <div>
+    {% if current_user.is_authenticated %}
     <div>
-        {% if current_user.is_authenticated %}
-        <div>
-            <h2>Сведения о пользователе</h2>
-            <ul>
-                <li>Username: {{ current_user.username }}</li>
-                <li>Email: {{ current_user.email }}</li>
-                <li>Created on: {{ current_user.created_on }}</li>
-                <li>Updated on: {{ current_user.updated_on }}</li>
-            </ul>
+      <h2>Сведения о пользователе</h2>
+      <ul>
+        <li>Username: {{ current_user.username }}</li>
+        <li>Email: {{ current_user.email }}</li>
+        <li>Created on: {{ current_user.created_on }}</li>
+        <li>Updated on: {{ current_user.updated_on }}</li>
+      </ul>
 
-            <h2>Возможности и настройки</h2>
-            <p class="lead">Вы можете:</p>
-            <p><a href="/admin/change/">Изменить пароль</a></p>
-        </div>
-
-        {% else %}
-        <form method="POST" action="">
-            {{ form.hidden_tag() if form.hidden_tag }}
-            {% for f in form if f.type != 'CSRFTokenField' %}
-            <div>
-                {{ f.label }}
-                {{ f }}
-                {% if f.errors %}
-                <ul>
-                    {% for e in f.errors %}
-                    <li>{{ e }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-            {% endfor %}
-            <button class="btn" type="submit">Submit</button>
-        </form>
-        {{ link | safe }}
-        {% endif %}
+      <h2>Возможности и настройки</h2>
+      <p class="lead">Вы можете:</p>
+      <p><a href="/admin/change/">Изменить пароль</a></p>
     </div>
+
+    {% else %}
+    <form method="POST" action="">
+      {{ form.hidden_tag() if form.hidden_tag }}
+      {% for f in form if f.type != 'CSRFTokenField' %}
+      <div>
+        {{ f.label }}
+        {{ f }}
+        {% if f.errors %}
+        <ul>
+          {% for e in f.errors %}
+          <li>{{ e }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+      <button class="btn" type="submit">Submit</button>
+    </form>
+    {{ link | safe }}
+    {% endif %}
+  </div>
 
 </div>
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
-    <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
-    <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button>
-  </div>
-  
-  <div id="Сервис" class="tabcontent">
+  <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
+  <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
+  <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button>
+</div>
 
-    <h3>Сервис</h3>
-   
-    <div class="window_form">
+<div id="Сервис" class="tabcontent">
+
+  <h3>Сервис</h3>
+
+  <div class="window_form">
+    <form enctype="multipart/form-data" method="post">
       Название сервиса
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
       Описание сервиса
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
       Ссылка на сервис
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input" aria-label="default input example">
       Загрузка изображения
-      <div id="upload_img">
-      <form enctype="multipart/form-data" method="post">
-        <p><input type="file" name="f">
-        <input type="submit" value="Загрузить"></p>
-       </form> 
-      </div>   
-     <button class="btn  b_nav btn-primary">  Добавить  </button>
-    </div>
-  </div>
-  
-  <div id="Новость" class="tabcontent">
-    <h3>Новость</h3>
-    <div class="window_form">
-      Заголовок новости
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Описание новости
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Ссылка на полную страницу
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      <button class="btn b_admin b_nav btn-primary">  Добавить  </button>
-    </div>
-  
-  </div>
-  
-  <div id="Проект" class="tabcontent">
-    <h3>Проект</h3>
-    <div class="window_form">
-      Название проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Описание проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Ссылка на проект
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Авторы проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      <button class="btn b_admin b_nav btn-primary">  Добавить  </button>
-    </div>
+        <p><input name='image' id="image" type="file">
+          <input type="submit" value="Загрузить">
+        </p>
+      <button type="submit" class="btn  b_nav btn-primary"> Добавить </button>
 
+    </form>
   </div>
+</div>
+
+<div id="Новость" class="tabcontent">
+  <h3>Новость</h3>
+  <div class="window_form">
+    Заголовок новости
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    Описание новости
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    Ссылка на полную страницу
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+  </div>
+
+</div>
+
+<div id="Проект" class="tabcontent">
+  <h3>Проект</h3>
+  <div class="window_form">
+    Название проекта
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    Описание проекта
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    Ссылка на проект
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    Авторы проекта
+    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+    <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+  </div>
+
+</div>
 {% endblock body %}

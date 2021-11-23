@@ -1,6 +1,6 @@
 from app import db, app
 from flask import url_for, redirect, request, abort
-from app.models import User, Role
+from app.models import User, Role, Item
 
 # flask-login
 from flask_login import current_user
@@ -13,6 +13,11 @@ from flask_security import SQLAlchemyUserDatastore, Security
 import flask_admin
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
+
+import os
+from werkzeug.utils import secure_filename
+
+
 
 # Setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
@@ -42,11 +47,52 @@ class MyModelView(sqla.ModelView):
 
 # Переадресация страниц (используется в шаблонах)
 class MyAdminIndexView(flask_admin.AdminIndexView):
-    @expose('/')
+    @expose('/', methods=['POST', 'GET'])
     def index(self):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
+
+        
+        if request.method == "POST":
+            title = request.form['title']
+            desc = request.form['desc']
+            url_serv = request.form['url_serv']
+            image = request.files['image'].read()
+
+            # image.save(secure_filename(image.filename))
+
+            item = Item(title=title, desc=desc,url_serv=url_serv, image=image)
+
+            try:
+                db.session.add(item)
+                db.session.commit()
+                return super(MyAdminIndexView, self).index()
+            except:
+                return "error"
+
+
         return super(MyAdminIndexView, self).index()
+
+
+    # def create(self):
+    #     if request.method == "POST":
+    #         title = request.form['title']
+    #         desc = request.form['desc']
+    #         url_serv = request.form['url_serv']
+    #         image = request.form['image']
+
+    #         item = Item(title=title, desc=desc,url_serv=url_serv)
+
+    #         try:
+    #             db.session.add(item)
+    #             db.session.commit()
+    #             return "true"
+    #         except:
+    #             return "error"
+
+
+    #     else:
+    #         return super(MyAdminIndexView, self).index()
 
     @expose('/login/', methods=('GET', 'POST'))
     def login_page(self):

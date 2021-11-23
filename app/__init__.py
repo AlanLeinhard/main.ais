@@ -31,6 +31,7 @@ app.register_blueprint(admin_bp, url_prefix="/admin")
 
 
 # apply the blueprints to the app
-from app import site
+from app import site, blog
 
 app.register_blueprint(site.bp)
+app.register_blueprint(blog.bp)

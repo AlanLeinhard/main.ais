@@ -140,39 +140,18 @@
 
   <!-- Первый ряд -->
   <div class="row">
-
+    {% for item in items %}
     <div class="containerr col cola holder ">
       <div class="linke elementsetki">
         <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
+          <h1 class="zgl"> {{el.title}} </h1>
         </div>
       </div>
       <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
+        <h1 class="zgl">{{el.desc}}</h1>
       </div>
     </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
+    {%endfor%}
 
   </div>
 

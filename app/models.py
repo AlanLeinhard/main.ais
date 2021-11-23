@@ -1,4 +1,4 @@
-from flask import url_for
+from flask import url_for, g
 
 from datetime import datetime
 from flask_login import UserMixin
@@ -73,9 +73,15 @@ class User(db.Model, UserMixin):
 
 
 # Отвечает за сессию пользователей. Запрещает доступ к роутам, перед которыми указано @login_required
-@login_manager.user_loader
-def load_user(user_id):
-    return db.session.query(User).get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     if db.session["user_id"]:
+#         user = User.query.filter_by(username=db.session["user_id"]).first()
+#     else:
+#         user = {"name": "Guest"}  # Make it better, use an anonymous User instead
+
+#     g.user = user
+#     return db.session.query(User).get(user_id)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -97,3 +103,23 @@ class Post(db.Model):
     @property
     def delete_url(self):
         return url_for("site.delete", id=self.id)
+
+
+
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    created = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.current_timestamp()
+    )
+    desc = db.Column(db.String, nullable=False)
+    url_serv = db.Column(db.String, nullable=False)
+    image = db.Column(db.LargeBinary, nullable=False)
+
+
+
+
+# Отвечает за сессию пользователей. Запрещает доступ к роутам, перед которыми указано @login_required
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.query(User).get(user_id)
