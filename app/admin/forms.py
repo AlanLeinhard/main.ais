@@ -4,10 +4,10 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from flask_wtf import FlaskForm
 
 class ServiceForm(FlaskForm):
-    title = StringField('Название сервиса', [validators.Length(min=4, max=25)])
-    desc = StringField('desc', [validators.Length(min=6, max=35)])
-    url_serv = StringField('url_serv',[validators.Length(min=6, max=35)])
-    image = FileField('image', validators=[
+    title = StringField('Название', [validators.Length(min=4, max=25)])
+    desc = StringField('Описание', [validators.Length(min=6, max=35)])
+    url_serv = StringField('Ссылка',[validators.Length(min=6, max=35)])
+    image = FileField('Изображение', validators=[
                       FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
     submit = SubmitField("Добавить")
 

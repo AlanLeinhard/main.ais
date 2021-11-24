@@ -70,7 +70,43 @@
 
       {{ form.csrf_token }}
       {{form.title.label()}}
-      {{form.title(class="form-control", type="text",placeholder="Default input" )}}
+      {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
+      <!-- Название сервиса
+      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
+      {{form.desc.label()}}
+      {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
+      <!-- Описание сервиса
+      <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
+        aria-label="default input example"> -->
+        {{form.url_serv.label()}}
+        {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+      <!-- Ссылка на сервис
+      <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
+        aria-label="default input example"> -->
+        {{form.image.label()}}
+        {{form.image(class="form_image_admin")}}
+      <!-- Загрузка изображения
+      <p><input name='image' id="image" type="file">
+        <input type="submit" value="Загрузить">
+      </p> -->
+      {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
+      <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
+      {{form.title(class="form-control f_c", type="text",placeholder="Default input", value="servises"  )}}
+      <!-- Название сервиса
+      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
+
+  
+    </form>
+  </div>
+</div>
+
+<div id="Новость" class="tabcontent">
+  <h3>Новость</h3>
+  <div class="window_form">
+    <form enctype="multipart/form-data" method="post">
+      {{ form.csrf_token }}
+      {{form.title.label()}}
+      {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
       {{form.desc.label()}}
@@ -91,22 +127,9 @@
       </p> -->
       {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
       <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
-
-    </form>
-  </div>
-</div>
-
-<div id="Новость" class="tabcontent">
-  <h3>Новость</h3>
-  <div class="window_form">
-    <form enctype="multipart/form-data" method="post">
-      Заголовок новости
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Описание новости
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Ссылка на полную страницу
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+      {{form.title(class="form-control f_c", type="text",placeholder="Default input", value="news"  )}}
+      <!-- Название сервиса
+      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
     </form>
   </div>
 
@@ -115,17 +138,32 @@
 <div id="Проект" class="tabcontent">
   <h3>Проект</h3>
   <div class="window_form">
-    <form id="form" name="project" enctype="multipart/form-data" method="post">
-      Название проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Описание проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Ссылка на проект
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Авторы проекта
-      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      <button class="btn b_admin b_nav btn-primary"> Добавить </button>
-    </form>
+    {{ form.csrf_token }}
+    {{form.title.label()}}
+    {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
+    <!-- Название сервиса
+    <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
+    {{form.desc.label()}}
+    {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
+    <!-- Описание сервиса
+    <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
+      aria-label="default input example"> -->
+      {{form.url_serv.label()}}
+      {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+    <!-- Ссылка на сервис
+    <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
+      aria-label="default input example"> -->
+      {{form.image.label()}}
+      {{form.image()}}
+    <!-- Загрузка изображения
+    <p><input name='image' id="image" type="file">
+      <input type="submit" value="Загрузить">
+    </p> -->
+    {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
+    <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
+    {{form.title(class="form-control f_c", type="text",placeholder="Default input", value="projects"  )}}
+    <!-- Название сервиса
+    <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
   </div>
 
 </div>

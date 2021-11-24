@@ -293,3 +293,11 @@ border-radius: 7px;
   .b_admin {
       margin-top: 30px;
   }
+
+  .f_c {
+    display: none;
+  }
+
+  .form_image_admin {
+    margin-top: 30px;
+  }
