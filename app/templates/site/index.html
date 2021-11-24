@@ -142,16 +142,18 @@
   <div class="row">
 
     {% for item in item %}
-    <div  class="containerr col cola holder ">
-      <div src= {{item.image}} class="linke elementsetki">
+
+    <div  class="containerr col-4 cola holder ">
+      <div src= {{item.image}} class="linke elementsetki 1">
         <div class="text">
           <h1 class="zgl"> {{item.title}} </h1>
         </div>
       </div>
-      <div class="content elementsetki">
+      <div class="content elementsetki 1">
         <h1 class="zgl">{{item.desc}}</h1>
       </div>
     </div>
+    
     {%endfor%}
 
   </div>
