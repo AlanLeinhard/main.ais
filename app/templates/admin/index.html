@@ -70,16 +70,16 @@
 
       {{ form.csrf_token }}
       {{form.title.label()}}
-      {{form.title()}}
+      {{form.title(class="form-control", type="text",placeholder="Default input" )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
       {{form.desc.label()}}
-      {{form.desc()}}
+      {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
       <!-- Описание сервиса
       <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
         {{form.url_serv.label()}}
-        {{form.url_serv()}}
+        {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
       <!-- Ссылка на сервис
       <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
@@ -89,7 +89,7 @@
       <p><input name='image' id="image" type="file">
         <input type="submit" value="Загрузить">
       </p> -->
-      {{form.submit()}}
+      {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
       <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
 
     </form>
