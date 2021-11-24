@@ -9,7 +9,7 @@
 
 <!-- Новости news -->
 
-<div class="navig align-items-middle shadow p-3 mb-5 bg-body rounded row justify-content-between" id="news">
+<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news">
   <div class="poloska">Новости</div>
   <div class="scrolling-wrapper-flexbox prokrutka">
     <div class="card" style="width: 18rem;">
@@ -141,79 +141,25 @@
   <!-- Первый ряд -->
   <div class="row">
 
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
+    {% for item in item %}
+
+    <div  class="containerr col-4 cola holder ">
+      <div src= {{item.image}} class="linke elementsetki 1">
         <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
+          <h1 class="zgl"> {{item.title}} </h1>
         </div>
       </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
+      <div class="content elementsetki 1">
+        <h1 class="zgl">{{item.desc}}</h1>
       </div>
     </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Второй ряд ряд -->
-  <div class="row">
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
-
-    <div class="containerr col cola holder ">
-      <div class="linke elementsetki">
-        <div class="text">
-          <h1 class="zgl"> GitLab AIS </h1>
-        </div>
-      </div>
-      <div class="content elementsetki">
-        <h1 class="zgl">Описание</h1>
-      </div>
-    </div>
+    
+    {%endfor%}
 
   </div>
 
 </div>
+
 
 
 
