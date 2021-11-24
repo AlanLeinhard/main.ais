@@ -1,3 +1,4 @@
+from flask.templating import render_template
 from app import db, app
 from flask import url_for, redirect, request, abort
 from app.models import User, Role, Item
@@ -16,6 +17,8 @@ from flask_admin.contrib import sqla
 
 import os
 from werkzeug.utils import secure_filename
+
+from app.admin.forms import ServiceForm
 
 
 
@@ -52,14 +55,14 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
 
-        
-        if request.method == "POST":
-            title = request.form['title']
-            desc = request.form['desc']
-            url_serv = request.form['url_serv']
-            image = request.files['image'].read()
+        form = ServiceForm()
+        if form.validate_on_submit():
+            title = form.title.data
+            desc = form.desc.data
+            url_serv = form.url_serv.data
+            image = form.image.data.read()
+            # print(image)
 
-            # image.save(secure_filename(image.filename))
 
             item = Item(title=title, desc=desc,url_serv=url_serv, image=image)
 
@@ -71,7 +74,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                 return "error"
 
 
-        return super(MyAdminIndexView, self).index()
+
+        # if request.method == "POST":
+
+
+
+        return render_template("admin/index.html", form=form)
 
 
     # def create(self):

@@ -1,6 +1,19 @@
-{% extends 'admin/master.html' %}
+{% extends 'base.html' %}
+
+{% block title %}
+<title>ADMIN</title>
+{% endblock %}
+
+{% block access_control %}
+
+{% if current_user.is_authenticated %}
+<div class="btn-group pull-right">
+  <a class="btn" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Log out</a>
+</div>
+{% endif %}
+{% endblock %}
+
 {% block content %}
-{{ super() }}
 <div class="row-fluid">
 
   <div>
@@ -54,17 +67,30 @@
 
   <div class="window_form">
     <form enctype="multipart/form-data" method="post">
-      Название сервиса
-      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Описание сервиса
-      <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Ссылка на сервис
-      <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      Загрузка изображения
-        <p><input name='image' id="image" type="file">
-          <input type="submit" value="Загрузить">
-        </p>
-      <button type="submit" class="btn  b_nav btn-primary"> Добавить </button>
+
+      {{ form.csrf_token }}
+      {{form.title.label()}}
+      {{form.title()}}
+      <!-- Название сервиса
+      <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
+      {{form.desc.label()}}
+      {{form.desc()}}
+      <!-- Описание сервиса
+      <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
+        aria-label="default input example"> -->
+        {{form.url_serv.label()}}
+        {{form.url_serv()}}
+      <!-- Ссылка на сервис
+      <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
+        aria-label="default input example"> -->
+        {{form.image.label()}}
+        {{form.image()}}
+      <!-- Загрузка изображения
+      <p><input name='image' id="image" type="file">
+        <input type="submit" value="Загрузить">
+      </p> -->
+      {{form.submit()}}
+      <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
 
     </form>
   </div>
@@ -73,13 +99,15 @@
 <div id="Новость" class="tabcontent">
   <h3>Новость</h3>
   <div class="window_form">
-    Заголовок новости
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    Описание новости
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    Ссылка на полную страницу
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+    <form enctype="multipart/form-data" method="post">
+      Заголовок новости
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Описание новости
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Ссылка на полную страницу
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+    </form>
   </div>
 
 </div>
@@ -87,15 +115,17 @@
 <div id="Проект" class="tabcontent">
   <h3>Проект</h3>
   <div class="window_form">
-    Название проекта
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    Описание проекта
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    Ссылка на проект
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    Авторы проекта
-    <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-    <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+    <form id="form" name="project" enctype="multipart/form-data" method="post">
+      Название проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Описание проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Ссылка на проект
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      Авторы проекта
+      <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      <button class="btn b_admin b_nav btn-primary"> Добавить </button>
+    </form>
   </div>
 
 </div>
