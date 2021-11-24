@@ -17,27 +17,8 @@ bp = Blueprint("site", __name__)
 def index():
     """Show all the posts, most recent first."""
     items = Item.query.order_by(Item.created).all()
-    return render_template("site/index.html", item=items)
-
-
-def get_post(id, check_author=True):
-    """Get a post and its author by id.
-    Checks that the id exists and optionally that the current user is
-    the author.
-    :param id: id of post to get
-    :param check_author: require the current user to be the author
-    :return: the post with author information
-    :raise 404: if a post with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
-    post = Post.query.get_or_404(id, f"Post id {id} doesn't exist.")
-
-    if check_author and post.author != g.user:
-        abort(403)
-
-    return post
-
-
+    post = Post.query.order_by(Post.created).all()
+    return render_template("site/index.html", item=items, post=post)
 
 
 
