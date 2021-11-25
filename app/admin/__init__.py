@@ -1,7 +1,8 @@
+from re import match
 from flask.templating import render_template
 from app import db, app
 from flask import url_for, redirect, request, abort
-from app.models import User, Role, Item
+from app.models import Post, User, Role, Item
 
 # flask-login
 from flask_login import current_user
@@ -18,8 +19,7 @@ from flask_admin.contrib import sqla
 import os
 from werkzeug.utils import secure_filename
 
-from app.admin.forms import ServiceForm
-
+from app.admin.forms import ServiceForm, RegisterForm, LoginForm
 
 
 # Setup Flask-Security
@@ -64,23 +64,26 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             # print(image)
 
 
-            item = Item(title=title, desc=desc,url_serv=url_serv, image=image)
+            if form.title2.data == "servises":
+                item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
+            elif form.title2.data == "news":
+                item = Post(title=title, desc=desc, url_serv=url_serv, image=image)
+            # elif form.title2.data is "projects":
+            #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
+
+
+
+                
 
             try:
                 db.session.add(item)
                 db.session.commit()
-                return super(MyAdminIndexView, self).index()
             except:
-                return "error"
-
-
+                return super(MyAdminIndexView, self).index()
 
         # if request.method == "POST":
 
-
-
         return render_template("admin/index.html", form=form)
-
 
     # def create(self):
     #     if request.method == "POST":
@@ -98,7 +101,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     #         except:
     #             return "error"
 
-
     #     else:
     #         return super(MyAdminIndexView, self).index()
 
@@ -106,6 +108,19 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def login_page(self):
         if current_user.is_authenticated:
             return redirect(url_for('.index'))
+
+        # создаем экземпляр класса формы
+        form = LoginForm(request.form)
+        # если HTTP-метод POST и данные формы валидны
+        if form.validate_on_submit():
+            # используя схему `SQLAlchemy` создаем объект,
+            # для последующей записи в базу данных
+            user = User(form.username.data,
+                        form.password.data)
+            db.session.add(user)
+            return redirect(url_for('login'))
+        # если HTTP-метод GET, то просто отрисовываем форму
+        return render_template('register.html', form=form)
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
@@ -117,9 +132,25 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
+    @expose('/register', methods=['GET', 'POST'])
+    def register():
+        # создаем экземпляр класса формы
+        form = RegisterForm(request.form)
+        # если HTTP-метод POST и данные формы валидны
+        if form.validate_on_submit():
+            # используя схему `SQLAlchemy` создаем объект,
+            # для последующей записи в базу данных
+            user = User(form.username.data, form.email.data,
+                        form.password.data)
+            db.session.add(user)
+            return redirect(url_for('login'))
+        # если HTTP-метод GET, то просто отрисовываем форму
+        return render_template('register.html', form=form)
+
 
 # Create admin
-admin = flask_admin.Admin(app, index_view=MyAdminIndexView(), base_template='admin/master-extended.html')
+admin = flask_admin.Admin(app, index_view=MyAdminIndexView(
+), base_template='admin/master-extended.html')
 
 # Add view
 admin.add_view(MyModelView(User, db.session))
@@ -127,6 +158,8 @@ admin.add_view(MyModelView(User, db.session))
 
 # define a context processor for merging flask-admin's template context into the
 # flask-security views.
+
+
 @security.context_processor
 def security_context_processor():
     return dict(
