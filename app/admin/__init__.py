@@ -56,6 +56,13 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return redirect(url_for('.login_page'))
 
         form = ServiceForm()
+
+
+
+        services = Item.query.order_by(Item.created.desc()).all()
+
+
+
         if form.validate_on_submit():
             title = form.title.data
             desc = form.desc.data
@@ -72,18 +79,18 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
 
 
-
                 
 
             try:
                 db.session.add(item)
                 db.session.commit()
+                # return super(MyAdminIndexView, self).index()
             except:
                 return super(MyAdminIndexView, self).index()
 
         # if request.method == "POST":
 
-        return render_template("admin/index.html", form=form)
+        return render_template("admin/index.html", form=form, services=services)
 
     # def create(self):
     #     if request.method == "POST":
@@ -146,6 +153,39 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return redirect(url_for('login'))
         # если HTTP-метод GET, то просто отрисовываем форму
         return render_template('register.html', form=form)
+
+
+
+
+    
+    @expose('/<int:id>/del')
+    def delete(self, id):
+        service = Item.query.get_or_404(id)
+
+
+
+        try:
+            db.session.delete(service)
+            db.session.commit()
+            # return super(MyAdminIndexView, self).index()
+        except:
+            return super(MyAdminIndexView, self).index()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Create admin

@@ -54,6 +54,39 @@
     {% endif %}
   </div>
 
+  {% if current_user.is_authenticated %}
+
+
+
+
+
+  <table border="1">
+    <caption> </caption>
+    <tr>
+      <th>Title</th>
+      <th>Desc</th>
+      <th>Created</th>
+      <th>url_serv</th>
+      <th>Buttons</th>
+    </tr>
+
+    {% for services in services %}
+
+    <tr>
+      <td>{{services.title}} </td>
+      <td>{{services.desc}}</td>
+      <td>{{services.created}}</td>
+      <td>{{services.url_serv}}</td>
+      <td><a href="{{services.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+    </tr>
+
+    {%endfor%}
+
+  </table>
+
+
+
+
 </div>
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
@@ -70,7 +103,7 @@
 
       {{ form.csrf_token }}
       {{form.title.label()}}
-      {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
+      {{form.title(class="form-control", type="text",placeholder="Default input", )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
       {{form.desc.label()}}
@@ -78,24 +111,31 @@
       <!-- Описание сервиса
       <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
-        {{form.url_serv.label()}}
-        {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+      {{form.url_serv.label()}}
+      {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
       <!-- Ссылка на сервис
       <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
-        {{form.image.label()}}
-        {{form.image(class="form_image_admin")}}
+      {{form.image.label()}}
+      {{form.image(class="form_image_admin")}}
       <!-- Загрузка изображения
       <p><input name='image' id="image" type="file">
         <input type="submit" value="Загрузить">
       </p> -->
-      {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
+      {{form.submit( type="submit", class="btn b_nav btn-primary")}}
       <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
-      {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises"  )}}
+      {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises" )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
 
-  
+
+
+
+
+
+
+
+
     </form>
   </div>
 </div>
@@ -106,7 +146,7 @@
     <form enctype="multipart/form-data" method="post">
       {{ form.csrf_token }}
       {{form.title.label()}}
-      {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
+      {{form.title(class="form-control", type="text",placeholder="Default input", )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
       {{form.desc.label()}}
@@ -114,20 +154,20 @@
       <!-- Описание сервиса
       <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
-        {{form.url_serv.label()}}
-        {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+      {{form.url_serv.label()}}
+      {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
       <!-- Ссылка на сервис
       <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
         aria-label="default input example"> -->
-        {{form.image.label()}}
-        {{form.image()}}
+      {{form.image.label()}}
+      {{form.image()}}
       <!-- Загрузка изображения
       <p><input name='image' id="image" type="file">
         <input type="submit" value="Загрузить">
       </p> -->
-      {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
+      {{form.submit( type="submit", class="btn b_nav btn-primary")}}
       <!-- <button type="submit" class="btn  b_nav btn-primary"> Добавить </button> -->
-      {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="news"  )}}
+      {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="news" )}}
       <!-- Название сервиса
       <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example"> -->
     </form>
@@ -167,4 +207,27 @@
   </div> -->
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
 {% endblock content %}
