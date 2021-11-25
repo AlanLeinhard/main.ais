@@ -55,11 +55,24 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
 
+        if not current_user.has_role('admin'):
+            return render_template("admin/kursant.html")
+
+
+
+
+        # if current_user.has_role('kursant'):
+        #     return render_template("admin/kursant.html")
+
+
+
         form = ServiceForm()
 
 
 
         services = Item.query.order_by(Item.created.desc()).all()
+        users = User.query.order_by(User.created_on.desc()).all()
+        roles = Role.query.order_by(Role.id.desc()).all()
 
 
 
@@ -90,7 +103,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         # if request.method == "POST":
 
-        return render_template("admin/index.html", form=form, services=services)
+        return render_template("admin/index.html", form=form, services=services, users=users, roles=roles)
 
     # def create(self):
     #     if request.method == "POST":
@@ -115,19 +128,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def login_page(self):
         if current_user.is_authenticated:
             return redirect(url_for('.index'))
-
-        # создаем экземпляр класса формы
-        form = LoginForm(request.form)
-        # если HTTP-метод POST и данные формы валидны
-        if form.validate_on_submit():
-            # используя схему `SQLAlchemy` создаем объект,
-            # для последующей записи в базу данных
-            user = User(form.username.data,
-                        form.password.data)
-            db.session.add(user)
-            return redirect(url_for('login'))
-        # если HTTP-метод GET, то просто отрисовываем форму
-        return render_template('register.html', form=form)
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
@@ -138,23 +138,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     @expose('/reset/')
     def reset_page(self):
         return redirect(url_for('.index'))
-
-    @expose('/register', methods=['GET', 'POST'])
-    def register():
-        # создаем экземпляр класса формы
-        form = RegisterForm(request.form)
-        # если HTTP-метод POST и данные формы валидны
-        if form.validate_on_submit():
-            # используя схему `SQLAlchemy` создаем объект,
-            # для последующей записи в базу данных
-            user = User(form.username.data, form.email.data,
-                        form.password.data)
-            db.session.add(user)
-            return redirect(url_for('login'))
-        # если HTTP-метод GET, то просто отрисовываем форму
-        return render_template('register.html', form=form)
-
-
 
 
     

@@ -70,14 +70,60 @@
       <th>Buttons</th>
     </tr>
 
-    {% for services in services %}
+    {% for el in services %}
 
     <tr>
-      <td>{{services.title}} </td>
-      <td>{{services.desc}}</td>
-      <td>{{services.created}}</td>
-      <td>{{services.url_serv}}</td>
-      <td><a href="{{services.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+      <td>{{el.title}} </td>
+      <td>{{el.desc}}</td>
+      <td>{{el.created}}</td>
+      <td>{{el.url_serv}}</td>
+      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+    </tr>
+
+    {%endfor%}
+
+  </table>
+  <table border="1">
+    <caption> </caption>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>username</th>
+      <th>email</th>
+      <th>created_on</th>
+      <th>updated_on</th>
+    </tr>
+
+    {% for el in users %}
+
+    <tr>
+      <td>{{el.id}} </td>
+      <td>{{el.name}}</td>
+      <td>{{el.username}}</td>
+      <td>{{el.email}}</td>
+      <td>{{el.created_on}} </td>
+      <td>{{el.updated_on}} </td>
+      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+    </tr>
+
+    {%endfor%}
+
+  </table>
+  <table border="1">
+    <caption> </caption>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>description</th>
+    </tr>
+
+    {% for el in roles %}
+
+    <tr>
+      <td>{{el.id}} </td>
+      <td>{{el.name}} </td>
+      <td>{{el.description}}</td>
+      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
     </tr>
 
     {%endfor%}
