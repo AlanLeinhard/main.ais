@@ -31,18 +31,25 @@
   <div class="col-1"></div>
   <div class="poisk row google" id="default">
 
-    <select class="form-select col-2" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+    <select class="form-select col-2" id="sel" aria-label="">
+      <option selected>Поисковик</option>
+      <option value="1"  >Google</option>
+      <option value="2" >Yandex</option>
+      <option value="3">DuckDuckGo</option>
     </select>
+   
+
+    <script>
+    if (document.getElementById("sel").options.selectedIndex == 1) {
+      alert("Выбран Пункт 2");
+    }
+    </script>
+
 
 
     <!-- Defalut строка поиска Google -->
-    <div class="poiskbar col-9 my-auto " id="poiskbaar">
-      <span id="google">
-
+    <div class="poiskbar col-9 my-auto " id="poiskbaar main">
+      <span id="google_1">
         <form id="poisk" class="row" action="http://google.com/search" target="_blank">
           <div class="col-1"></div>
           <input class="form-control poisk_row col-8" type="text" placeholder="Default input"
@@ -69,7 +76,7 @@
 
   <!-- Строка поиска Google для замены -->
   <div class="poisk row " style="display: none" id="p_google">
-    <span id="google">
+    <span id="google_2">
       <form id="poisk" action="http://google.com/search" target="_blank">
         <input type="search" name="q">
         <input type="hidden" name="as_sitesearch" value="AISOVD.ru">
@@ -81,6 +88,7 @@
 </div>
 
 
+
 <!-- Сетка с плитками -->
 
 <div class="setka">
@@ -90,15 +98,12 @@
 
     {% for item in item %}
 
-    <div  class="containerr col-3 cola holder ">
-      <div src= {{item.image}} class="linke elementsetki 1">
-        <div class="text">
-          <h1 class="zgl"> {{item.title}} </h1>
+      <div class="holder cola col-3">
+        <div class="block">
+        <h2>{{item.title}}</h2>
+        {{item.desc}}
         </div>
-      </div>
-      <div class="content elementsetki 1">
-        <h1 class="zgl">{{item.desc}}</h1>
-      </div>
+        </div>
     </div>
     
     {%endfor%}

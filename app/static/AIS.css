@@ -179,9 +179,9 @@ border-radius: 7px;
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 .cola {
-    margin: 25px;
     height: 150px;
     width: 100px;
+    padding: 25px;
 }
 
 .setka {
@@ -199,6 +199,7 @@ border-radius: 7px;
     width: 100%;
     height: 100%;
     z-index: 1;
+    
 }
 .content {
     position: absolute;
@@ -210,7 +211,7 @@ border-radius: 7px;
     z-index: 2;
     transition: 0.5s;
     cursor: pointer;
-
+    
 }
 .content:hover {
     opacity: 1;
@@ -301,3 +302,23 @@ border-radius: 7px;
   .form_image_admin {
     margin-top: 30px;
   }
+
+  .holder{
+    position:relative;   
+
+    background:#ff6600;
+     margin:100px auto;
+}
+.block{
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    top:0;
+    background:rgba(255,255,255, 0.7);
+    padding:5px;
+    display:none;
+}
+.holder:hover .block{
+    display:block;
+}
