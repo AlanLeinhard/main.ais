@@ -96,18 +96,18 @@
   <!-- Первый ряд -->
   <div class="row">
 
-    {% for item in item %}
-
+    {% for el in item %}
+     <div class="elementsetki col-3">
       <div class="holder cola col-3">
         <div class="block">
-        <h2>{{item.title}}</h2>
-        {{item.desc}}
+        <h2>{{el.title}}</h2>
+        {{el.desc}}
         </div>
-        </div>
-    </div>
+        </div> </div>
+    
     
     {%endfor%}
-
+  </div>
   </div>
 
 </div>

@@ -24,5 +24,19 @@
             document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
         }
 
+function openServ(evt, title) {
+ var i, tabcontente, tablinkse;
 
+ tabcontente = document.getElementsByClassName("tabcontente");
+for (i = 0; i < tabcontente.length; i++) {
+tabcontente[i].style.display = "none";
+ }
+    
+ tablinkse = document.getElementsByClassName("tablinkse");
+for (i = 0; i < tablinkse.length; i++) {
+tablinkse[i].className = tablinkse[i].className.replace(" active", "");
+ }
+ document.getElementById(title).style.display = "block";
+ evt.currentTarget.className += " active";
+}
 
