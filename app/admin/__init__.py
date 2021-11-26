@@ -55,8 +55,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
 
-        if not current_user.has_role('admin'):
-            return render_template("admin/kursant.html")
 
 
 
@@ -100,6 +98,13 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                 # return super(MyAdminIndexView, self).index()
             except:
                 return super(MyAdminIndexView, self).index()
+
+        
+        if not current_user.has_role('admin'):
+            if current_user.has_role('prepod'):
+                return render_template("admin/prepod.html", form=form,)
+            else:
+                return render_template("admin/kursant.html", form=form,)
 
         # if request.method == "POST":
 
