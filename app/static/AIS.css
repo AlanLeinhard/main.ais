@@ -4,9 +4,9 @@
 
 .fon {
     background-image: url(images/backbody.jpg);
-    width: 100%;
     height: 100%;
     padding-top: 30px;
+
 }
 
 .con {
@@ -15,7 +15,7 @@
         border: 2px solid;
     border-color: #c8d3e3;
     background-color: #f0f7ff;
-
+    min-height: 1000px;
 }
 
 .navig {
@@ -238,10 +238,10 @@ input[type="search"] {
 
   .footer {
       height: 150px;
-      margin-top: 10px;
       background-color: #ffff;
       border: 3px solid #c8d3e3;
-      border-radius: 5px;
+      border-radius: 5px; margin: 0;
+  
   }
 
   .header_inner {
@@ -277,5 +277,9 @@ input[type="search"] {
     display:block;
 }
 
+.void_content {
+    height: 1000px;
+    width:100%;
+}
 
 

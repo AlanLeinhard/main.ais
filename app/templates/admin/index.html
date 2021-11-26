@@ -11,6 +11,104 @@
   <div>
     {% if current_user.is_authenticated %}
     <div>
+      <div class="tabe">
+        <button class="tablinkse" onclick="openServ(event, 'servises_table')">Сервисы</button>
+        <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
+        <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
+      </div>
+    
+    
+      <div id="servises_table" class="tabcontente">
+        <h3>Сервисы сайта</h3>
+        <div class="window_form">
+          <form enctype="multipart/form-data" method="post">
+            <table border="1">
+              <caption> </caption>
+              <tr>
+                <th>Title</th>
+                <th>Desc</th>
+                <th>Created</th>
+                <th>url_serv</th>
+                <th>Buttons</th>
+              </tr>
+          
+              {% for el in services %}
+          
+              <tr>
+                <td>{{el.title}} </td>
+                <td>{{el.desc}}</td>
+                <td>{{el.created}}</td>
+                <td>{{el.url_serv}}</td>
+                <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+              </tr>
+          
+              {%endfor%}
+          
+            </table>
+          </form></div>
+        </div>
+    
+    
+        <div id="users_table" class="tabcontente">
+          <h3>Пользователи сайта</h3>
+          <div class="window_form">
+            <form enctype="multipart/form-data" method="post">
+              <table border="1">
+                <caption> </caption>
+                <tr>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>username</th>
+                  <th>email</th>
+                  <th>created_on</th>
+                  <th>updated_on</th>
+                </tr>
+            
+                {% for el in users %}
+            
+                <tr>
+                  <td>{{el.id}} </td>
+                  <td>{{el.name}}</td>
+                  <td>{{el.username}}</td>
+                  <td>{{el.email}}</td>
+                  <td>{{el.created_on}} </td>
+                  <td>{{el.updated_on}} </td>
+                  <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                </tr>
+            
+                {%endfor%}
+            
+              </table>
+            </form></div>
+          </div>
+    
+    
+          <div id="roles_table" class="tabcontente">
+            <h3>Роли пользователей</h3>
+            <div class="window_form">
+              <form enctype="multipart/form-data" method="post">
+                <table border="1">
+                  <caption> </caption>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>description</th>
+                  </tr>
+              
+                  {% for el in roles %}
+              
+                  <tr>
+                    <td>{{el.id}} </td>
+                    <td>{{el.name}} </td>
+                    <td>{{el.description}}</td>
+                    <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                  </tr>
+              
+                  {%endfor%}
+              
+                </table>
+              </form></div>
+            </div>
       <h2>Сведения о пользователе</h2>
       <ul>
         <li>Username: {{ current_user.username }}</li>
@@ -52,75 +150,9 @@
 
 
 
-  <table border="1">
-    <caption> </caption>
-    <tr>
-      <th>Title</th>
-      <th>Desc</th>
-      <th>Created</th>
-      <th>url_serv</th>
-      <th>Buttons</th>
-    </tr>
-
-    {% for el in services %}
-
-    <tr>
-      <td>{{el.title}} </td>
-      <td>{{el.desc}}</td>
-      <td>{{el.created}}</td>
-      <td>{{el.url_serv}}</td>
-      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
-    </tr>
-
-    {%endfor%}
-
-  </table>
-  <table border="1">
-    <caption> </caption>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>username</th>
-      <th>email</th>
-      <th>created_on</th>
-      <th>updated_on</th>
-    </tr>
-
-    {% for el in users %}
-
-    <tr>
-      <td>{{el.id}} </td>
-      <td>{{el.name}}</td>
-      <td>{{el.username}}</td>
-      <td>{{el.email}}</td>
-      <td>{{el.created_on}} </td>
-      <td>{{el.updated_on}} </td>
-      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
-    </tr>
-
-    {%endfor%}
-
-  </table>
-  <table border="1">
-    <caption> </caption>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>description</th>
-    </tr>
-
-    {% for el in roles %}
-
-    <tr>
-      <td>{{el.id}} </td>
-      <td>{{el.name}} </td>
-      <td>{{el.description}}</td>
-      <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
-    </tr>
-
-    {%endfor%}
-
-  </table>
+  
+  
+  
 
 
 
@@ -245,38 +277,7 @@
   </div> -->
 
 
-  <div class="tabe">
-    <button class="tablinkse" onclick="openServ(event, 'servises_table')">Сервисы</button>
-    <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
-    <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
-  </div>
 
-
-  <div id="servises_table" class="tabcontente">
-    <h3>Сервисы сайта</h3>
-    <div class="window_form">
-      <form enctype="multipart/form-data" method="post">
-        хуй
-      </form></div>
-    </div>
-
-
-    <div id="users_table" class="tabcontente">
-      <h3>Пользователи сайта</h3>
-      <div class="window_form">
-        <form enctype="multipart/form-data" method="post">
-          хуй
-        </form></div>
-      </div>
-
-
-      <div id="roles_table" class="tabcontente">
-        <h3>Роли пользователей</h3>
-        <div class="window_form">
-          <form enctype="multipart/form-data" method="post">
-            хуй
-          </form></div>
-        </div>
 
 
 
