@@ -1,7 +1,8 @@
+from re import match
 from flask.templating import render_template
 from app import db, app
 from flask import url_for, redirect, request, abort
-from app.models import User, Role, Item
+from app.models import Post, User, Role, Item
 
 # flask-login
 from flask_login import current_user
@@ -18,8 +19,7 @@ from flask_admin.contrib import sqla
 import os
 from werkzeug.utils import secure_filename
 
-from app.admin.forms import ServiceForm
-
+from app.admin.forms import ServiceForm, RegisterForm, LoginForm
 
 
 # Setup Flask-Security
@@ -55,7 +55,25 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
 
+
+
+
+
+        # if current_user.has_role('kursant'):
+        #     return render_template("admin/kursant.html")
+
+
+
         form = ServiceForm()
+
+
+
+        services = Item.query.order_by(Item.created.desc()).all()
+        users = User.query.order_by(User.created_on.desc()).all()
+        roles = Role.query.order_by(Role.id.desc()).all()
+
+
+
         if form.validate_on_submit():
             title = form.title.data
             desc = form.desc.data
@@ -64,23 +82,33 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             # print(image)
 
 
-            item = Item(title=title, desc=desc,url_serv=url_serv, image=image)
+            if form.title2.data == "servises":
+                item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
+            elif form.title2.data == "news":
+                item = Post(title=title, desc=desc, url_serv=url_serv, image=image)
+            # elif form.title2.data is "projects":
+            #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
+
+
+                
 
             try:
                 db.session.add(item)
                 db.session.commit()
-                return super(MyAdminIndexView, self).index()
+                # return super(MyAdminIndexView, self).index()
             except:
-                return "error"
+                return super(MyAdminIndexView, self).index()
 
-
+        
+        if not current_user.has_role('admin'):
+            if current_user.has_role('prepod'):
+                return render_template("admin/prepod.html", form=form,)
+            else:
+                return render_template("admin/kursant.html", form=form,)
 
         # if request.method == "POST":
 
-
-
-        return render_template("admin/index.html", form=form)
-
+        return render_template("admin/index.html", form=form, services=services, users=users, roles=roles)
 
     # def create(self):
     #     if request.method == "POST":
@@ -97,7 +125,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     #             return "true"
     #         except:
     #             return "error"
-
 
     #     else:
     #         return super(MyAdminIndexView, self).index()
@@ -118,8 +145,40 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return redirect(url_for('.index'))
 
 
+    
+    @expose('/<int:id>/del')
+    def delete(self, id):
+        service = Item.query.get_or_404(id)
+
+
+
+        try:
+            db.session.delete(service)
+            db.session.commit()
+            # return super(MyAdminIndexView, self).index()
+        except:
+            return super(MyAdminIndexView, self).index()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Create admin
-admin = flask_admin.Admin(app, index_view=MyAdminIndexView(), base_template='admin/master-extended.html')
+admin = flask_admin.Admin(app, index_view=MyAdminIndexView(
+), base_template='admin/master-extended.html')
 
 # Add view
 admin.add_view(MyModelView(User, db.session))
@@ -127,6 +186,8 @@ admin.add_view(MyModelView(User, db.session))
 
 # define a context processor for merging flask-admin's template context into the
 # flask-security views.
+
+
 @security.context_processor
 def security_context_processor():
     return dict(

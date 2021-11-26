@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 
 class ServiceForm(FlaskForm):
     title = StringField('Название сервиса', [validators.Length(min=4, max=25)])
+    title2 = StringField('Название сервиса', [validators.Length(min=4, max=25)])
     desc = StringField('desc', [validators.Length(min=6, max=35)])
     url_serv = StringField('url_serv', [validators.Length(min=6, max=35)])
     image = FileField('image', validators=[
