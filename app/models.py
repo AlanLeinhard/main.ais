@@ -6,16 +6,20 @@ from flask_login import UserMixin
 from flask_security import RoleMixin
 from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import relationship, backref
 
 
 from app import db
 
 
-roles_users = db.Table(
-    'roles_user',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
-)
+class roles_users(db.Model):
+    __tablename__ = 'roles_user'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id =  db.Column(db.Integer(), db.ForeignKey("user.id"))
+    role_id =  db.Column(db.Integer(), db.ForeignKey("roles.id"))
+
+    user = relationship("User", backref=backref("roles_user", cascade="all, delete-orphan"))
+    product = relationship("Role", backref=backref("roles_user", cascade="all, delete-orphan"))
 
 
 class Role(db.Model, RoleMixin):
@@ -23,6 +27,7 @@ class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
+    users = relationship("User", secondary="roles_user")
 
     def __str__(self):
         return self.name
@@ -40,7 +45,7 @@ class User(db.Model, UserMixin):
     # Нужен для security!
     active = db.Column(db.Boolean())
     # Для получения доступа к связанным объектам
-    roles = db.relationship('Role', secondary=roles_users, backref=db.backref('user', lazy='dynamic'))
+    roles = relationship("Role", secondary="roles_user")
 
     # Flask - Login
     @property
@@ -92,7 +97,7 @@ class Post(db.Model):
     )
     desc = db.Column(db.String, nullable=False)
     url_serv = db.Column(db.String, nullable=False)
-    image = db.Column(db.LargeBinary, nullable=False)
+    image = db.Column(db.LargeBinary)
 
     # User object backed by author_id
     # lazy="joined" means the user is returned with the post in one query
@@ -116,7 +121,7 @@ class Item(db.Model):
     )
     desc = db.Column(db.String, nullable=False)
     url_serv = db.Column(db.String, nullable=False)
-    image = db.Column(db.LargeBinary, nullable=False)
+    image = db.Column(db.LargeBinary)
 
     def __repr__(self):
         return self.title
