@@ -4,9 +4,9 @@
 
 .fon {
     background-image: url(images/backbody.jpg);
-    width: 100%;
-    height: 1440px;
+    height: 100%;
     padding-top: 30px;
+
 }
 
 .con {
@@ -15,21 +15,22 @@
         border: 2px solid;
     border-color: #c8d3e3;
     background-color: #f0f7ff;
-
+    min-height: 1000px;
 }
 
 .navig {
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
     height: 100px; 
     align-items: center;
     align-content: center;
     border: 2px solid;
     border-color: #c8d3e3;
     background-color: white;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
 }
 
 .b_nav {
@@ -71,37 +72,7 @@ input[type="search"] {
     width: 800px;
 }
 
-.jul {
-background-color: #085C8C;
-height: 160px;
-width: 160px;
-margin-top: 10px;
-align-items: center;
-align-content: center;
-border: 2px solid;
-border-color: #c8d3e3;
-text-align: center;
-opacity: 90%;
-padding-top: 15px;
-margin-top: 70px; 
-border-radius: 7px;
-}
 
-.jul-1 {
-background-color: #085C8C;
-height: 160px;
-width: 160px;
-margin-top: 10px;
-align-items: center;
-align-content: center;
-border: 2px solid;
-border-color: #c8d3e3;
-text-align: center;
-opacity: 90%;
-padding-top: 15px;
-margin-top: 70px;
-border-radius: 7px;
-}
 
 
 .js {
@@ -117,7 +88,7 @@ border-radius: 7px;
     width:100px;
     height:100px;
     background-color: #085C8C;
-     margin:100px auto;
+     margin:15px auto;
      transition: 0.5s;
 
 }
@@ -179,9 +150,9 @@ border-radius: 7px;
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 .cola {
-    margin: 25px;
     height: 150px;
-    width: 100px;
+    width: 250px;
+    max-width: none;
 }
 
 .setka {
@@ -191,15 +162,7 @@ border-radius: 7px;
 .containerr {
     position: relative;
 }
-.linke {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #085C8C;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
+
 .content {
     position: absolute;
     top: 0;
@@ -210,7 +173,7 @@ border-radius: 7px;
     z-index: 2;
     transition: 0.5s;
     cursor: pointer;
-
+    
 }
 .content:hover {
     opacity: 1;
@@ -230,9 +193,7 @@ border-radius: 7px;
 
 
 .elementsetki {
-    border: 3px solid;
-    border-color:#3388b9;
-    border-radius: 3px;
+    height: 50%;
 }
 
 .prokrutka {
@@ -276,12 +237,11 @@ border-radius: 7px;
   }
 
   .footer {
-      width: 100%;
       height: 150px;
-      margin-top: 10px;
       background-color: #ffff;
       border: 3px solid #c8d3e3;
-      border-radius: 5px;
+      border-radius: 5px; margin: 0;
+  
   }
 
   .header_inner {
@@ -301,3 +261,25 @@ border-radius: 7px;
   .form_image_admin {
     margin-top: 30px;
   }
+
+
+.block{
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    top:0;
+    background:rgba(255,255,255, 0.7);
+    padding:5px;
+    display:none;
+}
+.holder:hover .block{
+    display:block;
+}
+
+.void_content {
+    height: 1000px;
+    width:100%;
+}
+
+

@@ -26,8 +26,7 @@
     crossorigin="anonymous"></script>
 </head>
 <!-- Навигация Header -->
-<header>
-  <div class="navig header align-items-middle shadow p-3 bg-body rounded row justify-content-between">
+<header class="header">
 
     <!-- Логотип -->
     <div class="col-2 img">
@@ -48,7 +47,6 @@
     </div>
 
 
-  </div>
 
 </header>
 {% for message in get_flashed_messages() %}
@@ -73,6 +71,9 @@
 
     {%endblock%}
 
+    {% block content2 %}
+
+    {% endblock %}
     {% block content %}
 
     {% endblock %}
