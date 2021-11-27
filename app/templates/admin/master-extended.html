@@ -3,13 +3,161 @@
 
 {% if current_user.is_authenticated %}
 <div class="btn-group pull-right">
-    <a  class="btn b_nav btn-primary" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Log out</a>
+    <a class="btn b_nav btn-primary" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Log out</a>
 
 </div>
 
-{% endif %}
-{% endblock %}
+
+<div class="row-fluid">
+
+    <div>
+        {% if current_user.is_authenticated %}
+        <div>
+            <h2>Сведения о пользователе</h2>
+            <ul>
+                <li>Username: {{ current_user.username }}</li>
+                <li>Email: {{ current_user.email }}</li>
+                <li>Created on: {{ current_user.created_on }}</li>
+                <li>Updated on: {{ current_user.updated_on }}</li>
+            </ul>
+
+            <h2>Возможности и настройки</h2>
+            <p class="lead">Вы можете:</p>
+            <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
+        </div>
+
+        {% else %}
+        <form method="POST" action="">
+            {{ form.hidden_tag() if form.hidden_tag }}
+            {% for f in form if f.type != 'CSRFTokenField' %}
+            <div>
+                {{ f.label }}
+                {{ f }}
+                {% if f.errors %}
+                <ul>
+                    {% for e in f.errors %}
+                    <li>{{ e }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+        {{ link | safe }}
+        {% endif %}
+    </div>
+
+    {% endif %}
+    {% endblock %}
 
 
-{% block content %}
-{% endblock %}
+    {% block content2 %}
+
+    {% endblock %}
+
+    {% block content %}
+
+
+
+    {% if current_user.is_authenticated %}
+    <div class="row-fluid">
+
+        <div class="tab">
+
+            {% if current_user.has_role('admin') %}
+            <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
+
+            {% endif %}
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+            <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
+            {% endif %}
+            <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
+            <button class="tablinks" onclick="openCity()">Пустота</button>
+        </div>
+
+        {% if current_user.has_role('admin') %}
+        <div id="Сервис" class="tabcontent">
+
+            <h3>Сервис</h3>
+
+            <div class="window_form">
+                <form enctype="multipart/form-data" method="post">
+
+                    {{ form.csrf_token }}
+                    Сервис
+                    {{form.title(class="form-control", type="text",placeholder="Default input", )}}
+                    Описание
+                    {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
+                    Адрес
+                    {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+                    Изображение
+                    {{form.image(class="form_image_admin")}}
+                    {{form.submit( type="submit", class="btn b_nav btn-primary")}}
+
+                    {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises"
+                    )}}
+
+                </form>
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+        <div id="Новость" class="tabcontent">
+            <h3>Новость</h3>
+            <div class="window_form">
+                <form enctype="multipart/form-data" method="post">
+
+                    {{ form2.csrf_token }}
+                    Новость
+                    {{form2.title(class="form-control", type="text",placeholder="Default input", )}}
+                    Текст
+                    <!-- {{form2.body.label}} -->
+                    {{form2.body(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form2.submit( type="submit", class="btn b_nav btn-primary")}}
+
+                    {{form2.title2(class="form-control f_c", type="text",placeholder="Default input", value="news" )}}
+
+                </form>
+            </div>
+
+        </div>
+        {% endif %}
+        
+        <!-- 
+    <div id="Проект" class="tabcontent">
+      <h3>Проект</h3>
+      <div class="window_form">
+        {{ form.csrf_token }}
+        {{form.title.label()}}
+        {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
+        Название сервиса
+        <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+        {{form.desc.label()}}
+        {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
+        Описание сервиса
+        <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
+          aria-label="default input example">
+          Адрес
+          {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+        Ссылка на сервис
+        <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
+          aria-label="default input example">
+          Изображение
+          {{form.image()}}
+        Загрузка изображения
+        <p><input name='image' id="image" type="file">
+          <input type="submit" value="Загрузить">
+        </p>
+        {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
+        <button type="submit" class="btn  b_nav btn-primary"> Добавить </button>
+        {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="projects"  )}}
+        Название сервиса
+        <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+      </div> -->
+
+    </div>
+    {% endif %}
+    {% endblock content %}
