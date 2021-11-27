@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Главная</title>
+{% endblock %}
+
+
+{% block content%}
+
+<a>
+    {{post.title}}
+</a>
+
+<br>
+
+<a>
+    {{post.created}}
+</a>
+<br>
+
+<a>
+    {{post.desc}}
+</a>
+<br>
+
+<a>
+    {{post.body}}
+</a>
+<br>
+
+
+
+    <img src='data:;base64,{{ post.image }}' width='100%' height='100%' />
+
+{% endblock %}

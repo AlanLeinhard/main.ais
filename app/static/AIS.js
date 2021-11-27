@@ -1,9 +1,5 @@
 
 
-function replaceContentInContainer(target,source) {
-    document.getElementById(target).innerHTML  = document.getElementById(source).innerHTML;
-  }
-
   function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
 
@@ -20,3 +16,27 @@ function replaceContentInContainer(target,source) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+ document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
+
+
+        function OnSelectionChange (select) {
+            alert(select);
+            document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
+        }
+
+function openServ(evt, title) {
+ var i, tabcontente, tablinkse;
+
+ tabcontente = document.getElementsByClassName("tabcontente");
+for (i = 0; i < tabcontente.length; i++) {
+tabcontente[i].style.display = "none";
+ }
+    
+ tablinkse = document.getElementsByClassName("tablinkse");
+for (i = 0; i < tablinkse.length; i++) {
+tablinkse[i].className = tablinkse[i].className.replace(" active", "");
+ }
+ document.getElementById(title).style.display = "block";
+ evt.currentTarget.className += " active";
+}
+

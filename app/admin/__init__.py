@@ -1,4 +1,3 @@
-from re import match
 from flask.templating import render_template
 from app import db, app
 from flask import url_for, redirect, request, abort
@@ -16,10 +15,7 @@ import flask_admin
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
 
-import os
-from werkzeug.utils import secure_filename
-
-from app.admin.forms import ServiceForm, RegisterForm, LoginForm
+from app.admin.forms import NewsForm, ServiceForm
 
 
 # Setup Flask-Security
@@ -55,79 +51,49 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         if not current_user.is_authenticated:
             return redirect(url_for('.login_page'))
 
-
-
-
-
-        # if current_user.has_role('kursant'):
-        #     return render_template("admin/kursant.html")
-
-
-
         form = ServiceForm()
-
-
+        form2 = NewsForm()
 
         services = Item.query.order_by(Item.created.desc()).all()
+        news = Post.query.order_by(Post.created.desc()).all()
         users = User.query.order_by(User.created_on.desc()).all()
         roles = Role.query.order_by(Role.id.desc()).all()
 
-
-
-        if form.validate_on_submit():
-            title = form.title.data
-            desc = form.desc.data
-            url_serv = form.url_serv.data
-            image = form.image.data.read()
-            # print(image)
-
+        if form.validate_on_submit() or form2.validate_on_submit():
 
             if form.title2.data == "servises":
-                item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
-            elif form.title2.data == "news":
-                item = Post(title=title, desc=desc, url_serv=url_serv, image=image)
+                title = form.title.data
+                desc = form.desc.data
+                url_serv = form.url_serv.data
+                image = form.image.data.read()
+                item = Item(title=title, desc=desc,
+                            url_serv=url_serv, image=image)
+            elif form2.title2.data == "news":
+                title = form2.title.data
+                desc = form2.desc.data
+                body = form2.body.data
+                image = form2.image.data.read()
+                item = Post(title=title, desc=desc,
+                            body=body, image=image)
             # elif form.title2.data is "projects":
             #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
-
-
-                
 
             try:
                 db.session.add(item)
                 db.session.commit()
-                # return super(MyAdminIndexView, self).index()
+                return redirect(url_for('.index'))
             except:
-                return super(MyAdminIndexView, self).index()
+                return "error"
 
-        
         if not current_user.has_role('admin'):
             if current_user.has_role('prepod'):
-                return render_template("admin/prepod.html", form=form,)
+                return render_template("admin/prepod.html", form=form, form2=form2)
             else:
-                return render_template("admin/kursant.html", form=form,)
+                return render_template("admin/kursant.html", form=form)
 
         # if request.method == "POST":
 
-        return render_template("admin/index.html", form=form, services=services, users=users, roles=roles)
-
-    # def create(self):
-    #     if request.method == "POST":
-    #         title = request.form['title']
-    #         desc = request.form['desc']
-    #         url_serv = request.form['url_serv']
-    #         image = request.form['image']
-
-    #         item = Item(title=title, desc=desc,url_serv=url_serv)
-
-    #         try:
-    #             db.session.add(item)
-    #             db.session.commit()
-    #             return "true"
-    #         except:
-    #             return "error"
-
-    #     else:
-    #         return super(MyAdminIndexView, self).index()
+        return render_template("admin/index.html", form=form, form2=form2, services=services, users=users, roles=roles, news=news)
 
     @expose('/login/', methods=('GET', 'POST'))
     def login_page(self):
@@ -144,36 +110,27 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
-
-    
-    @expose('/<int:id>/del')
+    @expose('service/<int:id>/del')
     def delete(self, id):
         service = Item.query.get_or_404(id)
-
-
 
         try:
             db.session.delete(service)
             db.session.commit()
-            # return super(MyAdminIndexView, self).index()
+            return redirect(url_for('.index'))
         except:
-            return super(MyAdminIndexView, self).index()
+            return redirect(url_for('.index'))
 
+    @expose('news/<int:id>/del')
+    def delete(self, id):
+        news = Post.query.get_or_404(id)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        try:
+            db.session.delete(news)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return redirect(url_for('.index'))
 
 
 # Create admin

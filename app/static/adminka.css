@@ -46,3 +46,42 @@
 #upload_img {
     margin-top: 10px;
 }
+
+.tabe {
+    overflow: hidden;
+    border: 2px solid #085C8C;
+    background-color: #c8d3e3;
+    border-radius: 5px;
+}
+
+
+.tabe button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+
+.tabe button:hover {
+    background-color: #085C8C;
+    color: #fff;
+}
+
+
+.tabe button.active {
+    background-color: #085C8C;
+  color: #fff;
+}
+
+
+.tabcontente {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #085C8C;
+    border-top: none;
+    border-radius: 5px;
+}
