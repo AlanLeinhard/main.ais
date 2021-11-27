@@ -13,14 +13,15 @@
   <div class="poloska">Новости</div>
   <div class="scrolling-wrapper-flexbox prokrutka">
 
-{% for post in post %}
+    {% for el in post %}
     <div class="card" style="width: 18rem;">
-      <img src="images/ais.jpg" class="card-img-top" alt={{post.title}}>
+      <a>{{el.title}}</a>
+      <!-- <img src="images/ais.jpg" class="card-img-top" alt={{el.title}}> -->
       <div class="card-body">
-        <p class="card-text"> {{post.body}} </p>
+        <p class="card-text"> {{el.desc}} </p>
       </div>
     </div>
-    
+
     {%endfor%}
   </div>
 </div>
@@ -33,16 +34,16 @@
 
     <select class="form-select col-2" id="sel" aria-label="">
       <option selected>Поисковик</option>
-      <option value="1"  >Google</option>
-      <option value="2" >Yandex</option>
+      <option value="1">Google</option>
+      <option value="2">Yandex</option>
       <option value="3">DuckDuckGo</option>
     </select>
-   
+
 
     <script>
-    if (document.getElementById("sel").options.selectedIndex == 1) {
-      alert("Выбран Пункт 2");
-    }
+      if (document.getElementById("sel").options.selectedIndex == 1) {
+        alert("Выбран Пункт 2");
+      }
     </script>
 
 
@@ -97,21 +98,25 @@
   <div class="row">
 
     {% for el in item %}
-     <div class="elementsetki col-3">
-      <a href="http://{{el.url_serv}}"><div class="holder cola col-3" style="background: url('pic.jpg') #085C8C">
-        <div class="block">
-        <h2>{{el.title}}</h2>
-        {{el.desc}}
+    <div class="elementsetki col-3">
+      <a href="https://{{el.url_serv}}">
+        <!-- <img src='data:;base64,{{ el.image }}' width='100%' height='100%' /> -->
+        <div class="holder cola col-3" style="background: url('data:;base64,{{ el.image }}')">
+
+          <div class="block">
+            <h2>{{el.title}}</h2>
+            {{el.desc}}
+          </div>
         </div>
-        </div> </div> </a>
-    
-    
+    </div> </a>
+
+
     {%endfor%}
   </div>
   <div class="void_content">
-  
+
   </div>
-  </div>
+</div>
 
 </div>
 
