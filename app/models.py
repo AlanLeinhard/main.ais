@@ -95,7 +95,9 @@ class Post(db.Model):
     created = db.Column(
         db.DateTime, nullable=False, server_default=db.func.current_timestamp()
     )
+    desc = db.Column(db.String, nullable=False)
     body = db.Column(db.String, nullable=False)
+    image = db.Column(db.LargeBinary)
 
     @property
     def update_url(self):

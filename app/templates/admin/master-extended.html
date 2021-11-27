@@ -85,13 +85,13 @@
                 <form enctype="multipart/form-data" method="post">
 
                     {{ form.csrf_token }}
-                    Сервис
+                    {{form.title.label}}
                     {{form.title(class="form-control", type="text",placeholder="Default input", )}}
-                    Описание
+                    {{form.desc.label}}
                     {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
-                    Адрес
+                    {{form.url_serv.label}}
                     {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
-                    Изображение
+                    {{form.image.label}}
                     {{form.image(class="form_image_admin")}}
                     {{form.submit( type="submit", class="btn b_nav btn-primary")}}
 
@@ -111,11 +111,14 @@
                 <form enctype="multipart/form-data" method="post">
 
                     {{ form2.csrf_token }}
-                    Новость
+                    {{form2.title.label}}
                     {{form2.title(class="form-control", type="text",placeholder="Default input", )}}
-                    Текст
-                    <!-- {{form2.body.label}} -->
+                    {{form2.desc.label}}
+                    {{form2.desc(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form2.body.label}}
                     {{form2.body(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form2.image.label}}
+                    {{form2.image(class="form_image_admin")}}
                     {{form2.submit( type="submit", class="btn b_nav btn-primary")}}
 
                     {{form2.title2(class="form-control f_c", type="text",placeholder="Default input", value="news" )}}

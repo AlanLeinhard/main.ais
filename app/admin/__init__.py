@@ -32,7 +32,6 @@ class MyModelView(sqla.ModelView):
                 current_user.has_role('admin')
                 )
 
-
     def _handle_view(self, name, **kwargs):
         """
         Override builtin _handle_view in order to redirect users when a view is not accessible.
@@ -71,8 +70,11 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                             url_serv=url_serv, image=image)
             elif form2.title2.data == "news":
                 title = form2.title.data
+                desc = form2.desc.data
                 body = form2.body.data
-                item = Post(title=title, body=body)
+                image = form2.image.data.read()
+                item = Post(title=title, desc=desc,
+                            body=body, image=image)
             # elif form.title2.data is "projects":
             #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
 

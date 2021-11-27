@@ -4,7 +4,7 @@ from flask_sqlalchemy import model
 from app.models import db, User, Role, roles_users
 
 
-# subprocess.run('rm -r migrations', shell=True)
+subprocess.run('rm -r migrations', shell=True)
 subprocess.run('export FLASK_APP=app', shell=True)
 subprocess.run('export FLASK_ENV=development', shell=True)
 subprocess.run('flask db init', shell=True)

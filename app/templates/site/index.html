@@ -14,20 +14,25 @@
   <div class="scrolling-wrapper-flexbox prokrutka">
 
     {% for el in post %}
-    <div class="card" style="width: 18rem;">
-      <a>{{el.title}}</a>
-      <!-- <img src="images/ais.jpg" class="card-img-top" alt={{el.title}}> -->
-      <div class="card-body">
-        <p class="card-text"> {{el.desc}} </p>
-      </div>
-    </div>
 
+      <div class="card" style="width: 18rem;">
+        <a href='{{el.id}}'>{{el.title}}</a>
+        <!-- <img src="images/ais.jpg" class="card-img-top" alt={{el.title}}> -->
+        <div class="card-body">
+          <p class="card-text"> {{el.body}} </p>
+          <img src='data:;base64,{{ el.image }}' width='100%' height='100%' />
+        </div>
+      </div>
     {%endfor%}
   </div>
 </div>
+
 <!-- Смена поисковиков -->
+
 <div class="search shadow p-3 mb-5 bg-body rounded">
+
   <!-- Кнопки поисковиков -->
+
   <div class="col-1"></div>
   <div class="col-1"></div>
   <div class="poisk row google" id="default">
@@ -49,6 +54,7 @@
 
 
     <!-- Defalut строка поиска Google -->
+
     <div class="poiskbar col-9 my-auto " id="poiskbaar main">
       <span id="google_1">
         <form id="poisk" class="row" action="http://google.com/search" target="_blank">
@@ -64,6 +70,7 @@
 
 
   <!-- Строка поиска Яндекс для замены -->
+
   <div class="poisk row " style="display: none" id="p_yandex">
     <span id="yandex">
       <form id="poisk" action="https://yandex.ru/" target="_blank">
@@ -76,6 +83,7 @@
 
 
   <!-- Строка поиска Google для замены -->
+
   <div class="poisk row " style="display: none" id="p_google">
     <span id="google_2">
       <form id="poisk" action="http://google.com/search" target="_blank">
@@ -95,6 +103,7 @@
 <div class="setka">
 
   <!-- Первый ряд -->
+  
   <div class="row">
 
     {% for el in item %}
