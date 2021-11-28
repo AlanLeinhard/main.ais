@@ -15,7 +15,7 @@
             <button class="tablinkse" onclick="openServ(event, 'news_table')">Нововсти</button>
             <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
             <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
-            <button class="tablinkse" onclick="openServ()">Пустота</button>
+            <button class="tablinkse" style="margin-left: auto;" onclick="openServ()">Скрыть</button>
         </div>
 
 
@@ -26,11 +26,11 @@
                     <table border="1">
                         <caption> </caption>
                         <tr>
-                            <th>Title</th>
-                            <th>Desc</th>
-                            <th>Created</th>
-                            <th>url_serv</th>
-                            <th>Buttons</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Создан</th>
+                            <th>Ссылка</th>
+                            <th>Действие</th>
                         </tr>
 
                         {% for el in services %}
@@ -40,7 +40,7 @@
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.url_serv}}</td>
-                            <td><a href="service/{{el.id}}/del" onclick="alert()" class="btn b_nav btn-primary">Delete</a></td>
+                            <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
                         </tr>
 
                         {%endfor%}
@@ -57,11 +57,11 @@
                     <table border="1">
                         <caption> </caption>
                         <tr>
-                            <th>Title</th>
-                            <th>Desc</th>
-                            <th>Created</th>
-                            <th>body</th>
-                            <th>Buttons</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Дата создания</th>
+                            <th>Содержание</th>
+                            <th>Действия</th>
                         </tr>
 
                         {% for el in news %}

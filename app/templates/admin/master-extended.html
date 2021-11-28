@@ -10,7 +10,7 @@
     <div>
         {% if current_user.is_authenticated %}
         <div>
-            <h2>Сведения о пользователе</h2>
+            <h2 style="margin-top: 20px;">Сведения о пользователе</h2>
             <ul>
                 <li>Имя пользователя: {{ current_user.username }}</li>
                 <li>Email: {{ current_user.email }}</li>
@@ -18,11 +18,12 @@
                 <li>Изменён: {{ current_user.updated_on }}</li>
             </ul>
             <div class="btn-group pull-right">
-                <a class="btn b_nav btn-primary" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Выйти</a>
+                <a class="btn b_nav btn-primary" style="margin-bottom: 50px; margin-top: 10px;" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Выйти</a>
             
             </div>
+
             <h2>Возможности и настройки</h2>
-            <p class="lead">Вы можете:</p>
+            <p class="lead">Таблица данных:</p>
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
         </div>
 
@@ -61,6 +62,7 @@
 
 
     {% if current_user.is_authenticated %}
+    <p class="lead" style="margin-top: 10px;">Добавление элементов:</p>
     <div class="row-fluid">
 
         <div class="tab">
@@ -73,7 +75,7 @@
             <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
             {% endif %}
             <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
-            <button class="tablinks" onclick="openCity()">Пустота</button>
+            <button class="tablinks" onclick="openCity()">Скрыть</button>
         </div>
 
         {% if current_user.has_role('admin') %}
