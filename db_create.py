@@ -1,36 +1,38 @@
-import subprocess
+import subprocess, os
 
 from app.models import db, User, Role, roles_users
 
 
-OS = 0
-SET = 0
 print("Выберите тип установки:")
 print("Установить БД: 1")
 print("Обновить БД: 0")
-input(SET)
+SET = input()
 print("Выберите вашу ОС:")
 print("Windows: 1")
 print("Linux: 0")
-input(OS)
+OS = input()
+print(SET,OS)
 
-if SET == 1:
-    if OS == 1:
-        subprocess.run('set FLASK_APP=app', shell=True)
-        subprocess.run('set FLASK_ENV=development', shell=True)
-    else:
-        subprocess.run('export FLASK_APP=app', shell=True)
-        subprocess.run('export FLASK_ENV=development', shell=True)
-else:
 
+
+
+if SET != 1:
     if OS == 1:
         subprocess.run('rd -r migrations', shell=True)
-        subprocess.run('set FLASK_APP=app', shell=True)
-        subprocess.run('set FLASK_ENV=development', shell=True)
     else:
         subprocess.run('rm -r migrations', shell=True)
-        subprocess.run('export FLASK_APP=app', shell=True)
-        subprocess.run('export FLASK_ENV=development', shell=True)
+
+
+
+
+
+if OS == 1:
+    subprocess.run('set FLASK_APP=app', shell=True)
+    subprocess.run('set FLASK_ENV=development', shell=True)
+else:
+    subprocess.run('export FLASK_APP=app', shell=True)
+    subprocess.run('export FLASK_ENV=development', shell=True)
+
 subprocess.run('flask db init', shell=True)
 subprocess.run('flask db migrate', shell=True)
 subprocess.run('flask db upgrade', shell=True)
