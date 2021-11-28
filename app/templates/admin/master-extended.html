@@ -65,7 +65,7 @@
     <p class="lead" style="margin-top: 10px;">Добавление элементов:</p>
     <div class="row-fluid">
 
-        <div class="tab">
+        <div class="tab " style="display: flex;">
 
             {% if current_user.has_role('admin') %}
             <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
@@ -75,7 +75,7 @@
             <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
             {% endif %}
             <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
-            <button class="tablinks" onclick="openCity()">Скрыть</button>
+            <button class="tablinks" style="margin-left: auto;" onclick="openCity()">Скрыть</button>
         </div>
 
         {% if current_user.has_role('admin') %}
