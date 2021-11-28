@@ -18,7 +18,7 @@ class NewsForm(FlaskForm):
     title = StringField('Новость', [validators.Length(min=4, max=25)])
     title2 = StringField('Скрытое поле', [validators.Length(min=4, max=25)])
     desc = StringField('Описание', [validators.Length(min=6, max=35)])
-    body = StringField('Текст', [validators.Length(min=4, max=25)])
+    body = StringField('Текст')
     image = FileField('Изображение', validators=[
                       FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
     submit = SubmitField("Добавить")
