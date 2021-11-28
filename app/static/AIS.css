@@ -239,10 +239,9 @@ input[type="search"] {
 
   .footer {
       height: 150px;
-      background-color: #ffff;
-      border: 3px solid #c8d3e3;
-      border-radius: 5px; margin: 0;
-  
+      margin:0;
+      background-color: #085C8C;
+      margin-top: 50px;
   }
 
   .header_inner {
