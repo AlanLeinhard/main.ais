@@ -50,11 +50,11 @@
 
   <div class="col header_inner col-4">
 
-    <a href="/"><button type="button" class="btn btn-primary b_nav">Главная</button></a>
+    <a href="/"><button type="button" class="btn b_nav btn-primary">Главная</button></a>
     {% if current_user.is_authenticated %}
-    <a href="/admin/"><button type="button" class="btn btn-primary b_nav">Личный кабинет</button></a>
+    <a href="/admin/"><button type="button" class="btn b_nav btn-primary">Личный кабинет</button></a>
     {%else%}
-    <a href="/admin/login/"><button type="button" class="btn btn-primary b_nav">Авторизация</button></a>
+    <a href="/admin/login/"><button type="button" class="btn b_nav btn-primary">Авторизация</button></a>
     {% endif %}
   </div>
 

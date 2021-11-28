@@ -36,11 +36,11 @@
                         {% for el in services %}
 
                         <tr>
-                            <td>{{el.title}} </td>
+                            <td id="title">{{el.title}} </td>
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.url_serv}}</td>
-                            <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                            <td><a href="service/{{el.id}}/del" onclick="alert()" class="btn b_nav btn-primary">Delete</a></td>
                         </tr>
 
                         {%endfor%}

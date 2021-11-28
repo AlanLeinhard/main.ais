@@ -2,10 +2,7 @@
 {% block access_control %}
 
 {% if current_user.is_authenticated %}
-<div class="btn-group pull-right">
-    <a class="btn b_nav btn-primary" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Log out</a>
 
-</div>
 
 
 <div class="row-fluid">
@@ -15,12 +12,15 @@
         <div>
             <h2>Сведения о пользователе</h2>
             <ul>
-                <li>Username: {{ current_user.username }}</li>
+                <li>Имя пользователя: {{ current_user.username }}</li>
                 <li>Email: {{ current_user.email }}</li>
-                <li>Created on: {{ current_user.created_on }}</li>
-                <li>Updated on: {{ current_user.updated_on }}</li>
+                <li>Зарегистрирован: {{ current_user.created_on }}</li>
+                <li>Изменён: {{ current_user.updated_on }}</li>
             </ul>
-
+            <div class="btn-group pull-right">
+                <a class="btn b_nav btn-primary" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Выйти</a>
+            
+            </div>
             <h2>Возможности и настройки</h2>
             <p class="lead">Вы можете:</p>
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
@@ -93,7 +93,7 @@
                     {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
                     {{form.image.label}}
                     {{form.image(class="form_image_admin")}}
-                    {{form.submit( type="submit", class="btn b_nav btn-primary")}}
+                    {{form.submit( type="submit", class="btn b_nav btn-primary", onclick="alert()")}}
 
                     {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises"
                     )}}
@@ -161,6 +161,8 @@
         <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
       </div> -->
 
+    
     </div>
+</div>
     {% endif %}
     {% endblock content %}

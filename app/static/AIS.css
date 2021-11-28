@@ -16,6 +16,7 @@
     border-color: #c8d3e3;
     background-color: #f0f7ff;
     min-height: 1000px;
+    border-radius: 3px;
 }
 
 
@@ -32,6 +33,12 @@
 
 .b_nav {
     background-color: #085C8C;
+    border-radius: 3px;
+}
+
+.b_nav:hover {
+    background-color: #114664;
+    border-radius: 3px;
 }
 
 .img {
@@ -80,15 +87,7 @@ input[type="search"] {
     margin-top: 10px;
 }
 
-.holder{  
-    position:relative;
-    width:100px;
-    height:100px;
-    background-color: #085C8C;
-     margin:15px auto;
-     transition: 0.5s;
 
-}
 .block{
     position:absolute;
     left:0;
@@ -150,6 +149,11 @@ input[type="search"] {
     height: 150px;
     width: 250px;
     max-width: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    border-radius: 5px;
 }
 
 .setka {
@@ -178,14 +182,14 @@ input[type="search"] {
 }
 
 .poisk {
-    margin-left: 100px;
+
     width: 90%;
 }
 
 
 
 #news {
-    height: 200px;
+    height: 250px;
 }
 
 
@@ -195,7 +199,7 @@ input[type="search"] {
 
 .prokrutka {
     width: 100%;
-    height: 170px;
+    max-height: 220px;
     Overflow : auto;
     overflow-x: scroll;
 }
@@ -217,7 +221,7 @@ input[type="search"] {
     .card {
       flex: 0 0 auto;
       width: 200px;
-
+      overflow: hidden;
   }
 
   .scrolling-wrapper {
@@ -259,6 +263,13 @@ input[type="search"] {
     margin-top: 30px;
   }
 
+  .holder{  
+    position:relative;
+    margin:15px auto;
+    transition: 0.5s;
+    background-color: #000;
+    transition: opacity 0.1s linear, transform 0.1s linear;
+}
 
 .block{
     position:absolute;
@@ -266,12 +277,24 @@ input[type="search"] {
     bottom:0;
     right:0;
     top:0;
-    background:rgba(255,255,255, 0.7);
+    background-color:black;
     padding:5px;
     display:none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+     z-index: 1;
+     border-radius: 5px;
+     
 }
 .holder:hover .block{
     display:block;
+    
+}
+.holder:hover {
+    opacity: 0.9; /* Высветляем картинку, но она становится темнее, так как под ней черный фон */
+    transform: scale(1.05); /* Увеличение картинки */
 }
 
 .void_content {
@@ -279,4 +302,37 @@ input[type="search"] {
     width:100%;
 }
 
+.card-body {
+    padding: 0;
+}
 
+.news_card {
+    max-height: 220px;
+    overflow: hidden;
+    opacity: 1;
+
+    border-radius: 5px;
+}
+
+
+.news_card:hover {
+}
+
+a {
+    text-decoration:none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+    box-shadow:0 0 0 9999px rgba(0, 0, 0, 0.603) inset;
+}
+
+.block:hover {
+    opacity: 0.8;
+    box-shadow:0 0 0 9999px rgba(0, 0, 0, 0.603) inset;
+}
+
+.text_holder {
+}

@@ -40,3 +40,9 @@ tablinkse[i].className = tablinkse[i].className.replace(" active", "");
  evt.currentTarget.className += " active";
 }
 
+
+function alert() {
+    var title = document.getElementsById("title")[0];
+var val = title.value;
+alert(val);
+}
