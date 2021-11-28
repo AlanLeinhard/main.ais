@@ -34,6 +34,7 @@
   <form enctype="multipart/form-data" method="post">
     <div class="poisk row google" id="default">
 
+      {{ form.csrf_token }}
       {{form.select(class="form-select col-2")}}
       {{form.search(class="form-control poisk_row col-8", type="text", placeholder="Default input")}}
       {{form.submit(class="btn btn-primary search_button col-2")}}
