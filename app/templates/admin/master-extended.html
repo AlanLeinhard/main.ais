@@ -24,7 +24,8 @@
 
             <h2>Возможности и настройки</h2>
             <p class="lead">Изменить цвет фона: </p>
-<input type="color" list="colorList" name="idColor" id="idColor" value="#cc0000">
+            <div class="row " style="width: 25%; margin: 0;">
+<input type="color" list="colorList" name="idColor" id="idColor" value="#085C8C" style="height: 40px; width: 30; " class="col">
 <datalist id="colorList">
 <option value="#ff0000" label="Красный">
 <option value="#008000" label="Зелёный">
@@ -32,9 +33,9 @@
 <option value="#ffffff" label="Белый">
 <option value="#cccccc" label="Серый">
 </datalist>
-<output id="rezultatColor"></output> 
-            <button onclick="selectcolor()" class="btn b_nav b_navig btn-primary"> Применить </button> 
-            
+<output id="rezultatColor" style="display: none;"></output> 
+            <button onclick="selectcolor()" class="btn b_nav b_navig btn-primary col"> Применить </button> 
+            </div>
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
 
             <div class="user_settings">   
@@ -135,8 +136,12 @@
                     {{form2.title.label}}
                     {{form2.title(class="form-control", type="text",placeholder="", )}}
                     {{form2.desc.label}}
-                    {{form2.desc(class="form-control", type="text",placeholder="" )}}
+                    {{form2.desc(class="form-control", id="exampleFormControlTextarea1" )}}
                     {{form2.body.label}}
+                    <!-- <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div> -->
                     {{form2.body(class="form-control", type="text",placeholder="" )}}
                     {{form2.image.label}}
                     {{form2.image(class="form_image_admin")}}

@@ -25,15 +25,15 @@ class NewsForm(FlaskForm):
 
 
 class UserForm(FlaskForm):
-    name = StringField('Имя пользователя', [
+    name = StringField('Новые данные ФИО', [
         validators.Length(min=4, max=25)])
-    username = StringField('Имя пользователя', [
+    username = StringField('Новое имя пользователя', [
         validators.Length(min=4, max=25)])
-    email = StringField('Имя пользователя', [
+    email = StringField('Новая электронная почта', [
         validators.Length(min=4, max=25)])
     password = PasswordField('Новый пароль', [
         validators.Length(min=4, max=25)])
-    submit = SubmitField("Добавить")
+    submit = SubmitField("Применить")
 
 
 # class RegisterForm(FlaskForm):

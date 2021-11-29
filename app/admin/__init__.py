@@ -15,7 +15,7 @@ import flask_admin
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
 
-from app.admin.forms import NewsForm, ServiceForm
+from app.admin.forms import NewsForm, ServiceForm, UserForm
 import base64
 
 
@@ -118,7 +118,9 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
     @expose('lk/user_settings/')
     def user_settings(self):
-        return render_template("admin/user_settings.html",)
+        form = UserForm()
+        return render_template("admin/user_settings.html", form=form)
+        
 
 
     @expose('service/<int:id>/del')

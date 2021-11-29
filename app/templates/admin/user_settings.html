@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content2 %}
-
+<div style="text-align: center;"><h1 style="margin-bottom: 15px;">Редактировать данные пользователя</h1></div>
 <form enctype="multipart/form-data" method="post">
     {{ form.csrf_token }}
     {{form.name.label}}
@@ -16,7 +16,7 @@
     {{form.username(class="form-control", type="text",placeholder="" )}}
     {{form.password.label}}
     {{form.password(class="form-control", type="text",placeholder="" )}}
-    {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
+    {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary", style="margin-top:20px;" )}}
 
 </form>
 {% endblock %}
