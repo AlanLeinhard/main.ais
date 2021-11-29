@@ -12,6 +12,7 @@
         <div>
             <h2 style="margin-top: 20px;">Сведения о пользователе</h2>
             <ul>
+                <li>Имя пользователя: {{ current_user.name }}</li>
                 <li>Имя пользователя: {{ current_user.username }}</li>
                 <li>Email: {{ current_user.email }}</li>
                 <li>Зарегистрирован: {{ current_user.created_on }}</li>
