@@ -79,7 +79,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                 desc = form2.desc.data
                 body = form2.body.data
                 image = form2.image.data.read()
-                item = Post(title=title, desc=desc,
+                item = Post(author_id=current_user.id,title=title, desc=desc,
                             body=body, image=image)
             # elif form.title2.data is "projects":
             #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
@@ -116,11 +116,39 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
-    @expose('lk/user_settings/')
+    @expose('lk/user_settings/', methods=['POST', 'GET'])
     def user_settings(self):
-        form = UserForm()
+
+        form = UserForm()        
+        user = User.query.get_or_404(current_user.id)
+
+        if form.validate_on_submit():
+
+            name = form.name.data
+            username = form.username.data
+            email = form.email.data
+            password = form.password.data
+     
+            try:
+                if name !="":       
+                        user.name = name
+
+                if username !="":
+                    user.username = username
+                    
+                if email !="":
+                    user.email = email
+
+                if password !="":
+                    user.password = password
+                    
+                db.session.commit()
+                return render_template("admin/user_settings.html", form=form)
+            except:
+                return "error"
+
+
         return render_template("admin/user_settings.html", form=form)
-        
 
 
     @expose('service/<int:id>/del')
