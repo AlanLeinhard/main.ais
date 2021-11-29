@@ -23,6 +23,18 @@
             </div>
 
             <h2>Возможности и настройки</h2>
+            <p class="lead">Изменить цвет фона: </p>
+            <legend><b>Выберите ваш любимый цвет</b></legend>
+<input type="color" list="colorList" name="idColor" id="idColor" value="#cc0000">
+<datalist id="colorList">
+<option value="#ff0000" label="Красный">
+<option value="#008000" label="Зелёный">
+<option value="#0000ff" label="Синий">
+<option value="#ffffff" label="Белый">
+<option value="#cccccc" label="Серый">
+</datalist>
+<output id="rezultatColor"></output> 
+            <button onclick="selectcolor()" class="btn btn-primary b-nav"> Применить </button> 
             <p class="lead">Таблица данных:</p>
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
         </div>
@@ -88,14 +100,14 @@
 
                     {{ form.csrf_token }}
                     {{form.title.label}}
-                    {{form.title(class="form-control", type="text",placeholder="Default input", )}}
+                    {{form.title(class="form-control", id="servis_title", type="text",placeholder="Default input", )}}
                     {{form.desc.label}}
                     {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
                     {{form.url_serv.label}}
                     {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
                     {{form.image.label}}
                     {{form.image(class="form_image_admin")}}
-                    {{form.submit( type="submit", class="btn b_nav btn-primary", onclick="alert()")}}
+                    {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
 
                     {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises"
                     )}}

@@ -41,6 +41,10 @@
     border-radius: 3px;
 }
 
+.b_navig {
+
+}
+
 .img {
     align-self: center;
 }
@@ -325,7 +329,6 @@ a {
 a:hover {
     color: black;
     text-decoration: none;
-    box-shadow:0 0 0 9999px rgba(0, 0, 0, 0.603) inset;
 }
 
 .block:hover {
@@ -334,4 +337,9 @@ a:hover {
 }
 
 .text_holder {
+}
+
+.header_inner {
+    display: flex;
+    justify-content:end;
 }

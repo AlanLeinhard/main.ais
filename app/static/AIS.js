@@ -41,8 +41,12 @@ tablinkse[i].className = tablinkse[i].className.replace(" active", "");
 }
 
 
-function alert() {
-    var title = document.getElementsById("title")[0];
-var val = title.value;
-alert(val);
+function alerte() {
+    alert('Сервис '+(servis_title.value)+' успешно добавлен на главную страницу');
+}
+
+
+function selectcolor() {
+    var x = rezultatColor.value;
+    fon.style.background = x;
 }
