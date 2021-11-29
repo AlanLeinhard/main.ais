@@ -30,6 +30,7 @@
                             <th>Описание</th>
                             <th>Создан</th>
                             <th>Ссылка</th>
+                            <th>Изображение</th>
                             <th>Действие</th>
                         </tr>
 
@@ -40,6 +41,7 @@
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.url_serv}}</td>
+                            <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td>
                             <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
                         </tr>
 
@@ -61,6 +63,7 @@
                             <th>Описание</th>
                             <th>Дата создания</th>
                             <th>Содержание</th>
+                            <th>Изображение</th>
                             <th>Действия</th>
                         </tr>
 
@@ -71,6 +74,7 @@
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.body}}</td>
+                            <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td>
                             <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
                         </tr>
 
