@@ -60,10 +60,10 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         users = User.query.order_by(User.created_on.desc()).all()
         roles = Role.query.order_by(Role.id.desc()).all()
 
-        for el in services:
-            el.image = base64.b64encode(el.image).decode('ascii')
-        for el in news:
-            el.image = base64.b64encode(el.image).decode('ascii')
+        # for el in services:
+        #     el.image = base64.b64encode(el.image).decode('ascii')
+        # for el in news:
+        #     el.image = base64.b64encode(el.image).decode('ascii')
 
         if form.validate_on_submit() or form2.validate_on_submit():
 
@@ -117,7 +117,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return redirect(url_for('.index'))
 
     @expose('service/<int:id>/del')
-    def delete1(self, id):
+    def delete_service(self, id):
         service = Item.query.get_or_404(id)
 
         try:
@@ -125,10 +125,10 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             db.session.commit()
             return redirect(url_for('.index'))
         except:
-            return redirect(url_for('.index'))
+                return "error"
 
     @expose('news/<int:id>/del')
-    def delete(self, id):
+    def delete_news(self, id):
         news = Post.query.get_or_404(id)
 
         try:
@@ -136,7 +136,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             db.session.commit()
             return redirect(url_for('.index'))
         except:
-            return redirect(url_for('.index'))
+                return "error"
 
 
 # Create admin
