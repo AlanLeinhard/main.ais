@@ -116,6 +116,11 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
+    @expose('lk/user_settings/')
+    def user_settings(self):
+        return render_template("admin/user_settings.html",)
+
+
     @expose('service/<int:id>/del')
     def delete_service(self, id):
         service = Item.query.get_or_404(id)
