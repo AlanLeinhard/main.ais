@@ -1,7 +1,7 @@
 {% extends 'admin/master-extended.html' %}
 
 {% block title %}
-<title>ADMIN</title>
+<title>Личный кабинет</title>
 {% endblock %}
 
 {% block content2 %}
@@ -14,7 +14,7 @@
 
         <div class="tabe " style="display: flex;">
             <button class="tablinkse" onclick="openServ(event, 'servises_table')"> Сервисы</button>
-            <button class="tablinkse" onclick="openServ(event, 'news_table')">Нововсти</button>
+            <button class="tablinkse" onclick="openServ(event, 'news_table')">Новости</button>
             <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
             <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
             <button class="tablinkse" style="margin-left: auto;" onclick="openServ()">Скрыть</button>
@@ -42,7 +42,7 @@
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.url_serv}}</td>
-                            <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
+                            <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
                         </tr>
 
                         {%endfor%}
@@ -73,7 +73,7 @@
                             <td>{{el.desc}}</td>
                             <td>{{el.created}}</td>
                             <td>{{el.body}}</td>
-                            <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                            <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
                         </tr>
 
                         {%endfor%}
@@ -92,11 +92,11 @@
                         <caption> </caption>
                         <tr>
                             <th>id</th>
-                            <th>name</th>
-                            <th>username</th>
+                            <th>Название</th>
+                            <th>Имя пользователя</th>
                             <th>email</th>
-                            <th>created_on</th>
-                            <th>updated_on</th>
+                            <th>Создан</th>
+                            <th>Обновлён</th>
                         </tr>
 
                         {% for el in users %}
@@ -108,7 +108,7 @@
                             <td>{{el.email}}</td>
                             <td>{{el.created_on}} </td>
                             <td>{{el.updated_on}} </td>
-                            <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                            <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
                         </tr>
 
                         {%endfor%}
@@ -127,8 +127,8 @@
                         <caption> </caption>
                         <tr>
                             <th>id</th>
-                            <th>name</th>
-                            <th>description</th>
+                            <th>Название</th>
+                            <th>Описание</th>
                         </tr>
 
                         {% for el in roles %}
@@ -137,7 +137,7 @@
                             <td>{{el.id}} </td>
                             <td>{{el.name}} </td>
                             <td>{{el.description}}</td>
-                            <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                            <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
                         </tr>
 
                         {%endfor%}

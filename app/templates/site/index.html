@@ -49,7 +49,7 @@
       <form id="poisk" action="http://google.com/search" target="_blank">
         <input type="search" name="q">
         <input type="hidden" name="as_sitesearch" value="AISOVD.ru">
-        <button class="search_button" type="submit" value="Поиск">
+        <button class="search_button btn b_nav b_navig btn-primary" type="submit" value="Поиск">
       </form>
     </span>
   </div>
@@ -72,8 +72,8 @@
       <a href="https://{{el.url_serv}}">
         <div class="holder cola col-3" style= "background-image: url('data:;base64,{{ el.image }}')">
           <div class="block" style= "background-image: url('data:;base64,{{ el.image }}')">
-            <div class="text_holder " style="text-align: center; color: white;">
-            <h2>{{el.title}}</h2>
+            <div class="text_holder " style="text-overflow: ellipsis; overflow: hidden; text-align: center; color: white;">
+            <h2 style="text-overflow: ellipsis;">{{el.title}}</h2>
             {{el.desc}}
           </div>
           </div>
