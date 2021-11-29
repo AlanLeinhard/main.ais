@@ -116,39 +116,11 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
-    @expose('lk/user_settings/', methods=['POST', 'GET'])
+    @expose('lk/user_settings/')
     def user_settings(self):
-
-        form = UserForm()        
-        user = User.query.get_or_404(current_user.id)
-
-        if form.validate_on_submit():
-
-            name = form.name.data
-            username = form.username.data
-            email = form.email.data
-            password = form.password.data
-     
-            try:
-                if name !="":       
-                        user.name = name
-
-                if username !="":
-                    user.username = username
-                    
-                if email !="":
-                    user.email = email
-
-                if password !="":
-                    user.password = password
-                    
-                db.session.commit()
-                return render_template("admin/user_settings.html", form=form)
-            except:
-                return "error"
-
-
+        form = UserForm()
         return render_template("admin/user_settings.html", form=form)
+        
 
 
     @expose('service/<int:id>/del')

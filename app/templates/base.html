@@ -54,15 +54,15 @@
 
   <!-- Кнопки навигации -->
 
-  <div class="col header_inner row col-4">
-
-    <a href="/" style="    margin: 10px;"><button type="button" class="btn b_nav b_navig btn-primary">Главная</button></a>
+  <div class="col header_inner col-6 " style="overflow: hidden;">
+<div class="row col-12 " style="padding: 0; display: flex; justify-content: end; margin-right: 15px ;">
+    <a href="/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Главная</button></a>
     {% if current_user.is_authenticated %}
-    <a href="/admin/" style="    margin: 10px;"><button type="button" class="btn b_nav b_navig btn-primary">Личный кабинет</button></a>
+    <a href="/admin/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Личный кабинет</button></a>
     {%else%}
-    <a href="/admin/login/" style="    margin: 10px;"><button type="button" class="btn b_nav b_navig btn-primary">Авторизация</button></a>
+    <a href="/admin/login/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Авторизация</button></a>
     {% endif %}
-  </div>
+  </div></div>
 
 
 

@@ -251,7 +251,7 @@ input[type="search"] {
   .header_inner {
       display: flex;
       justify-content: space-between;
-      
+      padding: 0;
   }
 
   .b_admin {
