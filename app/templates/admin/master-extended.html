@@ -19,30 +19,32 @@
                 <li>Изменён: {{ current_user.updated_on }}</li>
             </ul>
             <div class="btn-group pull-right">
-                <a class="btn b_nav btn-primary" style="margin-bottom: 50px; margin-top: 10px;" href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Выйти</a>
-            
+                <a class="btn b_nav btn-primary" style="margin-bottom: 50px; margin-top: 10px;"
+                    href="{{ url_for('admin.logout_page') }}">{{ current_user.username }} - Выйти</a>
+
             </div>
 
             <h2>Возможности и настройки</h2>
             <p class="lead">Изменить цвет фона: </p>
             <div class="row " style="width: 25%; margin: 0;">
-<input type="color" list="colorList" name="idColor" id="idColor" value="#085C8C" style="height: 40px; width: 30; " class="col">
-<datalist id="colorList">
-<option value="#ff0000" label="Красный">
-<option value="#008000" label="Зелёный">
-<option value="#0000ff" label="Синий">
-<option value="#ffffff" label="Белый">
-<option value="#cccccc" label="Серый">
-</datalist>
-<output id="rezultatColor" style="display: none;"></output> 
-            <button onclick="selectcolor()" class="btn b_nav b_navig btn-primary col"> Применить </button> 
+                <input type="color" list="colorList" name="idColor" id="idColor" value="#085C8C"
+                    style="height: 40px; width: 30; " class="col">
+                <datalist id="colorList">
+                    <option value="#ff0000" label="Красный">
+                    <option value="#008000" label="Зелёный">
+                    <option value="#0000ff" label="Синий">
+                    <option value="#ffffff" label="Белый">
+                    <option value="#cccccc" label="Серый">
+                </datalist>
+                <output id="rezultatColor" style="display: none;"></output>
+                <button onclick="selectcolor()" class="btn b_nav b_navig btn-primary col"> Применить </button>
             </div>
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
 
-            <div class="user_settings">   
-            <p class="lead" style="margin-top: 10px;">Редактировать учётную запись: </p>
-             <a href="lk/user_settings"><button class="btn b_nav btn-primary">Редактировать</button></a>
-                 </div>
+            <div class="user_settings">
+                <p class="lead" style="margin-top: 10px;">Редактировать учётную запись: </p>
+                <a href="lk/user_settings"><button class="btn b_nav btn-primary">Редактировать</button></a>
+            </div>
 
         </div>
 
@@ -72,16 +74,182 @@
     {% endblock %}
 
 
-    {% block content2 %}
-
-    {% endblock %}
 
     {% block content %}
+    {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+
+    <div>
+        <div>
+
+            <p class="lead" style="margin-top: 10px;">Таблица данных:</p>
+            <div class="tabe " style="display: flex;">
+                {% if current_user.has_role('admin') %}
+                <button class="tablinkse" onclick="openServ(event, 'servises_table')"> Сервисы</button>
+                {% endif %}
+                <button class="tablinkse" onclick="openServ(event, 'news_table')">Новости</button>
+                {% if current_user.has_role('admin') %}
+                <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
+                <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
+                {% endif %}
+                <button class="tablinkse" style="margin-left: auto;" onclick="openServ()">Скрыть</button>
+            </div>
+
+
+            {% if current_user.has_role('admin') %}
+            <div id="servises_table" class="tabcontente">
+                <h3>Сервисы сайта</h3>
+                <div class="window_form">
+                    <form enctype="multipart/form-data" method="post">
+                        <table border="1">
+                            <caption> </caption>
+                            <tr>
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th>Создан</th>
+                                <th>Ссылка</th>
+                                <!-- <th>Изображение</th> -->
+                                <th>Действие</th>
+                            </tr>
+
+                            {% for el in services %}
+
+                            <tr>
+                                <td id="title">{{el.title}} </td>
+                                <td>{{el.desc}}</td>
+                                <td>{{el.created}}</td>
+                                <td>{{el.url_serv}}</td>
+                                <!-- <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td> -->
+                                <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
+                            </tr>
+
+                            {%endfor%}
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            {% endif %}
+            <div id="news_table" class="tabcontente">
+                <h3>Новости сайта</h3>
+                <div class="window_form">
+                    <form enctype="multipart/form-data" method="post">
+                        <table border="1">
+                            <caption> </caption>
+                            <tr style="word-break:break-all;">
+                                <th>Название</th>
+                                <th>Автор</th>
+                                <th>Описание</th>
+                                <th>Дата создания</th>
+                                <th>Содержание</th>
+                                <!-- <th>Изображение</th> -->
+                                <th>Действия</th>
+                            </tr>
+
+                            {% for el in news %}
+
+                            <tr style="max-height:300px;">
+                                <td>{{el.title}} </td>
+                                <td>{{el.author_id}} </td>
+                                <td>{{el.desc}}</td>
+                                <td>{{el.created}}</td>
+                                <td>
+                                    <div
+                                        style="overflow: scroll; overflow-x:hidden;  word-break:break-all; text-overflow: ellipsis; max-height:300px; ">
+                                        {{el.body}}</div>
+                                </td>
+                                <!-- <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td> -->
+
+                                {% if current_user.has_role('admin') or current_user.id == el.author_id %}
+
+                                <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
+
+                                {% endif %}
+                            </tr>
+
+                            {%endfor%}
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+
+            {% if current_user.has_role('admin') %}
+            <div id="users_table" class="tabcontente">
+                <h3>Пользователи сайта</h3>
+                <div class="window_form">
+                    <form enctype="multipart/form-data" method="post">
+                        <table border="1">
+                            <caption> </caption>
+                            <tr>
+                                <th>id</th>
+                                <th>ФИО</th>
+                                <th>Имя пользователя</th>
+                                <th>Эл. почта</th>
+                                <th>Создан</th>
+                                <th>Изменён</th>
+                            </tr>
+
+                            {% for el in users %}
+
+                            <tr>
+                                <td>{{el.id}} </td>
+                                <td>{{el.name}}</td>
+                                <td>{{el.username}}</td>
+                                <td>{{el.email}}</td>
+                                <td>{{el.created_on}} </td>
+                                <td>{{el.updated_on}} </td>
+                                <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
+                            </tr>
+
+                            {%endfor%}
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+
+            <div id="roles_table" class="tabcontente">
+                <h3>Роли пользователей</h3>
+                <div class="window_form">
+                    <form enctype="multipart/form-data" method="post">
+                        <table border="1">
+                            <caption> </caption>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>description</th>
+                            </tr>
+
+                            {% for el in roles %}
+
+                            <tr>
+                                <td>{{el.id}} </td>
+                                <td>{{el.name}} </td>
+                                <td>{{el.description}}</td>
+                                <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                            </tr>
+
+                            {%endfor%}
+
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% endif %}
 
 
 
     {% if current_user.is_authenticated %}
-            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+    {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
 
     <p class="lead" style="margin-top: 10px;">Добавление элементов:</p>
     <div class="row-fluid">
@@ -93,7 +261,7 @@
 
             {% endif %}
             <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
-            
+
             <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
             <button class="tablinks" style="margin-left: auto;" onclick="openCity()">Скрыть</button>
             {% endif %}
@@ -155,7 +323,7 @@
 
         </div>
         {% endif %}
-        
+
         <!-- 
     <div id="Проект" class="tabcontent">
       <h3>Проект</h3>
@@ -188,8 +356,14 @@
         <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
       </div> -->
 
-    
+
     </div>
 </div>
-    {% endif %}
-    {% endblock content %}
+{% endif %}
+{% endblock content %}
+
+
+{% block content2 %}
+
+
+{% endblock %}

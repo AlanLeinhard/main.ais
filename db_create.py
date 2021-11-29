@@ -66,7 +66,7 @@ from app.models import Post, db, User, Role, roles_users, Item
 
 img = open('img.png', 'rb')
 image = img.read()
-news = Post(author_id = 2, title='qwertyucxhgio', desc='admqxcgnwertyuioin', body="qwertyuioiuytrertyuioxcfbiuytre", image=image)
+news = Post(author_id = 3, title='qwertyucxhgio', desc='admqxcgnwertyuioin', body="qwertyuioiuytrertyuioxcfbiuytre", image=image)
 db.session.add(news)
 db.session.commit()
 print("done")

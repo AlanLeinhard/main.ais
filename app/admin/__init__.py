@@ -93,7 +93,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         if not current_user.has_role('admin'):
             if current_user.has_role('prepod'):
-                return render_template("admin/prepod.html", form=form, form2=form2)
+                return render_template("admin/prepod.html", form=form, form2=form2, news=news)
             else:
                 return render_template("admin/kursant.html", form=form)
 
