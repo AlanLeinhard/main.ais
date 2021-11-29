@@ -85,3 +85,7 @@
     border-top: none;
     border-radius: 5px;
 }
+
+.form_login {
+    width: 30%;
+}

@@ -117,7 +117,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return redirect(url_for('.index'))
 
     @expose('service/<int:id>/del')
-    def delete1(self, id):
+    def delete_service(self, id):
         service = Item.query.get_or_404(id)
 
         try:
@@ -128,7 +128,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return redirect(url_for('.index'))
 
     @expose('news/<int:id>/del')
-    def delete(self, id):
+    def delete_news(self, id):
         news = Post.query.get_or_404(id)
 
         try:

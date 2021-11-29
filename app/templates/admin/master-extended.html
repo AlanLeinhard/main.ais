@@ -34,8 +34,14 @@
 </datalist>
 <output id="rezultatColor"></output> 
             <button onclick="selectcolor()" class="btn b_nav b_navig btn-primary"> Применить </button> 
-            <p class="lead">Таблица данных:</p>
+            
             <!-- <p><a href="/admin/change/">Изменить пароль</a></p> -->
+
+            <div class="user_settings">   
+            <p class="lead" style="margin-top: 10px;">Редактировать учётную запись: </p>
+             <a href="/admin/user_settings/"><button class="btn b_nav btn-primary">Редактировать</button></a>
+                 </div>
+
         </div>
 
         {% else %}
@@ -54,7 +60,7 @@
                 {% endif %}
             </div>
             {% endfor %}
-            <button class="btn" type="submit">Submit</button>
+            <!-- <button class="btn" type="submit">Submit</button> -->
         </form>
         {{ link | safe }}
         {% endif %}
@@ -73,6 +79,8 @@
 
 
     {% if current_user.is_authenticated %}
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+
     <p class="lead" style="margin-top: 10px;">Добавление элементов:</p>
     <div class="row-fluid">
 
@@ -82,11 +90,11 @@
             <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
 
             {% endif %}
-            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
             <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
-            {% endif %}
+            
             <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
             <button class="tablinks" style="margin-left: auto;" onclick="openCity()">Скрыть</button>
+            {% endif %}
         </div>
 
         {% if current_user.has_role('admin') %}
@@ -99,16 +107,16 @@
 
                     {{ form.csrf_token }}
                     {{form.title.label}}
-                    {{form.title(class="form-control", id="servis_title", type="text",placeholder="Default input", )}}
+                    {{form.title(class="form-control", id="servis_title", type="text",placeholder="", )}}
                     {{form.desc.label}}
-                    {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form.desc(class="form-control", type="text",placeholder="" )}}
                     {{form.url_serv.label}}
-                    {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form.url_serv(class="form-control", type="text",placeholder="" )}}
                     {{form.image.label}}
                     {{form.image(class="form_image_admin")}}
                     {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
 
-                    {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="servises"
+                    {{form.title2(class="form-control f_c", type="text",placeholder="", value="servises"
                     )}}
 
                 </form>
@@ -125,16 +133,16 @@
 
                     {{ form2.csrf_token }}
                     {{form2.title.label}}
-                    {{form2.title(class="form-control", type="text",placeholder="Default input", )}}
+                    {{form2.title(class="form-control", type="text",placeholder="", )}}
                     {{form2.desc.label}}
-                    {{form2.desc(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form2.desc(class="form-control", type="text",placeholder="" )}}
                     {{form2.body.label}}
-                    {{form2.body(class="form-control", type="text",placeholder="Default input" )}}
+                    {{form2.body(class="form-control", type="text",placeholder="" )}}
                     {{form2.image.label}}
                     {{form2.image(class="form_image_admin")}}
                     {{form2.submit( type="submit", class="btn b_nav btn-primary")}}
 
-                    {{form2.title2(class="form-control f_c", type="text",placeholder="Default input", value="news" )}}
+                    {{form2.title2(class="form-control f_c", type="text",placeholder="", value="news" )}}
 
                 </form>
             </div>

@@ -19,10 +19,6 @@
  document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
 
 
-        function OnSelectionChange (select) {
-            alert(select);
-            document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
-        }
 
 function openServ(evt, title) {
  var i, tabcontente, tablinkse;
