@@ -41,10 +41,6 @@
     border-radius: 3px;
 }
 
-.b_navig {
-
-}
-
 .img {
     align-self: center;
 }
@@ -318,8 +314,7 @@ input[type="search"] {
 }
 
 
-.news_card:hover {
-}
+
 
 a {
     text-decoration:none;
@@ -336,8 +331,7 @@ a:hover {
     box-shadow:0 0 0 9999px rgba(0, 0, 0, 0.603) inset;
 }
 
-.text_holder {
-}
+
 
 .header_inner {
     display: flex;
