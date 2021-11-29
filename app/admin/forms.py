@@ -25,11 +25,12 @@ class NewsForm(FlaskForm):
 
 
 class UserForm(FlaskForm):
-    name = StringField('Имя пользователя', )
-    username = StringField('Имя пользователя', )
-    email = StringField('Имя пользователя', )
-    password = PasswordField('Новый пароль',)
-    submit = SubmitField("Добавить")
+    
+    name = StringField('Новые данные ФИО', )
+    username = StringField('Новое имя пользователя',)
+    email = StringField('Новая электронная почта', )
+    password = PasswordField('Новый пароль', )
+    submit = SubmitField("Применить")
 
 
 # class RegisterForm(FlaskForm):
