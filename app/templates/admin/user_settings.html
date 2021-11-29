@@ -6,4 +6,17 @@
 
 {% block content2 %}
 
+<form enctype="multipart/form-data" method="post">
+    {{ form.csrf_token }}
+    {{form.name.label}}
+    {{form.name(class="form-control", id="servis_title", type="text",placeholder="", )}}
+    {{form.email.label}}
+    {{form.email(class="form-control", type="text",placeholder="" )}}
+    {{form.username.label}}
+    {{form.username(class="form-control", type="text",placeholder="" )}}
+    {{form.password.label}}
+    {{form.password(class="form-control", type="text",placeholder="" )}}
+    {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
+
+</form>
 {% endblock %}
