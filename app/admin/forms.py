@@ -14,6 +14,16 @@ class ServiceForm(FlaskForm):
     submit = SubmitField("Добавить")
 
 
+class ProjectForm(FlaskForm):
+    title = StringField('Название проекта', [validators.Length(min=4, max=25)])
+    title2 = StringField('Скрытое поле', [validators.Length(min=4, max=25)])
+    desc = StringField('Описание')
+    url_serv = StringField('Адрес')
+    image = FileField('Изображение', validators=[
+                      FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
+    submit = SubmitField("Добавить")
+
+
 class NewsForm(FlaskForm):
     title = StringField('Новость', [validators.Length(min=4, max=25)])
     title2 = StringField('Скрытое поле', [validators.Length(min=4, max=25)])

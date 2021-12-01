@@ -3,7 +3,7 @@ import base64
 
 from wtforms.form import Form
 
-from app.models import Item, Post
+from app.models import Item, Post, Project
 from app.site.forms import SearchForm
 
 bp = Blueprint("site", __name__)
@@ -42,3 +42,22 @@ def news(id):
     post = Post.query.get_or_404(id)
     post.image = base64.b64encode(post.image).decode('ascii')
     return render_template("site/news.html", post=post)
+
+
+@bp.route("/projects")
+def projects():
+
+    form = SearchForm()
+    post = Post.query.order_by(Post.created.desc()).all()
+    item = Project.query.order_by(Project.created.desc()).all()
+
+    for el in post:
+        el.image = base64.b64encode(el.image).decode('ascii')
+
+    for el in item:
+
+        el.image = base64.b64encode(el.image).decode('ascii')
+
+    return render_template("site/projects.html", data=list, item=item, post=post, form=form)
+
+

@@ -1,0 +1,40 @@
+{% extends 'site/master.html' %}
+
+{% block title %}
+<title>Проекты</title>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Сетка с плитками -->
+
+<div class="setka">
+
+    <!-- Первый ряд -->
+  
+    <div class="row">
+  
+      {% for el in item %}
+  
+      <div class="elementsetki col-3">
+        <a href="{{el.url_serv}}">
+          <div class="holder cola col-3" style= "background-image: url('data:;base64,{{ el.image }}')">
+            <div class="block" style= "background-image: url('data:;base64,{{ el.image }}')">
+              <div class="text_holder " style="text-overflow: ellipsis; overflow: hidden; text-align: center; color: white;">
+              <h2 style="text-overflow: ellipsis;">{{el.title}}</h2>
+              {{el.desc}}
+            </div>
+            </div>
+  
+          </div>
+      </div> </a>
+  
+      
+  
+      {%endfor%}
+  
+    </div>
+  </div>
+  
+{% endblock %}

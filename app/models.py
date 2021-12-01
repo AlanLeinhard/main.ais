@@ -90,6 +90,7 @@ class User(db.Model, UserMixin):
 #     return db.session.query(User).get(user_id)
 
 class Post(db.Model):
+    __tablename__ = 'post'
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(100), nullable=False)
@@ -111,7 +112,25 @@ class Post(db.Model):
 
 
 class Item(db.Model):
+    __tablename__ = 'item'
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    created = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.current_timestamp()
+    )
+    desc = db.Column(db.String, nullable=False)
+    url_serv = db.Column(db.String, nullable=False)
+    image = db.Column(db.LargeBinary)
+
+    def __repr__(self):
+        return self.title
+
+
+
+class Project(db.Model):
+    __tablename__ = 'project'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(100), nullable=False)
     created = db.Column(
         db.DateTime, nullable=False, server_default=db.func.current_timestamp()

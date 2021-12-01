@@ -76,7 +76,6 @@
 
 
     {% block content %}
-    {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
 
     <div>
         <div>
@@ -86,7 +85,13 @@
                 {% if current_user.has_role('admin') %}
                 <button class="tablinkse" onclick="openServ(event, 'servises_table')"> Сервисы</button>
                 {% endif %}
+                {% if current_user.has_role('admin') or current_user.has_role('prepod') or
+                current_user.has_role('kursant') %}
+                <button class="tablinkse" onclick="openServ(event, 'projects_table')"> Проекты</button>
+                {% endif %}
+                {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
                 <button class="tablinkse" onclick="openServ(event, 'news_table')">Новости</button>
+                {% endif %}
                 {% if current_user.has_role('admin') %}
                 <button class="tablinkse" onclick="openServ(event, 'users_table')">Пользователи</button>
                 <button class="tablinkse" onclick="openServ(event, 'roles_table')">Роли</button>
@@ -128,8 +133,49 @@
                     </form>
                 </div>
             </div>
+            {% endif %}
+
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') or current_user.has_role('kursant') %}
+            <div id="projects_table" class="tabcontente">
+                <h3>Проекты пользователей</h3>
+                <div class="window_form">
+                    <form enctype="multipart/form-data" method="post">
+                        <table border="1">
+                            <caption> </caption>
+                            <tr>
+                                <th>Название</th>
+                                <th>Автор</th>
+                                <th>Описание</th>
+                                <th>Создан</th>
+                                <th>Ссылка</th>
+                                <!-- <th>Изображение</th> -->
+                                <th>Действие</th>
+                            </tr>
+
+                            {% for el in projects %}
+
+                            <tr>
+                                <td id="title">{{el.title}} </td>
+                                <td>{{el.author_id}}</td>
+                                <td>{{el.desc}}</td>
+                                <td>{{el.created}}</td>
+                                <td>{{el.url_serv}}</td>
+                                <!-- <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td> -->
+                                {% if current_user.has_role('admin') or current_user.id == el.author_id %}
+                                <td><a href="project/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
+                                {% endif %}
+                            </tr>
+
+                            {%endfor%}
+
+                        </table>
+                    </form>
+                </div>
+            </div>
 
             {% endif %}
+
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
             <div id="news_table" class="tabcontente">
                 <h3>Новости сайта</h3>
                 <div class="window_form">
@@ -174,6 +220,7 @@
                 </div>
             </div>
 
+            {% endif %}
 
             {% if current_user.has_role('admin') %}
             <div id="users_table" class="tabcontente">
@@ -200,7 +247,7 @@
                                 <td>{{el.email}}</td>
                                 <td>{{el.created_on}} </td>
                                 <td>{{el.updated_on}} </td>
-                                <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
+                                <td><a href="user/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
                             </tr>
 
                             {%endfor%}
@@ -229,7 +276,7 @@
                                 <td>{{el.id}} </td>
                                 <td>{{el.name}} </td>
                                 <td>{{el.description}}</td>
-                                <td><a href="{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                                <td><a href="role/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
                             </tr>
 
                             {%endfor%}
@@ -244,12 +291,9 @@
 
     </div>
 
-    {% endif %}
 
 
 
-    {% if current_user.is_authenticated %}
-    {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
 
     <p class="lead" style="margin-top: 10px;">Добавление элементов:</p>
     <div class="row-fluid">
@@ -258,14 +302,20 @@
 
             {% if current_user.has_role('admin') %}
             <button class="tablinks" onclick="openCity(event, 'Сервис')">Добавить сервис</button>
-
             {% endif %}
-            <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
 
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') %}
+            <button class="tablinks" onclick="openCity(event, 'Новость')">Добавить новость</button>
+            {% endif %}
+
+            {% if current_user.has_role('admin') or current_user.has_role('prepod') or current_user.has_role('kursant')
+            %}
+            <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button>
+            {% endif %}
             <!-- <button class="tablinks" onclick="openCity(event, 'Проект')">Добавить проект</button> -->
             <button class="tablinks" style="margin-left: auto;" onclick="openCity()">Скрыть</button>
-            {% endif %}
         </div>
+
 
         {% if current_user.has_role('admin') %}
         <div id="Сервис" class="tabcontent">
@@ -286,8 +336,7 @@
                     {{form.image(class="form_image_admin")}}
                     {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
 
-                    {{form.title2(class="form-control f_c", type="text",placeholder="", value="servises"
-                    )}}
+                    {{form.title2(class="form-control f_c", type="text",placeholder="", value="services" )}}
 
                 </form>
             </div>
@@ -324,42 +373,35 @@
         </div>
         {% endif %}
 
-        <!-- 
-    <div id="Проект" class="tabcontent">
-      <h3>Проект</h3>
-      <div class="window_form">
-        {{ form.csrf_token }}
-        {{form.title.label()}}
-        {{form.title(class="form-control", type="text",placeholder="Default input",  )}}
-        Название сервиса
-        <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-        {{form.desc.label()}}
-        {{form.desc(class="form-control", type="text",placeholder="Default input" )}}
-        Описание сервиса
-        <input name='desc' id='desc' class="form-control" type="text" placeholder="Default input"
-          aria-label="default input example">
-          Адрес
-          {{form.url_serv(class="form-control", type="text",placeholder="Default input" )}}
-        Ссылка на сервис
-        <input name='url_serv' id="url_serv" class="form-control" type="text" placeholder="Default input"
-          aria-label="default input example">
-          Изображение
-          {{form.image()}}
-        Загрузка изображения
-        <p><input name='image' id="image" type="file">
-          <input type="submit" value="Загрузить">
-        </p>
-        {{form.submit( type="submit", class="btn  b_nav btn-primary")}}
-        <button type="submit" class="btn  b_nav btn-primary"> Добавить </button>
-        {{form.title2(class="form-control f_c", type="text",placeholder="Default input", value="projects"  )}}
-        Название сервиса
-        <input name='title' id='title' class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-      </div> -->
 
+        {% if current_user.has_role('admin') or current_user.has_role('prepod') or current_user.has_role('kursant') %}
+        <div id="Проект" class="tabcontent">
 
+            <h3>Проект</h3>
+
+            <div class="window_form">
+                <form enctype="multipart/form-data" method="post">
+
+                    {{ form3.csrf_token }}
+                    {{form3.title.label}}
+                    {{form3.title(class="form-control", id="project_title", type="text",placeholder="", )}}
+                    {{form3.desc.label}}
+                    {{form3.desc(class="form-control", type="text",placeholder="" )}}
+                    {{form3.url_serv.label}}
+                    {{form3.url_serv(class="form-control", type="text",placeholder="" )}}
+                    {{form3.image.label}}
+                    {{form3.image(class="form_image_admin")}}
+                    {{form3.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
+
+                    {{form3.title2(class="form-control f_c", type="text",placeholder="", value="projects" )}}
+
+                </form>
+            </div>
+        </div>
+
+        {% endif %}
     </div>
 </div>
-{% endif %}
 {% endblock content %}
 
 

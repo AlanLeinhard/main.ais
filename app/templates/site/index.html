@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'site/master.html' %}
 
 {% block title %}
 <title>Главная</title>
@@ -6,57 +6,6 @@
 
 
 {% block content%}
-
-<!-- Новости news -->
-
-<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news" style="overflow: scroll;">
-  <div class="scrolling-wrapper-flexbox prokrutka">
-
-    {% for el in post %}
-
-    <a class="news_card" href='{{el.id}}'><div class="card" style="width: 18rem;">
-      <!-- <a href='{{el.id}}' style="text-align: center;">{{el.title}}</a> -->
-      <div class="card-body">
-        <p class="card-text" style="text-overflow: ellipsis; text-decoration:none; min-height: 35px; margin: 5px;"> {{el.desc}} </p>
-        <img  src='data:;base64,{{ el.image }}' width='100%' height='100%' />
-      </div>
-    </div></a>
-
-    {%endfor%}
-
-  </div>
-</div>
-
-
-<div class="search shadow p-3 mb-5 bg-body rounded">
-
-  <form enctype="multipart/form-data" method="post">
-    <div class="poisk row google" id="default">
-
-      {{ form.csrf_token }}
-      {{form.select(class="form-select col-2")}}
-      {{form.search(class="form-control poisk_row col-8", type="text", placeholder="Искать в интернете")}}
-      {{form.submit(class="btn btn-primary search_button col-2", style="background-color: #085C8C")}}
-
-    </div>
-  </form>
-
-
-  <!-- Строка поиска Google для замены -->
-
-  <div class="poisk row " style="display: none" id="p_google">
-    <span id="google_2">
-      <form id="poisk" action="http://google.com/search" target="_blank">
-        <input type="search" name="q">
-        <input type="hidden" name="as_sitesearch" value="AISOVD.ru">
-        <button class="search_button btn b_nav b_navig btn-primary" type="submit" value="Поиск">
-      </form>
-    </span>
-  </div>
-
-</div>
-
-
 
 <!-- Сетка с плитками -->
 
