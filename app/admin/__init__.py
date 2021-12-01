@@ -143,7 +143,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                     user.password = password
                     
                 db.session.commit()
-                return render_template("admin/user_settings.html", form=form)
+                return redirect(url_for(".index"))
             except:
                 return "error"
 

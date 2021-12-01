@@ -1,13 +1,13 @@
-from os import name
-import subprocess
-from flask.helpers import url_for
+# from os import name
+# import subprocess
+# from flask.helpers import url_for
 
-from flask_sqlalchemy import model
-from itsdangerous import url_safe
-from app.models import Post, db, User, Role, roles_users, Item
+# from flask_sqlalchemy import model
+# from itsdangerous import url_safe
+# from app.models import Post, db, User, Role, roles_users, Item
 
 
-# subprocess.run('rm -r migrations', shell=True)
+# # subprocess.run('rm -r migrations', shell=True)
 # subprocess.run('set FLASK_APP=app', shell=True)
 # subprocess.run('set FLASK_ENV=development', shell=True)
 # subprocess.run('flask db init', shell=True)
@@ -56,17 +56,77 @@ from app.models import Post, db, User, Role, roles_users, Item
 # db.session.commit()
 
 
+# img = open('img.png', 'rb')
+# image = img.read()
+# news = Post(author_id = 1, title='Портал создан', desc='Информация', body="Сегодня был создан данный портал", image=image)
+# db.session.add(news)
+# db.session.commit()
+# print("done")
+
+
+# img = open('elastic.png', 'rb')
+# image = img.read()
+# news = Post(author_id = 1, title='Портал создан', desc='Информация', body="Сегодня был создан данный портал", image=image)
+# db.session.add(news)
+# db.session.commit()
+# print("done")
+
+
+# img = open('grafana.jpg', 'rb')
+# image = img.read()
+# news = Post(author_id = 2, title='Портал создан', desc='Информация', body="Сегодня был создан данный портал", image=image)
+# db.session.add(news)
+# db.session.commit()
+# print("done")
+
 
 # img = open('img.png', 'rb')
 # image = img.read()
-# service = Item(title='qwertyuio', desc='admqwertyuioin', url_serv="qwertyuioiuytrertyuioiuytre", image=image)
+# news = Post(author_id = 1, title='Портал создан', desc='Информация', body="Сегодня был создан данный портал", image=image)
+# db.session.add(news)
+# db.session.commit()
+# print("done")
+
+
+# img = open('runcher.jpg', 'rb')
+# image = img.read()
+# news = Post(author_id = 2, title='Портал создан', desc='Информация', body="Сегодня был создан данный портал", image=image)
+# db.session.add(news)
+# db.session.commit()
+# print("done")
+
+
+# img = open('elastic.png', 'rb')
+# image = img.read()
+# service = Item(title='Elastic', desc='DitLab кафедры АИС', url_serv="192.168.100.150:5601", image=image)
 # db.session.add(service)
 # db.session.commit()
 # print("done")
 
-img = open('img.png', 'rb')
-image = img.read()
-news = Post(author_id = 3, title='qwertyucxhgio', desc='admqxcgnwertyuioin', body="qwertyuioiuytrertyuioxcfbiuytre", image=image)
-db.session.add(news)
-db.session.commit()
-print("done")
+# img = open('grafana.jpg', 'rb')
+# image = img.read()
+# service = Item(title='Grafana', desc='Grafana кафедры АИС', url_serv="192.168.100.150:3005", image=image)
+# db.session.add(service)
+# db.session.commit()
+# print("done")
+
+# img = open('postgres.jpg', 'rb')
+# image = img.read()
+# service = Item(title='Postgres', desc='Postgres кафедры АИС', url_serv="192.168.100.150:5050", image=image)
+# db.session.add(service)
+# db.session.commit()
+# print("done")
+
+# img = open('prometheus.png', 'rb')
+# image = img.read()
+# service = Item(title='Prometheus', desc='Prometheus кафедры АИС', url_serv="192.168.100.150:9095", image=image)
+# db.session.add(service)
+# db.session.commit()
+# print("done")
+
+# img = open('runcher.jpg', 'rb')
+# image = img.read()
+# service = Item(title='Runcher', desc='Runcher кафедры АИС', url_serv="192.168.100.150:4443", image=image)
+# db.session.add(service)
+# db.session.commit()
+# print("done")
