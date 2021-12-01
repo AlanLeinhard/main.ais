@@ -6,30 +6,29 @@
 
 
 {% block content%}
-
-<a>
-    {{post.title}}
-</a>
+<div style="text-align: center;">
+<h1>{{post.title}}</h1>
+</div> 
 
 <br>
 
-<a>
-    {{post.created}}
-</a>
+
 <br>
 
-<a>
+<div>
     {{post.desc}}
-</a>
+</div>
 <br>
 
-<a>
+<p style="word-break:break-all;">
     {{post.body}}
-</a>
+</p>
 <br>
 
 
 
 <img src='data:;base64,{{ post.image }}' width='100%' height='100%' />
-
+<div>
+    {{post.created}}
+</div>
 {% endblock %}

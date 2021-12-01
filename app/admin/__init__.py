@@ -15,7 +15,8 @@ import flask_admin
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
 
-from app.admin.forms import NewsForm, ServiceForm
+from app.admin.forms import NewsForm, ServiceForm, UserForm
+import base64
 
 
 # Setup Flask-Security
@@ -59,6 +60,11 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         users = User.query.order_by(User.created_on.desc()).all()
         roles = Role.query.order_by(Role.id.desc()).all()
 
+        # for el in services:
+        #     el.image = base64.b64encode(el.image).decode('ascii')
+        # for el in news:
+        #     el.image = base64.b64encode(el.image).decode('ascii')
+
         if form.validate_on_submit() or form2.validate_on_submit():
 
             if form.title2.data == "servises":
@@ -73,7 +79,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
                 desc = form2.desc.data
                 body = form2.body.data
                 image = form2.image.data.read()
-                item = Post(title=title, desc=desc,
+                item = Post(author_id=current_user.id,title=title, desc=desc,
                             body=body, image=image)
             # elif form.title2.data is "projects":
             #     item = Item(title=title, desc=desc, url_serv=url_serv, image=image)
@@ -87,7 +93,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         if not current_user.has_role('admin'):
             if current_user.has_role('prepod'):
-                return render_template("admin/prepod.html", form=form, form2=form2)
+                return render_template("admin/prepod.html", form=form, form2=form2, news=news)
             else:
                 return render_template("admin/kursant.html", form=form)
 
@@ -110,8 +116,43 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
+    @expose('lk/user_settings/', methods=['POST', 'GET'])
+    def user_settings(self):
+
+        form = UserForm()        
+        user = User.query.get_or_404(current_user.id)
+
+        if form.validate_on_submit():
+
+            name = form.name.data
+            username = form.username.data
+            email = form.email.data
+            password = form.password.data
+     
+            try:
+                if name !="":       
+                        user.name = name
+
+                if username !="":
+                    user.username = username
+                    
+                if email !="":
+                    user.email = email
+
+                if password !="":
+                    user.password = password
+                    
+                db.session.commit()
+                return redirect(url_for(".index"))
+            except:
+                return "error"
+
+
+        return render_template("admin/user_settings.html", form=form)
+
+
     @expose('service/<int:id>/del')
-    def delete(self, id):
+    def delete_service(self, id):
         service = Item.query.get_or_404(id)
 
         try:
@@ -119,10 +160,10 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             db.session.commit()
             return redirect(url_for('.index'))
         except:
-            return redirect(url_for('.index'))
+                return "error"
 
     @expose('news/<int:id>/del')
-    def delete(self, id):
+    def delete_news(self, id):
         news = Post.query.get_or_404(id)
 
         try:
@@ -130,7 +171,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             db.session.commit()
             return redirect(url_for('.index'))
         except:
-            return redirect(url_for('.index'))
+                return "error"
 
 
 # Create admin

@@ -19,10 +19,6 @@
  document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
 
 
-        function OnSelectionChange (select) {
-            alert(select);
-            document.getElementById(main).innerHTML = document.getElementById(p_yandex).innerHTML;
-        }
 
 function openServ(evt, title) {
  var i, tabcontente, tablinkse;
@@ -40,3 +36,13 @@ tablinkse[i].className = tablinkse[i].className.replace(" active", "");
  evt.currentTarget.className += " active";
 }
 
+
+function alerte() {
+    alert('Сервис '+(servis_title.value)+' успешно добавлен на главную страницу');
+}
+
+
+function selectcolor() {
+    var x = rezultatColor.value;
+    fon.style.background = x;
+}

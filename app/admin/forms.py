@@ -24,13 +24,13 @@ class NewsForm(FlaskForm):
     submit = SubmitField("Добавить")
 
 
-# class LoginForm(FlaskForm):
-#     username = StringField('Имя пользователя', [
-#                            validators.Length(min=4, max=25)])
-#     password = PasswordField('Новый пароль', [
-#         validators.DataRequired()
-#     ])
-#     pass
+class UserForm(FlaskForm):
+    
+    name = StringField('Новые данные ФИО', )
+    username = StringField('Новое имя пользователя',)
+    email = StringField('Новая электронная почта', )
+    password = PasswordField('Новый пароль', )
+    submit = SubmitField("Применить")
 
 
 # class RegisterForm(FlaskForm):

@@ -35,12 +35,12 @@
     border: 1px solid #085C8C;
     border-top: none;
     border-radius: 5px;
+    height: auto;
 }
 
 .window_form {
 
     width: 100%;
-    height: 500px;
 }
 
 #upload_img {
@@ -84,4 +84,8 @@
     border: 1px solid #085C8C;
     border-top: none;
     border-radius: 5px;
+}
+
+.form_login {
+    width: 30%;
 }
