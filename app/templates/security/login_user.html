@@ -3,14 +3,18 @@
 
 {% from "security/_macros.html" import render_field_with_errors, render_field %}
 {% include "security/_messages.html" %}
-<h1>{{ _('Login') }}</h1>
+<h1>{{ _('Авторизация пользователя') }}</h1>
 <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
   {{ login_user_form.hidden_tag() }}
-  {{ render_field_with_errors(login_user_form.email) }}
-  {{ render_field_with_errors(login_user_form.password) }}
-  {{ render_field_with_errors(login_user_form.remember) }}
+  <h5>Электронная почта</h5>
+  {{ login_user_form.email(class="form-control form_login") }}
+  <h5>Пароль</h5>
+  {{ login_user_form.password(class="form-control form_login") }}
+  <div class="row" style="display: flex; justify-content: start; margin-left: 0; margin-top: 10px;">
+  <h6 class="">Запомнить меня</h6>
+  <div class="" style="margin-left: 5px;">{{ login_user_form.remember }}</div></div>
   {{ render_field(login_user_form.next) }}
-  {{ render_field(login_user_form.submit) }}
+  {{ render_field(login_user_form.submit,class="form-control form_login", value="Войти") }}
 </form>
 {% include "security/_menu.html" %}
 

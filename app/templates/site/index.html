@@ -9,19 +9,18 @@
 
 <!-- Новости news -->
 
-<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news">
-  <div class="poloska">Новости</div>
+<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news" style="overflow: scroll;">
   <div class="scrolling-wrapper-flexbox prokrutka">
 
     {% for el in post %}
 
-    <div class="card" style="width: 18rem;">
-      <a href='{{el.id}}'>{{el.title}}</a>
+    <a class="news_card" href='{{el.id}}'><div class="card" style="width: 18rem;">
+      <!-- <a href='{{el.id}}' style="text-align: center;">{{el.title}}</a> -->
       <div class="card-body">
-        <p class="card-text"> {{el.body}} </p>
-        <img src='data:;base64,{{ el.image }}' width='100%' height='100%' />
+        <p class="card-text" style="text-overflow: ellipsis; text-decoration:none; min-height: 35px; margin: 5px;"> {{el.desc}} </p>
+        <img  src='data:;base64,{{ el.image }}' width='100%' height='100%' />
       </div>
-    </div>
+    </div></a>
 
     {%endfor%}
 
@@ -36,8 +35,8 @@
 
       {{ form.csrf_token }}
       {{form.select(class="form-select col-2")}}
-      {{form.search(class="form-control poisk_row col-8", type="text", placeholder="Default input")}}
-      {{form.submit(class="btn btn-primary search_button col-2")}}
+      {{form.search(class="form-control poisk_row col-8", type="text", placeholder="Искать в интернете")}}
+      {{form.submit(class="btn btn-primary search_button col-2", style="background-color: #085C8C")}}
 
     </div>
   </form>
@@ -50,7 +49,7 @@
       <form id="poisk" action="http://google.com/search" target="_blank">
         <input type="search" name="q">
         <input type="hidden" name="as_sitesearch" value="AISOVD.ru">
-        <button class="search_button" type="submit" value="Поиск">
+        <button class="search_button btn b_nav b_navig btn-primary" type="submit" value="Поиск">
       </form>
     </span>
   </div>
@@ -70,15 +69,19 @@
     {% for el in item %}
 
     <div class="elementsetki col-3">
-      <a href="https://{{el.url_serv}}">
-        <img src='data:;base64,{{ el.image }}' width='100%' height='100%' />
-        <div class="holder cola col-3" style="background: url('data:;base64,{{ el.image }}')">
-          <div class="block">
-            <h2>{{el.title}}</h2>
+      <a href="http://{{el.url_serv}}">
+        <div class="holder cola col-3" style= "background-image: url('data:;base64,{{ el.image }}')">
+          <div class="block" style= "background-image: url('data:;base64,{{ el.image }}')">
+            <div class="text_holder " style="text-overflow: ellipsis; overflow: hidden; text-align: center; color: white;">
+            <h2 style="text-overflow: ellipsis;">{{el.title}}</h2>
             {{el.desc}}
           </div>
+          </div>
+
         </div>
     </div> </a>
+
+    
 
     {%endfor%}
 

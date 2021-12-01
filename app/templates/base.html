@@ -33,6 +33,12 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"
     integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
     crossorigin="anonymous"></script>
+    <script>
+      window.oninput = function oninputColor() {
+      var idColor = document.getElementById('idColor').value;
+      document.getElementById('rezultatColor').innerHTML = idColor;
+      }
+      </script>
 </head>
 
 <!-- Навигация Header -->
@@ -41,22 +47,22 @@
 
   <!-- Логотип -->
 
-  <div class="col-2 img">
+  <a href="/"><div class="col-2 img">
     <img id="logo" src="{{ url_for('static', filename='images/4nepbggowropb8so1meje.png') }}" alt="logo">
-  </div>
+  </div></a>
 
 
   <!-- Кнопки навигации -->
 
-  <div class="col header_inner col-4">
-
-    <a href="/"><button type="button" class="btn btn-primary b_nav">Главная</button></a>
+  <div class="col header_inner col-6 " style="overflow: hidden;">
+<div class="row col-12 " style="padding: 0; display: flex; justify-content: end; margin-right: 15px ;">
+    <a href="/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Главная</button></a>
     {% if current_user.is_authenticated %}
-    <a href="/admin/"><button type="button" class="btn btn-primary b_nav">Личный кабинет</button></a>
+    <a href="/admin/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Личный кабинет</button></a>
     {%else%}
-    <a href="/admin/login/"><button type="button" class="btn btn-primary b_nav">Авторизация</button></a>
+    <a href="/admin/login/" ><button type="button" class="btn b_nav b_navig btn-primary" style="    margin: 10px;">Авторизация</button></a>
     {% endif %}
-  </div>
+  </div></div>
 
 
 
@@ -68,25 +74,41 @@
 {% endfor %}
 
 
-<div class="fon">
+<div id="fon" class="fon">
   <div class="container-md con mx-auto">
 
     {% block access_control %}
     {%endblock%}
 
-    {% block content2 %}
-    {% endblock %}
-
     {% block content %}
 
     {% endblock %}
 
+    {% block content2 %}
+    {% endblock %}
+
   </div>
 
-  <div class="footer align-items-center row shadow p-3 ">
-    <div class="col"></div>
-    <div class="col "></div>
-    <div class="col"></div>
+  <div class="footer align-items-center row shadow p-3 " style="color: rgb(250, 248, 244); ">
+    <div class="col-3"></div>
+
+    <div class="col-3"> 
+  <h4>Команда CodeMasters:</h4>
+  <ul>
+     <li>Александр Ленц</li>
+    <li>Магомедов Артур</li>  
+    <li> Беленикин Даниил</li>  
+   </ul>
+  
+    </div>
+
+    <div class="col-3">
+      <h4 style="margin-top: 0;">Руководитель проекта:</h4>
+      <div>Попов Антон Дмитриевич</div> 
+      <div>Кафедра АИС ОВД</div>
+      <div style=" margin-bottom: 15px;">Воронеж, ВИ МВД России, 2021</div> 
+    </div>
   </div>
+  <div class="col-3"></div>
 
 </div>
