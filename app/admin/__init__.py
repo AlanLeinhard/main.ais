@@ -15,7 +15,7 @@ import flask_admin
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
 
-from app.admin.forms import NewsForm, ProjectForm, ServiceForm, UserForm
+from app.admin.forms import NewsForm, ProjectForm, ServiceForm, ServiceUpdForm, UserForm
 import base64
 
 
@@ -116,25 +116,21 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
     def reset_page(self):
         return redirect(url_for('.index'))
 
-    @expose('lk/user_settings/', methods=['POST', 'GET'])
-    def user_settings(self):
+    @expose('lk/user_settings/<int:id>', methods=['POST', 'GET'])
+    def user_settings(self, id):
 
         form = UserForm()
-        user = User.query.get_or_404(current_user.id)
+        user = User.query.get_or_404(id)
 
         if form.validate_on_submit():
 
             try:
-                if form.name.data != "":
-                    user.name = form.name.data
+                user.name = form.name.data
+                user.username = form.username.data
+                user.email = form.email.data
 
-                if form.username.data != "":
-                    user.username = form.username.data
-
-                if form.email.data != "":
-                    user.email = form.email.data
-
-                if form.password.data != "":
+                if form.check.data == True:
+                    
                     user.password = form.password.data
 
                 db.session.commit()
@@ -142,7 +138,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             except:
                 return "error"
 
-        return render_template("admin/user_settings.html", form=form)
+        return render_template("admin/user_settings.html", form=form, user=user)
 
     @expose('service/<int:id>/del')
     def delete_service(self, id):
@@ -197,6 +193,115 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return redirect(url_for('.index'))
         except:
             return "error"
+
+    @expose('service/<int:id>/upd', methods=['POST', 'GET'])
+    def service_upd(self, id):
+
+        form = ServiceUpdForm()
+        service = Item.query.get(id)
+        title = "сервис"
+        # service.image = base64.b64encode(service.image).decode('ascii')
+
+        if form.validate_on_submit():
+
+            try:
+                service.title = form.title.data
+
+                service.desc = form.desc.data
+
+                service.url_serv = form.url_serv.data
+
+                if form.check.data == True:
+                    service.image = form.image.data.read()
+
+                db.session.commit()
+                return redirect(url_for(".index"))
+            except:
+                return "error"
+
+        return render_template("admin/service_upd.html", form=form, service=service, title=title)
+
+    @expose('project/<int:id>/upd', methods=['POST', 'GET'])
+    def project_upd(self, id):
+
+        form = ServiceUpdForm()
+        service = Project.query.get(id)
+        title = "проект"
+        # service.image = base64.b64encode(service.image).decode('ascii')
+
+        if form.validate_on_submit():
+
+            try:
+                service.title = form.title.data
+
+                service.desc = form.desc.data
+
+                service.url_serv = form.url_serv.data
+
+                if form.check.data == True:
+                    service.image = form.image.data.read()
+
+                db.session.commit()
+                return redirect(url_for(".index"))
+            except:
+                return "error"
+
+        return render_template("admin/service_upd.html", form=form, service=service, title=title)
+
+    @expose('news/<int:id>/upd', methods=['POST', 'GET'])
+    def project_upd(self, id):
+
+        form = ServiceUpdForm()
+        news = Post.query.get(id)
+        title = "новост"
+        # service.image = base64.b64encode(service.image).decode('ascii')
+
+        if form.validate_on_submit():
+
+            try:
+                news.title = form.title.data
+
+                news.desc = form.desc.data
+
+                news.body = form.url_serv.data
+
+                if form.check.data == True:
+                    news.image = form.image.data.read()
+
+                db.session.commit()
+                return redirect(url_for(".index"))
+            except:
+                return "error"
+
+        return render_template("admin/news_upd.html", form=form, news=news, title=title)
+
+    # @expose('user/<int:id>/upd', methods=['POST', 'GET'])
+    # def user_upd(self):
+
+    #     form = UserForm()
+    #     user = User.query.get_or_404(current_user.id)
+
+    #     if form.validate_on_submit():
+
+    #         try:
+    #             if form.name.data != "":
+    #                 user.name = form.name.data
+
+    #             if form.username.data != "":
+    #                 user.username = form.username.data
+
+    #             if form.email.data != "":
+    #                 user.email = form.email.data
+
+    #             if form.password.data != "":
+    #                 user.password = form.password.data
+
+    #             db.session.commit()
+    #             return redirect(url_for(".index"))
+    #         except:
+    #             return "error"
+
+    #     return render_template("admin/user_settings.html", form=form)
 
 
 # Create admin

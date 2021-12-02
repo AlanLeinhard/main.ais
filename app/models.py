@@ -15,6 +15,7 @@ from app import db
 class roles_users(db.Model):
     __tablename__ = 'roles_user'
     id = db.Column(db.Integer, primary_key=True)
+    desc = db.Column(db.String)
     user_id =  db.Column(db.Integer(), db.ForeignKey("user.id"))
     role_id =  db.Column(db.Integer(), db.ForeignKey("roles.id"))
 

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title> Редактировать {{title}}</title>
+{% endblock %}
+
+{% block content2 %}
+
+<form enctype="multipart/form-data" method="post">
+
+    {{ form.csrf_token }}
+    {{form.title.label}} {{title}}a
+    {{form.title(class="form-control", id="servis_title", type="text",placeholder="", value=service.title )}}
+    {{form.desc.label}}
+    {{form.desc(class="form-control", type="text",placeholder="", value=service.desc )}}
+    {{form.url_serv.label}}
+    {{form.url_serv(class="form-control", type="text",placeholder="", value=service.url_serv )}}<br>
+    {{form.check.label}}
+    {{form.check}}<br>
+    {{form.image.label}}
+    {{form.image(class="form_image_admin")}}
+    {{form.submit(onclick="alerte()", type="submit", class="btn b_nav btn-primary" )}}
+
+
+</form>
+{% endblock %}

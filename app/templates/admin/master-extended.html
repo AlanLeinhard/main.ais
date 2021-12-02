@@ -43,7 +43,7 @@
 
             <div class="user_settings">
                 <p class="lead" style="margin-top: 10px;">Редактировать учётную запись: </p>
-                <a href="lk/user_settings"><button class="btn b_nav btn-primary">Редактировать</button></a>
+                <a href="lk/user_settings/{{current_user.id}}"><button class="btn b_nav btn-primary">Редактировать</button></a>
             </div>
 
         </div>
@@ -124,7 +124,8 @@
                                 <td>{{el.created}}</td>
                                 <td>{{el.url_serv}}</td>
                                 <!-- <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td> -->
-                                <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
+                                <td><a href="service/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a>
+                                    <a href="service/{{el.id}}/upd" class="btn b_nav btn-primary"> Редактировать</a></td>
                             </tr>
 
                             {%endfor%}
@@ -162,7 +163,8 @@
                                 <td>{{el.url_serv}}</td>
                                 <!-- <td><img src='data:;base64,{{ el.image }}' width='100%' height='100%' /></td> -->
                                 {% if current_user.has_role('admin') or current_user.id == el.author_id %}
-                                <td><a href="project/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a></td>
+                                <td><a href="project/{{el.id}}/del" class="btn b_nav btn-primary"> Удалить</a>
+                                    <a href="project/{{el.id}}/upd" class="btn b_nav btn-primary"> Редактировать</a></td>
                                 {% endif %}
                             </tr>
 
@@ -208,7 +210,8 @@
 
                                 {% if current_user.has_role('admin') or current_user.id == el.author_id %}
 
-                                <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
+                                <td><a href="news/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a>
+                                    <a href="news/{{el.id}}/upd" class="btn b_nav btn-primary">Редактировать</a></td>
 
                                 {% endif %}
                             </tr>
@@ -247,7 +250,8 @@
                                 <td>{{el.email}}</td>
                                 <td>{{el.created_on}} </td>
                                 <td>{{el.updated_on}} </td>
-                                <td><a href="user/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a></td>
+                                <td><a href="user/{{el.id}}/del" class="btn b_nav btn-primary">Удалить</a>
+                                    <a href="lk/user_settings/{{el.id}}" class="btn b_nav btn-primary">Редактировать</a></td>
                             </tr>
 
                             {%endfor%}
@@ -276,7 +280,8 @@
                                 <td>{{el.id}} </td>
                                 <td>{{el.name}} </td>
                                 <td>{{el.description}}</td>
-                                <td><a href="role/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a></td>
+                                <td><a href="role/{{el.id}}/del" class="btn b_nav btn-primary">Delete</a>
+                                    <a href="role/{{el.id}}/upd" class="btn b_nav btn-primary">Редактировать</a></td>
                             </tr>
 
                             {%endfor%}

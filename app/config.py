@@ -13,4 +13,4 @@ class Config(object):
 
     SQLALCHEMY_DATABASE_URI= "postgresql://flask_user:password@localhost:5432/flask"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_ECHO = True
+    # SQLALCHEMY_ECHO = True
