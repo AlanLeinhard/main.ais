@@ -122,6 +122,7 @@ class Item(db.Model):
     desc = db.Column(db.String, nullable=False)
     url_serv = db.Column(db.String, nullable=False)
     image = db.Column(db.LargeBinary)
+    active = db.Column(db.Boolean())
 
     def __repr__(self):
         return self.title
@@ -139,6 +140,7 @@ class Project(db.Model):
     desc = db.Column(db.String, nullable=False)
     url_serv = db.Column(db.String, nullable=False)
     image = db.Column(db.LargeBinary)
+    active = db.Column(db.Boolean())
 
     def __repr__(self):
         return self.title

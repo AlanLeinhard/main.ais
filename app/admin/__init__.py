@@ -91,12 +91,6 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             except:
                 return "error"
 
-        if not current_user.has_role('admin'):
-            if current_user.has_role('prepod'):
-                return render_template("admin/prepod.html", form2=form2,  form3=form3, news=news, projects=projects)
-            else:
-                return render_template("admin/kursant.html", form3=form3, projects=projects)
-
         # if request.method == "POST":
 
         return render_template("admin/index.html", form=form, form2=form2, form3=form3, services=services, users=users, roles=roles, news=news, projects=projects)
@@ -140,6 +134,16 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         return render_template("admin/user_settings.html", form=form, user=user)
 
+    @expose('user/<int:id>/del')
+    def delete_user(self, id):
+        user = User.query.get_or_404(id)
+        try:
+            db.session.delete(user)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return "error"
+
     @expose('service/<int:id>/del')
     def delete_service(self, id):
         service = Item.query.get_or_404(id)
@@ -151,44 +155,15 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         except:
             return "error"
 
-    @expose('project/<int:id>/del')
-    def delete_project(self, id):
-        project = Project.query.get_or_404(id)
+    @expose('service/<int:id>/onoff')
+    def service_on_off(self, id):
+        service = Item.query.get_or_404(id)
 
         try:
-            db.session.delete(project)
-            db.session.commit()
-            return redirect(url_for('.index'))
-        except:
-            return "error"
-
-    @expose('news/<int:id>/del')
-    def delete_news(self, id):
-        news = Post.query.get_or_404(id)
-
-        try:
-            db.session.delete(news)
-            db.session.commit()
-            return redirect(url_for('.index'))
-        except:
-            return "error"
-
-    @expose('user/<int:id>/del')
-    def delete_user(self, id):
-        user = User.query.get_or_404(id)
-        try:
-            db.session.delete(user)
-            db.session.commit()
-            return redirect(url_for('.index'))
-        except:
-            return "error"
-
-    @expose('role/<int:id>/del')
-    def delete_role(self, id):
-        role = Role.query.get_or_404(id)
-
-        try:
-            db.session.delete(role)
+            if service.active:
+                service.active = False
+            else:
+                service.active = True
             db.session.commit()
             return redirect(url_for('.index'))
         except:
@@ -221,6 +196,31 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         return render_template("admin/service_upd.html", form=form, service=service, title=title)
 
+    @expose('project/<int:id>/del')
+    def delete_project(self, id):
+        project = Project.query.get_or_404(id)
+
+        try:
+            db.session.delete(project)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return "error"
+
+    @expose('project/<int:id>/onoff')
+    def project_on_off(self, id):
+        project = Project.query.get_or_404(id)
+
+        try:
+            if project.active:
+                project.active = False
+            else:
+                project.active = True
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return "error"
+
     @expose('project/<int:id>/upd', methods=['POST', 'GET'])
     def project_upd(self, id):
 
@@ -248,8 +248,19 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         return render_template("admin/service_upd.html", form=form, service=service, title=title)
 
+    @expose('news/<int:id>/del')
+    def delete_news(self, id):
+        news = Post.query.get_or_404(id)
+
+        try:
+            db.session.delete(news)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return "error"
+
     @expose('news/<int:id>/upd', methods=['POST', 'GET'])
-    def project_upd(self, id):
+    def news_upd(self, id):
 
         form = ServiceUpdForm()
         news = Post.query.get(id)
@@ -275,33 +286,17 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
         return render_template("admin/news_upd.html", form=form, news=news, title=title)
 
-    # @expose('user/<int:id>/upd', methods=['POST', 'GET'])
-    # def user_upd(self):
+    @expose('role/<int:id>/del')
+    def delete_role(self, id):
+        role = Role.query.get_or_404(id)
 
-    #     form = UserForm()
-    #     user = User.query.get_or_404(current_user.id)
-
-    #     if form.validate_on_submit():
-
-    #         try:
-    #             if form.name.data != "":
-    #                 user.name = form.name.data
-
-    #             if form.username.data != "":
-    #                 user.username = form.username.data
-
-    #             if form.email.data != "":
-    #                 user.email = form.email.data
-
-    #             if form.password.data != "":
-    #                 user.password = form.password.data
-
-    #             db.session.commit()
-    #             return redirect(url_for(".index"))
-    #         except:
-    #             return "error"
-
-    #     return render_template("admin/user_settings.html", form=form)
+        try:
+            db.session.delete(role)
+            db.session.commit()
+            return redirect(url_for('.index'))
+        except:
+            return "error"
+        
 
 
 # Create admin
