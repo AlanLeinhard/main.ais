@@ -7,9 +7,26 @@ from itsdangerous import url_safe
 from app.models import Post, Project, db, User, Role, roles_users, Item
 
 
-subprocess.run('rm -r migrations', shell=True)
-subprocess.run('set FLASK_APP=app', shell=True)
-subprocess.run('set FLASK_ENV=development', shell=True)
+
+print("Установка БД: 1")
+SET=input("Обновление БД: 0")
+
+print("Выберите вашу ОС:")
+print("Windows: 1")
+OS=input("Linux 0:")
+
+if SET == 0:
+    if OS == 0:
+        subprocess.run('rd migrations', shell=True)
+    else:
+        subprocess.run('rm -r migrations', shell=True)
+        
+if OS == 0:
+    subprocess.run('set FLASK_APP=app', shell=True)
+    subprocess.run('set FLASK_ENV=development', shell=True)
+else:
+    subprocess.run('export FLASK_APP=app', shell=True)
+    subprocess.run('export FLASK_ENV=development', shell=True)
 
 subprocess.run('flask db init', shell=True)
 subprocess.run('flask db migrate', shell=True)
