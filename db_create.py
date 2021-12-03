@@ -1,9 +1,5 @@
-from os import name
 import subprocess
-from flask.helpers import url_for
 
-from flask_sqlalchemy import model
-from itsdangerous import url_safe
 from app.models import Post, Project, db, User, Role, roles_users, Item
 
 
@@ -15,13 +11,13 @@ print("Выберите вашу ОС:")
 print("Windows: 1")
 OS=input("Linux 0:")
 
-if SET == 0:
-    if OS == 0:
+if int(SET) == 0:
+    if int(OS) == 1:
         subprocess.run('rd migrations', shell=True)
     else:
         subprocess.run('rm -r migrations', shell=True)
         
-if OS == 0:
+if int(OS) == 1:
     subprocess.run('set FLASK_APP=app', shell=True)
     subprocess.run('set FLASK_ENV=development', shell=True)
 else:
