@@ -6,7 +6,7 @@ from flask_login import UserMixin
 from flask_security import RoleMixin
 from app import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 
 from app import db
@@ -19,16 +19,13 @@ class roles_users(db.Model):
     user_id =  db.Column(db.Integer(), db.ForeignKey("user.id"))
     role_id =  db.Column(db.Integer(), db.ForeignKey("roles.id"))
 
-    user = relationship("User", backref=backref("roles_user", cascade="all, delete-orphan"))
-    product = relationship("Role", backref=backref("roles_user", cascade="all, delete-orphan"))
-
 
 class Role(db.Model, RoleMixin):
     __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
-    users = relationship("User", secondary="roles_user")
+    users = relationship("User", secondary="roles_user", back_populates='roles')
 
     def __str__(self):
         return self.name
@@ -46,7 +43,7 @@ class User(db.Model, UserMixin):
     # Нужен для security!
     active = db.Column(db.Boolean())
     # Для получения доступа к связанным объектам
-    roles = relationship("Role", secondary="roles_user")
+    roles = relationship("Role", secondary="roles_user", back_populates='users')
 
     # Flask - Login
     @property
