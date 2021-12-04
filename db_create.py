@@ -31,7 +31,10 @@ cur.execute(sql.SQL("CREATE DATABASE flask"))
 #     if int(OS) == 1:
 #         subprocess.run('rd migrations', shell=True)
 #     else:
-subprocess.run('rm -r migrations', shell=True)
+try:
+    subprocess.run('rm -r migrations', shell=True)
+except:
+    pass
         
 # if int(OS) == 1:
 #     subprocess.run('set FLASK_APP=app', shell=True)
