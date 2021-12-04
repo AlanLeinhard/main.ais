@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect
+from app import db, app
 import base64
 
 from wtforms.form import Form
@@ -14,7 +15,7 @@ def index():
     """Show all the posts, most recent first."""
     form = SearchForm()
     post = Post.query.order_by(Post.created.desc()).all()
-    item = Item.query.order_by(Item.created.desc()).all()
+    item = Item.query.order_by(Item.click.desc()).all()
 
     for el in post:
         el.image = base64.b64encode(el.image).decode('ascii')
@@ -49,7 +50,7 @@ def projects():
 
     form = SearchForm()
     post = Post.query.order_by(Post.created.desc()).all()
-    item = Project.query.order_by(Project.created.desc()).all()
+    item = Project.query.order_by(Project.click.desc()).all()
 
     for el in post:
         el.image = base64.b64encode(el.image).decode('ascii')
@@ -61,3 +62,17 @@ def projects():
     return render_template("site/projects.html", data=list, item=item, post=post, form=form)
 
 
+@bp.route("/service/<int:id>")
+def service_url(id):
+    service =Item.query.get_or_404(id)
+    service.click = service.click + 1
+    db.session.commit()
+    return redirect(service.url_serv)
+
+
+@bp.route("/project/<int:id>")
+def project_url(id):
+    project =Project.query.get_or_404(id)
+    project.click = project.click + 1
+    db.session.commit()
+    return redirect(project.url_serv)
