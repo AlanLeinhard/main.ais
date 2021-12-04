@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres
+    # container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/postgres:/data/postgres
+    ports:
+      - "5012:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  pgadmin:
+    # container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./data/pgadmin:/root/.pgadmin
+    depends_on:
+      - postgres
+    ports:
+      - "5013:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  mainapp:
+    build: .
+    restart: always
+    ports:
+      - "5011:5000"
+    volumes:
+      - .:/app
+    links:
+      - postgres
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+
+# volumes:
+#     postgres:
+#     pgadmin:
