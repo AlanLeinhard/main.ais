@@ -2,27 +2,43 @@ import subprocess
 
 from app.models import Post, Project, db, User, Role, roles_users, Item
 
+import psycopg2
+from psycopg2 import sql
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT # <-- ADD THIS LINE
+
+con = psycopg2.connect(dbname='postgres',
+      user='postgres', host='localhost',
+      password='postgres')
+
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT) # <-- ADD THIS LINE
+
+cur = con.cursor()
+
+# Use the psycopg2.sql module instead of string concatenation 
+# in order to avoid sql injection attacs.
+cur.execute(sql.SQL("DROP DATABASE IF EXISTS flask"))
+cur.execute(sql.SQL("CREATE DATABASE flask"))
 
 
-print("Установка БД: 1")
-SET=input("Обновление БД: 0")
+# print("Установка БД: 1")
+# SET=input("Обновление БД: 0")
 
-print("Выберите вашу ОС:")
-print("Windows: 1")
-OS=input("Linux 0:")
+# print("Выберите вашу ОС:")
+# print("Windows: 1")
+# OS=input("Linux 0:")
 
-if int(SET) == 0:
-    if int(OS) == 1:
-        subprocess.run('rd migrations', shell=True)
-    else:
-        subprocess.run('rm -r migrations', shell=True)
+# if int(SET) == 0:
+#     if int(OS) == 1:
+#         subprocess.run('rd migrations', shell=True)
+#     else:
+subprocess.run('rm -r migrations', shell=True)
         
-if int(OS) == 1:
-    subprocess.run('set FLASK_APP=app', shell=True)
-    subprocess.run('set FLASK_ENV=development', shell=True)
-else:
-    subprocess.run('export FLASK_APP=app', shell=True)
-    subprocess.run('export FLASK_ENV=development', shell=True)
+# if int(OS) == 1:
+#     subprocess.run('set FLASK_APP=app', shell=True)
+#     subprocess.run('set FLASK_ENV=development', shell=True)
+# else:
+subprocess.run('export FLASK_APP=app', shell=True)
+subprocess.run('export FLASK_ENV=development', shell=True)
 
 subprocess.run('flask db init', shell=True)
 subprocess.run('flask db migrate', shell=True)
