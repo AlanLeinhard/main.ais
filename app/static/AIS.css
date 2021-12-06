@@ -17,6 +17,8 @@
     background-color: #f0f7ff;
     min-height: 1000px;
     border-radius: 3px;
+    max-width: 1440px;
+    width:90%;
 }
 
 
@@ -217,6 +219,7 @@ input[type="search"] {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
 }
     .card {
       flex: 0 0 auto;
@@ -235,6 +238,8 @@ input[type="search"] {
       border-color:#c8d3e3;
       border-radius: 3px;
       background-color:white;
+      width: 80%;
+      margin: 0 auto;
   }
 
   .footer {

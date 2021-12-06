@@ -32,7 +32,7 @@ cur.execute(sql.SQL("CREATE DATABASE flask"))
 #         subprocess.run('rd migrations', shell=True)
 #     else:
 try:
-    subprocess.run('rm -r migrations', shell=True)
+    subprocess.run('rd migrations', shell=True)
 except:
     pass
         
@@ -40,8 +40,8 @@ except:
 #     subprocess.run('set FLASK_APP=app', shell=True)
 #     subprocess.run('set FLASK_ENV=development', shell=True)
 # else:
-subprocess.run('export FLASK_APP=app', shell=True)
-subprocess.run('export FLASK_ENV=development', shell=True)
+subprocess.run('set FLASK_APP=app', shell=True)
+subprocess.run('set FLASK_ENV=development', shell=True)
 
 subprocess.run('flask db init', shell=True)
 subprocess.run('flask db migrate', shell=True)

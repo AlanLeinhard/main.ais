@@ -5,7 +5,7 @@
 
 <!-- Новости news -->
 
-<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news" style="overflow: scroll;">
+<div class="navig  align-items-middle shadow p-3 news mb-5 bg-body rounded row justify-content-between" id="news" style=" overflow-x: auto;    overflow-y: hidden;">
   <div class="scrolling-wrapper-flexbox prokrutka">
 
     {% for el in post %}
@@ -30,9 +30,9 @@
     <div class="poisk row google" id="default">
 
       {{ form.csrf_token }}
-      {{form.select(class="form-select col-2")}}
+      {{form.select(class="form-select col", style="margin-right: 50px;")}}
       {{form.search(class="form-control poisk_row col-8", type="text", placeholder="Искать в интернете")}}
-      {{form.submit(class="btn btn-primary search_button col-2", style="background-color: #085C8C")}}
+      {{form.submit(class="btn btn-primary search_button col", style="background-color: #085C8C; margin-left:50px;")}}
 
     </div>
   </form>
