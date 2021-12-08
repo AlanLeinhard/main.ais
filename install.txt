@@ -5,3 +5,5 @@
     затем создать базу данных с именем flask в СУБД Postgres, а также пользователя flask_user с паролем password
     затем запустить файл db_create.py
     по окончании работы скрипта выполнить команду flask run
+
+    не забудь поменять ip addr сconfig + db_create + attach flask run db_create
