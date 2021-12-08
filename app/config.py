@@ -11,7 +11,7 @@ class Config(object):
     SECURITY_PASSWORD_SALT = "fsdfdfsdfdfsdafds"
 
 
-    SQLALCHEMY_DATABASE_URI= "postgresql://postgres:postgres@172.25.0.2:5432/flask"
+    SQLALCHEMY_DATABASE_URI= "postgresql://postgres:postgres@172.19.0.2:5432/flask"
     # SQLALCHEMY_DATABASE_URI= "postgresql://postgres:postgres@localhost:5012/flask"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     # SQLALCHEMY_ECHO = True
