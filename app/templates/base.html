@@ -12,8 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%block title%}{%endblock%}
 
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
   <!-- Bootstrap CSS (Cloudflare CDN) -->
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
     crossorigin="anonymous">
@@ -42,7 +43,7 @@
 </head>
 
 <!-- Навигация Header -->
-
+<button onclick="topFunction()" id="myBtn" title="Go to top">Вверх</button>
 <header class="header">
 
   <!-- Логотип -->
@@ -104,9 +105,9 @@
     <div class="col-3"> 
   <h4>Команда CodeMasters:</h4>
   <ul>
-     <li>Александр Ленц</li>
-    <li>Магомедов Артур</li>  
-    <li> Беленикин Даниил</li>  
+     Александр Ленц <br />
+    Магомедов Артур <br />
+    Беленикин Даниил <br />
    </ul>
   
     </div>
@@ -119,5 +120,4 @@
     </div>
   </div>
   <div class="col-3"></div>
-
 </div>

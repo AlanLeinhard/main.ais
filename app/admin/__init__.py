@@ -1,4 +1,5 @@
 from flask.templating import render_template
+from flask_login.utils import login_required
 from app import db, app
 from flask import url_for, redirect, request, abort
 from app.models import Post, Project, User, Role, Item
@@ -74,7 +75,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             if form.title2.data == "services":
 
                 item = Item(title=form.title.data, desc=form.desc.data,
-                            url_serv=form.url_serv.data, image=form.image.data.read())
+                            url_serv=form.url_serv.data, image=form.image.data.read(), click=0, active=True)
 
             elif form.title2.data == "news":
                 item = Post(author_id=current_user.id, title=form2.title.data, desc=form2.desc.data,
@@ -82,7 +83,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
 
             elif form.title2.data == "projects":
                 item = Project(author_id=current_user.id, title=form3.title.data, desc=form3.desc.data,
-                            url_serv=form3.url_serv.data, image=form3.image.data.read())
+                            url_serv=form3.url_serv.data, image=form3.image.data.read(), click=0, active=True)
 
             try:
                 db.session.add(item)
@@ -102,6 +103,7 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
+    @login_required
     def logout_page(self):
         login.logout_user()
         return redirect(url_for('.index'))
@@ -111,7 +113,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return redirect(url_for('.index'))
 
     @expose('lk/user_settings/<int:id>', methods=['POST', 'GET'])
+    @login_required
     def user_settings(self, id):
+
+        if current_user.id != id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
 
         form = UserForm()
         user = User.query.get_or_404(id)
@@ -135,7 +142,13 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return render_template("admin/user_settings.html", form=form, user=user)
 
     @expose('user/<int:id>/del')
+    @login_required
     def delete_user(self, id):
+        
+        if current_user.id != id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
         user = User.query.get_or_404(id)
         try:
             db.session.delete(user)
@@ -145,7 +158,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('service/<int:id>/del')
+    @login_required
     def delete_service(self, id):
+        
+        if not current_user.has_role('admin'):
+            return redirect(url_for('.index'))
+
         service = Item.query.get_or_404(id)
 
         try:
@@ -156,7 +174,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('service/<int:id>/onoff')
+    @login_required
     def service_on_off(self, id):
+        
+        if not current_user.has_role('admin'):
+            return redirect(url_for('.index'))
+
         service = Item.query.get_or_404(id)
 
         try:
@@ -170,7 +193,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('service/<int:id>/upd', methods=['POST', 'GET'])
+    @login_required
     def service_upd(self, id):
+        
+        if not current_user.has_role('admin'):
+            return redirect(url_for('.index'))
+
 
         form = ServiceUpdForm()
         service = Item.query.get(id)
@@ -197,8 +225,14 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return render_template("admin/service_upd.html", form=form, service=service, title=title)
 
     @expose('project/<int:id>/del')
+    @login_required
     def delete_project(self, id):
         project = Project.query.get_or_404(id)
+        
+        if current_user.id != project.author_id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
 
         try:
             db.session.delete(project)
@@ -208,8 +242,14 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('project/<int:id>/onoff')
+    @login_required
     def project_on_off(self, id):
         project = Project.query.get_or_404(id)
+        
+        if current_user.id != project.author_id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
 
         try:
             if project.active:
@@ -222,12 +262,18 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('project/<int:id>/upd', methods=['POST', 'GET'])
+    @login_required
     def project_upd(self, id):
 
         form = ServiceUpdForm()
         service = Project.query.get(id)
         title = "проект"
         # service.image = base64.b64encode(service.image).decode('ascii')
+        
+        if current_user.id != service.author_id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
 
         if form.validate_on_submit():
 
@@ -249,8 +295,14 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return render_template("admin/service_upd.html", form=form, service=service, title=title)
 
     @expose('news/<int:id>/del')
+    @login_required
     def delete_news(self, id):
         news = Post.query.get_or_404(id)
+        
+        if current_user.id != news.author_id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
 
         try:
             db.session.delete(news)
@@ -260,12 +312,18 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
             return "error"
 
     @expose('news/<int:id>/upd', methods=['POST', 'GET'])
+    @login_required
     def news_upd(self, id):
 
         form = ServiceUpdForm()
         news = Post.query.get(id)
         title = "новост"
         # service.image = base64.b64encode(service.image).decode('ascii')
+        
+        if current_user.id != news.author_id:
+            if not current_user.has_role('admin'):
+                return redirect(url_for('.index'))
+
 
         if form.validate_on_submit():
 
@@ -287,7 +345,12 @@ class MyAdminIndexView(flask_admin.AdminIndexView):
         return render_template("admin/news_upd.html", form=form, news=news, title=title)
 
     @expose('role/<int:id>/del')
+    @login_required
     def delete_role(self, id):
+        
+        if not current_user.has_role('admin'):
+            return redirect(url_for('.index'))
+
         role = Role.query.get_or_404(id)
 
         try:
