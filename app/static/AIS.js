@@ -62,69 +62,40 @@ function selectcolor() {
     fon.style.background = x;
 }
 
-var div = document.querySelector('#wrapper div');
-document.querySelector('bottom').addEventListener('click', function() {
-  var curPos = parseInt(getComputedStyle(div)['left'], 10);
-  animate(div, 'left', 'px', curPos, curPos - 100, 500);
-  console.log('Y');
-}, false);
-
-function animate(elem, style, unit, from, to, time) {
-  if (!elem) return;
-  var start = new Date().getTime(),
-    timer = setInterval(function() {
-      var step = Math.min(1, (new Date().getTime() - start) / time);
-      elem.style[style] = (from + step * (to - from)) + unit;
-      if (step == 1) clearInterval(timer);
-    }, 25);
-  elem.style[style] = from + unit;
-};
-
-
-$(document).ready(function () {
-    $("#makeMeScrollable").smoothDivScroll({
-        mousewheelScrolling: "allDirections",
-        manualContinuousScrolling: true,
-        autoScrollingMode: "onStart"
-    });
-});
-
-(function () {
-
-    var scrollHandle = 0,
-        scrollStep = 5,
-        parent = $("#container");
-
-    //Start the scrolling process
-    $(".panner").on("mouseenter", function () {
-        var data = $(this).data('scrollModifier'),
-            direction = parseInt(data, 10);
-
-        $(this).addClass('active');
-
-        startScrolling(direction, scrollStep);
-    });
-
-    //Kill the scrolling
-    $(".panner").on("mouseleave", function () {
-        stopScrolling();
-        $(this).removeClass('active');
-    });
-
-    //Actual handling of the scrolling
-    function startScrolling(modifier, step) {
-        if (scrollHandle === 0) {
-            scrollHandle = setInterval(function () {
-                var newOffset = parent.scrollLeft() + (scrollStep * modifier);
-
-                parent.scrollLeft(newOffset);
-            }, 10);
+$('.responsive').slick({
+    dots: true,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
         }
-    }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
 
-    function stopScrolling() {
-        clearInterval(scrollHandle);
-        scrollHandle = 0;
-    }
-
-}());
+ 
