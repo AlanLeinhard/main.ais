@@ -11,6 +11,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%block title%}{%endblock%}
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
   <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
   <!-- Bootstrap CSS (Cloudflare CDN) -->
@@ -22,6 +23,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='adminka.css') }}">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="{{ url_for('static', filename='AIS.js') }}"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
   <!-- jQuery (Cloudflare CDN) -->
 
@@ -99,25 +101,76 @@
 
   </div>
 
+<div class="responsive">
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+  <div class="slide">
+    <img style="max-width:50px; max-height:50px;" src="{{ url_for('static', filename='images/git_logo.png') }}" alt="">
+  </div>
+
+
+ 
+</div>
+
+  <!-- Начало футера -->
   <div class="footer align-items-center row shadow p-3 " style="color: rgb(250, 248, 244); ">
-    <div class="col-3"></div>
+
+    <div class="col-3">
+      <!-- Пустая колонка -->
+    </div>
 
     <div class="col-3"> 
+
   <h4>Команда CodeMasters:</h4>
   <ul>
-     Александр Ленц <br />
-    Магомедов Артур <br />
-    Беленикин Даниил <br />
+    <a target="_blank" class="git_link" href="https://github.com/AlanLeinhard">Александр Ленц</a>  <br />
+    <a target="_blank" class="git_link" href="https://github.com/GriZZlY4578">Магомедов Артур</a>  <br />
+    <a target="_blank" class="git_link" href="https://github.com/VeeNDeN2233">Беленикин Даниил</a>  <br />
    </ul>
-  
     </div>
 
     <div class="col-3">
+
       <h4 style="margin-top: 0;">Руководитель проекта:</h4>
-      <div>Попов Антон Дмитриевич</div> 
+
+      <div><a class="git_link" target="_blank" href="">Попов Антон</a></div> 
+
       <div>Кафедра АИС ОВД</div>
+
       <div style=" margin-bottom: 15px;">Воронеж, ВИ МВД России, 2021</div> 
     </div>
+
+    <div class="col-3 " style="display: flex; justify-content:start;">
+    <a target="_blank" href="https://github.com/AlanLeinhard/flask/">
+      <div id="git_logo" style="min-width: 50px; max-width:100px; min-height:50px; max-height:100px; "> 
+        <img src="{{ url_for('static', filename='images/git_logo.png') }}" style="max-width:100px; max-height:100px;" alt=""> 
+      </div>
+    </a>
   </div>
-  <div class="col-3"></div>
+
+  <!-- <div class="col-3" style="width:50px; height:50px; display: flex; justify-content:start; background: url ({{ url_for('static', filename='images/git_logo.png') }});">
+    </div> -->
+  </div>
+
+  </div> 
+  <!-- Конец футера -->
+  
+
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </div>

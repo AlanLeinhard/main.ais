@@ -412,3 +412,16 @@ a:hover {
     #panRight {
         right:0px;
     }
+
+    .git_link {
+        color: white;
+        transition: color 0.3s;
+    }
+
+    .git_link:hover {
+        color: #c8d3e3;
+    }
+
+    #git_logo:hover {
+        opacity: 0.8;
+    }
