@@ -7,3 +7,7 @@
     по окончании работы скрипта выполнить команду flask run
 
     не забудь поменять ip addr сconfig + db_create + attach flask run db_create
+
+
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
