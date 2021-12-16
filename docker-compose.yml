@@ -2,14 +2,14 @@ version: '3.5'
 
 services:
   postgres:
-    image: postgres
+    build: ./postgres
     # container_name: postgres_container
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
     volumes:
-      - ./data/postgres:/data/postgres
+      - ../data/postgres:/data/postgres
     ports:
       - "5012:5432"
     networks:
@@ -24,7 +24,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-      - ./data/pgadmin:/root/.pgadmin
+      - ../data/pgadmin:/root/.pgadmin
     depends_on:
       - postgres
     ports:
